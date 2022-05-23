@@ -35,7 +35,6 @@ func (dm *dmManager) initConnection() {
 	ctx := context.Background()
 	dm.Ctx = ctx
 	clientOpts := options.Client().ApplyURI(config.DatabaseConnectionString)
-	//clientOpts := options.Client().ApplyURI("mongodb+srv://MyDataBase:MongoDBDatabase@harun.wzryz.mongodb.net/<dbname>?retryWrites=true&w=majority")
 	client, err := mongo.Connect(ctx, clientOpts)
 	if err != nil {
 		log.Println("[ERROR] DB Connection error:", err.Error())
