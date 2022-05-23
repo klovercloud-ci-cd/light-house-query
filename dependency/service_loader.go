@@ -15,3 +15,8 @@ func GetV1PodService() service.Pod {
 func GetV1CertificateService() service.Certificate {
 	return logic.NewCertificateService(mongo.NewCertificateRepository(3000))
 }
+
+// GetV1NodeService returns service.Node
+func GetV1NodeService() service.Node {
+	return logic.NewNodeService(mongo.NewNodeRepository(3000))
+}

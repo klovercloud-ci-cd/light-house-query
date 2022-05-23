@@ -22,3 +22,9 @@ func CertificateRouter(g *echo.Group) {
 	certificateApi := NewCertificateApi(dependency.GetV1CertificateService())
 	g.GET("", certificateApi.Get)
 }
+
+// NodeRouter api/v1/node/* router
+func NodeRouter(g *echo.Group) {
+	nodeApi := NewNodeApi(dependency.GetV1NodeService())
+	g.GET("", nodeApi.Get)
+}
