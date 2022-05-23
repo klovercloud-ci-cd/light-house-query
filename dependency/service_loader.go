@@ -40,3 +40,8 @@ func GetV1ConfigMapService() service.ConfigMap {
 func GetV1PersistentVolumeService() service.PersistentVolume {
 	return logic.NewPersistentVolumeService(mongo.NewPersistentVolumeRepository(3000))
 }
+
+// GetV1PersistentVolumeClaimService returns service.PersistentVolumeClaim
+func GetV1PersistentVolumeClaimService() service.PersistentVolumeClaim {
+	return logic.NewPersistentVolumeClaimService(mongo.NewPersistentVolumeClaimRepository(3000))
+}

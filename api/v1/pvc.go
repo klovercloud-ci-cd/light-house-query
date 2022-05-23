@@ -9,27 +9,27 @@ import (
 	"strings"
 )
 
-type persistentVolumeApi struct {
-	persistentVolumeService service.PersistentVolume
+type persistentVolumeClaimApi struct {
+	persistentVolumeClaimService service.PersistentVolumeClaim
 }
 
 // Get... Get Api
 // @Summary Get api
 // @Description Api for getiing all Persistent Volume Claims by agent name
-// @Tags PersistentVolume
+// @Tags PersistentVolumeClaim
 // @Produce json
 // @Param agent query string true "Agent Name"
 // @Param page query int64 false "Page Number"
 // @Param limit query int64 false "Limit"
 // @Param sort query bool false "Sort By Created Time"
-// @Success 200 {object} common.ResponseDTO{data=[]v1.PersistentVolume{}}
+// @Success 200 {object} common.ResponseDTO{data=[]v1.PersistentVolumeClaim{}}
 // @Forbidden 403 {object} common.ResponseDTO
 // @Failure 400 {object} common.ResponseDTO
-// @Router /api/v1/persistentVolumes [GET]
-func (p persistentVolumeApi) Get(context echo.Context) error {
+// @Router /api/v1/persistentVolumeClaims [GET]
+func (p persistentVolumeClaimApi) Get(context echo.Context) error {
 	agent := context.QueryParam("agent")
 	option := GetQueryOption(context)
-	data, total := p.persistentVolumeService.Get(agent, option)
+	data, total := p.persistentVolumeClaimService.Get(agent, option)
 	metadata := common.GetPaginationMetadata(option.Pagination.Page, option.Pagination.Limit, total, int64(len(data)))
 	uri := strings.Split(context.Request().RequestURI, "?")[0]
 	if option.Pagination.Page > 0 {
@@ -43,9 +43,9 @@ func (p persistentVolumeApi) Get(context echo.Context) error {
 		&metadata, "Successful")
 }
 
-// NewPersistentVolumeApi returns api.PersistentVolume type api
-func NewPersistentVolumeApi(persistentVolumeService service.PersistentVolume) api.PersistentVolume {
-	return &persistentVolumeApi{
-		persistentVolumeService: persistentVolumeService,
+// NewPersistentVolumeClaimApi returns api.PersistentVolumeClaim type api
+func NewPersistentVolumeClaimApi(persistentVolumeClaimService service.PersistentVolumeClaim) api.PersistentVolumeClaim {
+	return &persistentVolumeClaimApi{
+		persistentVolumeClaimService: persistentVolumeClaimService,
 	}
 }

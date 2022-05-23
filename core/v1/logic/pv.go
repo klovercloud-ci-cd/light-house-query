@@ -14,7 +14,7 @@ func (p persistentVolumeService) Get(agent string, option v1.ResourceQueryOption
 	return p.persistentVolumeRepo.Get(agent, option)
 }
 
-// NewPersistentVolumeService returns service.ClusterRole type service
+// NewPersistentVolumeService returns service.PersistentVolumeService type service
 func NewPersistentVolumeService(persistentVolumeRepo repository.PersistentVolume) service.PersistentVolume {
 	return &persistentVolumeService{
 		persistentVolumeRepo: persistentVolumeRepo,

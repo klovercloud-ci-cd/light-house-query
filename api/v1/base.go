@@ -10,7 +10,8 @@ func Router(g *echo.Group) {
 	PodRouter(g.Group("/pods"))
 	CertificateRouter(g.Group("/certificates"))
 	NodeRouter(g.Group("/nodes"))
-	PersistentVolumeRouter(g.Group("/persistent-volumeRouter"))
+	PersistentVolumeRouter(g.Group("/persistent-volumes"))
+	PersistentVolumeCLaimRouter(g.Group("/persistent-volume-claims"))
 	ClusterRoleRouter(g.Group("/cluster-roles"))
 	ClusterRoleRouter(g.Group("/cluster-role-bindings"))
 }
@@ -55,4 +56,10 @@ func ConfigMapRouter(g *echo.Group) {
 func PersistentVolumeRouter(g *echo.Group) {
 	persistentVolumeApi := NewPersistentVolumeApi(dependency.GetV1PersistentVolumeService())
 	g.GET("", persistentVolumeApi.Get)
+}
+
+// PersistentVolumeClaimRouter api/v1/persistent-volume-claims/* router
+func PersistentVolumeCLaimRouter(g *echo.Group) {
+	persistentVolumeClaimApi := NewPersistentVolumeClaimApi(dependency.GetV1PersistentVolumeClaimService())
+	g.GET("", persistentVolumeClaimApi.Get)
 }
