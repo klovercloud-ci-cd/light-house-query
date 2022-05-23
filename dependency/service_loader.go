@@ -70,3 +70,8 @@ func GetV1PersistentVolumeClaimService() service.PersistentVolumeClaim {
 func GetV1ReplicaSetService() service.ReplicaSet {
 	return logic.NewReplicaSetService(mongo.NewReplicaSetRepository(3000))
 }
+
+// GetV1RoleService returns service.Role
+func GetV1RoleService() service.Role {
+	return logic.NewRoleService(mongo.NewRoleRepository(3000))
+}

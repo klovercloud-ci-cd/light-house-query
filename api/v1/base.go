@@ -13,6 +13,7 @@ func Router(g *echo.Group) {
 	PersistentVolumeRouter(g.Group("/persistent-volumes"))
 	PersistentVolumeCLaimRouter(g.Group("/persistent-volume-claims"))
 	ReplicaSetRouter(g.Group("/replica-sets"))
+	RoleRouter(g.Group("/roles"))
 	ClusterRoleRouter(g.Group("/cluster-roles"))
 	ClusterRoleBindingRouter(g.Group("/cluster-role-bindings"))
 	ConfigMapRouter(g.Group("/config-maps"))
@@ -98,4 +99,10 @@ func IngressRouter(g *echo.Group) {
 func ReplicaSetRouter(g *echo.Group) {
 	replicaSetApi := NewReplicaSetApi(dependency.GetV1ReplicaSetService())
 	g.GET("", replicaSetApi.Get)
+}
+
+// RoleRouter api/v1/roles/* router
+func RoleRouter(g *echo.Group) {
+	roleApi := NewRoleApi(dependency.GetV1RoleService())
+	g.GET("", roleApi.Get)
 }

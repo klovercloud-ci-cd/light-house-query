@@ -9,27 +9,27 @@ import (
 	"strings"
 )
 
-type replicaSetApi struct {
-	replicaSetService service.ReplicaSet
+type roleApi struct {
+	roleService service.Role
 }
 
 // Get... Get Api
 // @Summary Get api
 // @Description Api for getiing all Persistent Volume Claims by agent name
-// @Tags ReplicaSet
+// @Tags Role
 // @Produce json
 // @Param agent query string true "Agent Name"
 // @Param page query int64 false "Page Number"
 // @Param limit query int64 false "Limit"
 // @Param sort query bool false "Sort By Created Time"
-// @Success 200 {object} common.ResponseDTO{data=[]v1.ReplicaSet{}}
+// @Success 200 {object} common.ResponseDTO{data=[]v1.Role{}}
 // @Forbidden 403 {object} common.ResponseDTO
 // @Failure 400 {object} common.ResponseDTO
-// @Router /api/v1/replicaSets [GET]
-func (r replicaSetApi) Get(context echo.Context) error {
+// @Router /api/v1/roles [GET]
+func (r roleApi) Get(context echo.Context) error {
 	agent := context.QueryParam("agent")
 	option := GetQueryOption(context)
-	data, total := r.replicaSetService.Get(agent, option)
+	data, total := r.roleService.Get(agent, option)
 	metadata := common.GetPaginationMetadata(option.Pagination.Page, option.Pagination.Limit, total, int64(len(data)))
 	uri := strings.Split(context.Request().RequestURI, "?")[0]
 	if option.Pagination.Page > 0 {
@@ -43,9 +43,9 @@ func (r replicaSetApi) Get(context echo.Context) error {
 		&metadata, "Successful")
 }
 
-// NewReplicaSetApi returns api.ReplicaSetApi type api
-func NewReplicaSetApi(replicaSetService service.ReplicaSet) api.ReplicaSet {
-	return &replicaSetApi{
-		replicaSetService: replicaSetService,
+// NewRoleApi returns api.RoleApi type api
+func NewRoleApi(roleService service.Role) api.Role {
+	return &roleApi{
+		roleService: roleService,
 	}
 }
