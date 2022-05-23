@@ -5429,6 +5429,18 @@ const (
 	UsageNetscapeSGC       KeyUsage = "netscape sgc"
 )
 
+// ResourceQueryOption contains resource query options
+type ResourceQueryOption struct {
+	Pagination    Pagination
+	AscendingSort bool
+}
+
+// Pagination contains pagination options
+type Pagination struct {
+	Page  int64
+	Limit int64
+}
+
 // DefaultKeyUsages contains the default list of key usages
 func DefaultKeyUsages() []KeyUsage {
 	// The serverAuth EKU is required as of Mac OS Catalina: https://support.apple.com/en-us/HT210176
