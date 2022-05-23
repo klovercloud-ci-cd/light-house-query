@@ -9,6 +9,8 @@ import (
 func Router(g *echo.Group) {
 	PodRouter(g.Group("/pods"))
 	CertificateRouter(g.Group("/certificates"))
+	NodeRouter(g.Group("/nodes"))
+	ClusterRoleRouter(g.Group("/cluster_roles"))
 }
 
 // PodRouter api/v1/pods/* router
@@ -23,8 +25,14 @@ func CertificateRouter(g *echo.Group) {
 	g.GET("", certificateApi.Get)
 }
 
-// NodeRouter api/v1/node/* router
+// NodeRouter api/v1/nodes/* router
 func NodeRouter(g *echo.Group) {
+	nodeApi := NewNodeApi(dependency.GetV1NodeService())
+	g.GET("", nodeApi.Get)
+}
+
+// ClusterRoleRouter api/v1/cluster_roles/* router
+func ClusterRoleRouter(g *echo.Group) {
 	nodeApi := NewNodeApi(dependency.GetV1NodeService())
 	g.GET("", nodeApi.Get)
 }

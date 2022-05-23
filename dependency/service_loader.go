@@ -20,3 +20,8 @@ func GetV1CertificateService() service.Certificate {
 func GetV1NodeService() service.Node {
 	return logic.NewNodeService(mongo.NewNodeRepository(3000))
 }
+
+// GetV1ClusterRoleService returns service.ClusterRole
+func GetV1ClusterRoleService() service.ClusterRole {
+	return logic.NewClusterRoleService(mongo.NewClusterRoleRepository(3000))
+}
