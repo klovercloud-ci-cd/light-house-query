@@ -25,7 +25,7 @@ type clusterRoleApi struct {
 // @Success 200 {object} common.ResponseDTO{data=[]v1.ClusterRole{}}
 // @Forbidden 403 {object} common.ResponseDTO
 // @Failure 400 {object} common.ResponseDTO
-// @Router /api/v1/cluster_roles [GET]
+// @Router /api/v1/cluster-roles [GET]
 func (c clusterRoleApi) Get(context echo.Context) error {
 	agent := context.QueryParam("agent")
 	option := GetQueryOption(context)

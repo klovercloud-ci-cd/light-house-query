@@ -15,7 +15,7 @@ func (p podService) Get(agent string, option v1.ResourceQueryOption) ([]v1.Pod, 
 }
 
 // NewPodService returns service.Pod type service
-func NewPodService(podRepo service.Pod) service.Pod {
+func NewPodService(podRepo repository.Pod) service.Pod {
 	return &podService{
 		podRepo: podRepo,
 	}

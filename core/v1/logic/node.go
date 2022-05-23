@@ -15,7 +15,7 @@ func (n nodeService) Get(agent string, option v1.ResourceQueryOption) ([]v1.Node
 }
 
 // NewNodeService returns service.Node type service
-func NewNodeService(nodeRepo service.Node) service.Node {
+func NewNodeService(nodeRepo repository.Node) service.Node {
 	return &nodeService{
 		nodeRepo: nodeRepo,
 	}

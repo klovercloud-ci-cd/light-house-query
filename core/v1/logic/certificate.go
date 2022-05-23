@@ -15,7 +15,7 @@ func (c certificateService) Get(agent string, option v1.ResourceQueryOption) ([]
 }
 
 // NewCertificateService returns service.Certificate type service
-func NewCertificateService(certificateRepo service.Certificate) service.Certificate {
+func NewCertificateService(certificateRepo repository.Certificate) service.Certificate {
 	return &certificateService{
 		certificateRepo: certificateRepo,
 	}
