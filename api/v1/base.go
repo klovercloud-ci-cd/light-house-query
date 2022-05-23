@@ -19,6 +19,7 @@ func Router(g *echo.Group) {
 	DaemonSetRouter(g.Group("/daemon-sets"))
 	DeploymentRouter(g.Group("/deployments"))
 	IngressRouter(g.Group("/ingresses"))
+	NamespaceRouter(g.Group("/namespaces"))
 }
 
 // PodRouter api/v1/pods/* router
@@ -69,7 +70,7 @@ func PersistentVolumeRouter(g *echo.Group) {
 	g.GET("", persistentVolumeApi.Get)
 }
 
-// PersistentVolumeClaimRouter api/v1/persistent-volume-claims/* router
+// PersistentVolumeCLaimRouter api/v1/persistent-volume-claims/* router
 func PersistentVolumeCLaimRouter(g *echo.Group) {
 	persistentVolumeClaimApi := NewPersistentVolumeClaimApi(dependency.GetV1PersistentVolumeClaimService())
 	g.GET("", persistentVolumeClaimApi.Get)
@@ -81,13 +82,19 @@ func DeploymentRouter(g *echo.Group) {
 	g.GET("", deploymentApi.Get)
 }
 
+// NamespaceRouter api/v1/namespaces/* router
+func NamespaceRouter(g *echo.Group) {
+	namespaceApi := NewNamespaceApi(dependency.GetV1NamespaceService())
+	g.GET("", namespaceApi.Get)
+}
+
 // IngressRouter api/v1/ingresses/* router
 func IngressRouter(g *echo.Group) {
 	ingressApi := NewIngressApi(dependency.GetV1IngressService())
 	g.GET("", ingressApi.Get)
 }
 
-// ReplicaSet api/v1/replica-sets/* router
+// ReplicaSetRouter api/v1/replica-sets/* router
 func ReplicaSetRouter(g *echo.Group) {
 	replicaSetApi := NewReplicaSetApi(dependency.GetV1ReplicaSetService())
 	g.GET("", replicaSetApi.Get)

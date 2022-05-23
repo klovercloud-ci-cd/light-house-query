@@ -51,6 +51,11 @@ func GetV1IngressService() service.Ingress {
 	return logic.NewIngressService(mongo.NewIngressRepository(3000))
 }
 
+// GetV1NamespaceService returns service.Namespace
+func GetV1NamespaceService() service.Namespace {
+	return logic.NewNamespaceService(mongo.NewNamespaceRepository(3000))
+}
+
 // GetV1PersistentVolumeService returns service.PersistentVolume
 func GetV1PersistentVolumeService() service.PersistentVolume {
 	return logic.NewPersistentVolumeService(mongo.NewPersistentVolumeRepository(3000))
