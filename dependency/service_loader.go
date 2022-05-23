@@ -85,3 +85,8 @@ func GetV1NetworkPolicyService() service.NetworkPolicy {
 func GetV1StatefulSetService() service.StatefulSet {
 	return logic.NewStatefulSetService(mongo.NewStatefulSetRepository(3000))
 }
+
+// GetV1ServiceAccountService returns service.ServiceAccount
+func GetV1ServiceAccountService() service.ServiceAccount {
+	return logic.NewServiceAccountService(mongo.NewServiceAccountRepository(3000))
+}
