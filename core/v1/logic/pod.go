@@ -10,8 +10,8 @@ type podService struct {
 	podRepo repository.Pod
 }
 
-func (p podService) Get(agent string) ([]v1.Pod, int64) {
-	return p.podRepo.Get(agent)
+func (p podService) Get(agent string, option v1.ResourceQueryOption) ([]v1.Pod, int64) {
+	return p.podRepo.Get(agent, option)
 }
 
 // NewPodService returns service.Pod type service

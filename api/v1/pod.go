@@ -29,7 +29,7 @@ type podApi struct {
 func (p podApi) Get(context echo.Context) error {
 	agent := context.QueryParam("agent")
 	option := GetQueryOption(context)
-	data, total := p.podService.Get(agent)
+	data, total := p.podService.Get(agent, option)
 	metadata := common.GetPaginationMetadata(option.Pagination.Page, option.Pagination.Limit, total, int64(len(data)))
 	uri := strings.Split(context.Request().RequestURI, "?")[0]
 	if option.Pagination.Page > 0 {
