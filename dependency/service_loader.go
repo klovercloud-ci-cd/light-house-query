@@ -36,14 +36,19 @@ func GetV1ConfigMapService() service.ConfigMap {
 	return logic.NewConfigMapService(mongo.NewConfigMapRepository(3000))
 }
 
-// GetV1PersistentVolumeService returns service.PersistentVolume
-func GetV1PersistentVolumeService() service.PersistentVolume {
-	return logic.NewPersistentVolumeService(mongo.NewPersistentVolumeRepository(3000))
-}
-
 // GetV1DaemonSetService returns service.DaemonSet
 func GetV1DaemonSetService() service.DaemonSet {
 	return logic.NewDaemonSetService(mongo.NewDaemonSetRepository(3000))
+}
+
+// GetV1DeploymentService returns service.Deployment
+func GetV1DeploymentService() service.Deployment {
+	return logic.NewDeploymentService(mongo.NewDeploymentRepository(3000))
+}
+
+// GetV1PersistentVolumeService returns service.PersistentVolume
+func GetV1PersistentVolumeService() service.PersistentVolume {
+	return logic.NewPersistentVolumeService(mongo.NewPersistentVolumeRepository(3000))
 }
 
 // GetV1PersistentVolumeClaimService returns service.PersistentVolumeClaim
