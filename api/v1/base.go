@@ -21,6 +21,7 @@ func Router(g *echo.Group) {
 	DeploymentRouter(g.Group("/deployments"))
 	IngressRouter(g.Group("/ingresses"))
 	NamespaceRouter(g.Group("/namespaces"))
+	NetworkPolicyRouter(g.Group("/network-policies"))
 }
 
 // PodRouter api/v1/pods/* router
@@ -105,4 +106,10 @@ func ReplicaSetRouter(g *echo.Group) {
 func RoleRouter(g *echo.Group) {
 	roleApi := NewRoleApi(dependency.GetV1RoleService())
 	g.GET("", roleApi.Get)
+}
+
+// NetworkPolicyRouter api/v1/network-policies/* router
+func NetworkPolicyRouter(g *echo.Group) {
+	networkPolicyApi := NewNetworkPolicyApi(dependency.GetV1NetworkPolicyService())
+	g.GET("", networkPolicyApi.Get)
 }

@@ -75,3 +75,8 @@ func GetV1ReplicaSetService() service.ReplicaSet {
 func GetV1RoleService() service.Role {
 	return logic.NewRoleService(mongo.NewRoleRepository(3000))
 }
+
+// GetV1NetworkPolicyService returns service.NetworkPolicy
+func GetV1NetworkPolicyService() service.NetworkPolicy {
+	return logic.NewNetworkPolicyService(mongo.NewNetworkPolicyRepository(3000))
+}
