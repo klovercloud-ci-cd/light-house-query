@@ -90,3 +90,8 @@ func GetV1StatefulSetService() service.StatefulSet {
 func GetV1ServiceAccountService() service.ServiceAccount {
 	return logic.NewServiceAccountService(mongo.NewServiceAccountRepository(3000))
 }
+
+// GetV1RoleBindingService returns service.RoleBinding
+func GetV1RoleBindingService() service.RoleBinding {
+	return logic.NewRoleBindingService(mongo.NewRoleBindingRepository(3000))
+}

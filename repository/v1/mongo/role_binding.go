@@ -11,20 +11,20 @@ import (
 )
 
 var (
-	RoleCollection = "roleCollection"
+	RoleBindingCollection = "roleBindingCollection"
 )
 
-type roleRepository struct {
+type roleBindingRepository struct {
 	manager *dmManager
 	timeout time.Duration
 }
 
-func (r roleRepository) Get(agent string, option v1.ResourceQueryOption) ([]v1.Role, int64) {
-	var results []v1.Role
+func (r roleBindingRepository) Get(agent string, option v1.ResourceQueryOption) ([]v1.RoleBinding, int64) {
+	var results []v1.RoleBinding
 	query := bson.M{
 		"$and": []bson.M{{"agent_name": agent}},
 	}
-	coll := r.manager.Db.Collection(RoleCollection)
+	coll := r.manager.Db.Collection(RoleBindingCollection)
 	skip := option.Pagination.Page * option.Pagination.Limit
 	findOptions := options.FindOptions{
 		Limit: &option.Pagination.Limit,
@@ -39,7 +39,7 @@ func (r roleRepository) Get(agent string, option v1.ResourceQueryOption) ([]v1.R
 		log.Println(err.Error())
 	}
 	for result.Next(context.TODO()) {
-		elemValue := new(v1.Role)
+		elemValue := new(v1.RoleBinding)
 		err := result.Decode(elemValue)
 		if err != nil {
 			log.Println("[ERROR]", err)
@@ -54,9 +54,9 @@ func (r roleRepository) Get(agent string, option v1.ResourceQueryOption) ([]v1.R
 	return results, count
 }
 
-// NewRoleRepository returns repository.RoleRepository type repository
-func NewRoleRepository(timeout int) repository.Role {
-	return &roleRepository{
+// NewRoleBindingRepository returns repository.RoleRepository type repository
+func NewRoleBindingRepository(timeout int) repository.RoleBinding {
+	return &roleBindingRepository{
 		manager: GetDmManager(),
 		timeout: time.Duration(timeout),
 	}
