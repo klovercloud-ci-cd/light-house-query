@@ -11,20 +11,20 @@ import (
 )
 
 var (
-	PodCollection = "podCollection"
+	CertificateCollection = "certificateCollection"
 )
 
-type podRepository struct {
+type certificateRepository struct {
 	manager *dmManager
 	timeout time.Duration
 }
 
-func (p podRepository) Get(agent string, option v1.ResourceQueryOption) ([]v1.Pod, int64) {
-	var results []v1.Pod
+func (c certificateRepository) Get(agent string, option v1.ResourceQueryOption) ([]v1.Certificate, int64) {
+	var results []v1.Certificate
 	query := bson.M{
 		"$and": []bson.M{{"agent_name": agent}},
 	}
-	coll := p.manager.Db.Collection(PodCollection)
+	coll := c.manager.Db.Collection(CertificateCollection)
 	skip := option.Pagination.Page * option.Pagination.Limit
 	findOptions := options.FindOptions{
 		Limit: &option.Pagination.Limit,
@@ -34,12 +34,12 @@ func (p podRepository) Get(agent string, option v1.ResourceQueryOption) ([]v1.Po
 	if option.AscendingSort {
 		findOptions.Sort = bson.M{"created_at": 1}
 	}
-	result, err := coll.Find(p.manager.Ctx, query, &findOptions)
+	result, err := coll.Find(c.manager.Ctx, query, &findOptions)
 	if err != nil {
 		log.Println(err.Error())
 	}
 	for result.Next(context.TODO()) {
-		elemValue := new(v1.Pod)
+		elemValue := new(v1.Certificate)
 		err := result.Decode(elemValue)
 		if err != nil {
 			log.Println("[ERROR]", err)
@@ -47,16 +47,16 @@ func (p podRepository) Get(agent string, option v1.ResourceQueryOption) ([]v1.Po
 		}
 		results = append(results, *elemValue)
 	}
-	count, err := coll.CountDocuments(p.manager.Ctx, query)
+	count, err := coll.CountDocuments(c.manager.Ctx, query)
 	if err != nil {
 		log.Println(err.Error())
 	}
 	return results, count
 }
 
-// NewPodRepository returns repository.Pod type repository
-func NewPodRepository(timeout int) repository.Pod {
-	return &podRepository{
+// NewCertificateRepository returns repository.Certificate type repository
+func NewCertificateRepository(timeout int) repository.Certificate {
+	return &certificateRepository{
 		manager: GetDmManager(),
 		timeout: time.Duration(timeout),
 	}

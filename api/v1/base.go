@@ -8,10 +8,17 @@ import (
 // Router api/v1 base router
 func Router(g *echo.Group) {
 	PodRouter(g.Group("/pods"))
+	CertificateRouter(g.Group("/certificates"))
 }
 
 // PodRouter api/v1/pods/* router
 func PodRouter(g *echo.Group) {
 	podApi := NewPodApi(dependency.GetV1PodService())
 	g.GET("", podApi.Get)
+}
+
+// CertificateRouter api/v1/certificates/* router
+func CertificateRouter(g *echo.Group) {
+	certificateApi := NewCertificateApi(dependency.GetV1CertificateService())
+	g.GET("", certificateApi.Get)
 }

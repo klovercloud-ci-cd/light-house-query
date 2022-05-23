@@ -10,3 +10,8 @@ import (
 func GetV1PodService() service.Pod {
 	return logic.NewPodService(mongo.NewPodRepository(3000))
 }
+
+// GetV1CertificateService returns service.Certificate
+func GetV1CertificateService() service.Certificate {
+	return logic.NewCertificateService(mongo.NewCertificateRepository(3000))
+}
