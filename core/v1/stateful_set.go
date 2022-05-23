@@ -14,5 +14,5 @@ type K8sStatefulSet struct {
 type StatefulSet struct {
 	bongo.DocumentBase `bson:",inline"`
 	Obj                K8sStatefulSet `bson:"obj" json:"obj"`
-	KubeClusterId      string         `json:"kubeClusterId" bson:"kubeClusterId"`
+	AgentName          string         `bson:"agent_name" json:"agent_name"`
 }

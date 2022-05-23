@@ -14,5 +14,5 @@ type k8sClusterRoleBinding struct {
 type ClusterRoleBinding struct {
 	bongo.DocumentBase `bson:",inline"`
 	Obj                k8sClusterRoleBinding `bson:"obj" json:"obj"`
-	KubeClusterId      string                `bson:"kubeClusterId" json:"kubeClusterId"`
+	AgentName          string                `bson:"agent_name" json:"agent_name"`
 }

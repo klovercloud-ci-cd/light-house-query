@@ -18,3 +18,15 @@ const (
 	// INMEMORY in memory storage as db
 	INMEMORY = "INMEMORY"
 )
+
+// Command kafka command
+type Command string
+
+const (
+	// Kube object ADD command
+	ADD = Command("ADD")
+	// Kube object UPDATE command
+	UPDATE = Command("UPDATE")
+	// Kube object DELETE command
+	DELETE = Command("DELETE")
+)

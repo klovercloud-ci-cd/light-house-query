@@ -13,5 +13,5 @@ type K8sDaemonSet struct {
 type DaemonSet struct {
 	bongo.DocumentBase `bson:",inline"`
 	Obj                K8sDaemonSet `bson:"obj" json:"obj"`
-	KubeClusterId      string       `json:"kubeClusterId" bson:"kubeClusterId"`
+	AgentName          string       `bson:"agent_name" json:"agent_name"`
 }

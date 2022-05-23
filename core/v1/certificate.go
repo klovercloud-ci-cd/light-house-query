@@ -13,5 +13,5 @@ type K8sCertificate struct {
 type Certificate struct {
 	bongo.DocumentBase `bson:",inline"`
 	Obj                K8sCertificate `bson:"obj" json:"obj"`
-	KubeClusterId      string         `json:"kubeClusterId" bson:"kubeClusterId"`
+	AgentName          string         `bson:"agent_name" json:"agent_name"`
 }

@@ -15,5 +15,5 @@ type K8sSecret struct {
 type Secret struct {
 	bongo.DocumentBase `bson:",inline"`
 	Obj                K8sSecret `bson:"obj" json:"obj"`
-	KubeClusterId      string    `json:"kubeClusterId" bson:"kubeClusterId"`
+	AgentName          string    `bson:"agent_name" json:"agent_name"`
 }

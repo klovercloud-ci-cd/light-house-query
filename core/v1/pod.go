@@ -13,5 +13,5 @@ type K8sPod struct {
 type Pod struct {
 	bongo.DocumentBase `bson:",inline"`
 	Obj                K8sPod `bson:"obj" json:"obj"`
-	KubeClusterId      string `json:"kubeClusterId" bson:"kubeClusterId"`
+	AgentName          string `bson:"agent_name" json:"agent_name"`
 }

@@ -14,5 +14,5 @@ type K8sIngress struct {
 type Ingress struct {
 	bongo.DocumentBase `bson:",inline"`
 	Obj                K8sIngress `bson:"obj" json:"obj"`
-	KubeClusterId      string     `json:"kubeClusterId" bson:"kubeClusterId"`
+	AgentName          string     `bson:"agent_name" json:"agent_name"`
 }
