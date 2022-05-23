@@ -22,6 +22,7 @@ func Router(g *echo.Group) {
 	IngressRouter(g.Group("/ingresses"))
 	NamespaceRouter(g.Group("/namespaces"))
 	NetworkPolicyRouter(g.Group("/network-policies"))
+	StatefulSetRouter(g.Group("/stateful-sets"))
 }
 
 // PodRouter api/v1/pods/* router
@@ -112,4 +113,10 @@ func RoleRouter(g *echo.Group) {
 func NetworkPolicyRouter(g *echo.Group) {
 	networkPolicyApi := NewNetworkPolicyApi(dependency.GetV1NetworkPolicyService())
 	g.GET("", networkPolicyApi.Get)
+}
+
+// StatefulSetRouter api/v1/stateful-sets/* router
+func StatefulSetRouter(g *echo.Group) {
+	statefulSetApi := NewStatefulSetApi(dependency.GetV1StatefulSetService())
+	g.GET("", statefulSetApi.Get)
 }

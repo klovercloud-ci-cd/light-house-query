@@ -80,3 +80,8 @@ func GetV1RoleService() service.Role {
 func GetV1NetworkPolicyService() service.NetworkPolicy {
 	return logic.NewNetworkPolicyService(mongo.NewNetworkPolicyRepository(3000))
 }
+
+// GetV1StatefulSetService returns service.StatefulSet
+func GetV1StatefulSetService() service.StatefulSet {
+	return logic.NewStatefulSetService(mongo.NewStatefulSetRepository(3000))
+}
