@@ -31,6 +31,11 @@ func GetV1ClusterRoleBindingService() service.ClusterRoleBinding {
 	return logic.NewClusterRoleBindingService(mongo.NewClusterRoleBindingRepository(3000))
 }
 
+// GetV1ConfigMapService returns service.ConfigMap
+func GetV1ConfigMapService() service.ConfigMap {
+	return logic.NewConfigMapService(mongo.NewConfigMapRepository(3000))
+}
+
 // GetV1PersistentVolumeService returns service.PersistentVolume
 func GetV1PersistentVolumeService() service.PersistentVolume {
 	return logic.NewPersistentVolumeService(mongo.NewPersistentVolumeRepository(3000))

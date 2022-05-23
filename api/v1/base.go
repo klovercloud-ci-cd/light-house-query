@@ -45,6 +45,12 @@ func ClusterRoleBindingRouter(g *echo.Group) {
 	g.GET("", clusterRoleBindingApi.Get)
 }
 
+// ConfigMapRouter api/v1/config-maps/* router
+func ConfigMapRouter(g *echo.Group) {
+	configMapApi := NewConfigMapApi(dependency.GetV1ConfigMapService())
+	g.GET("", configMapApi.Get)
+}
+
 // PersistentVolumeRouter api/v1/persistent-volume/* router
 func PersistentVolumeRouter(g *echo.Group) {
 	persistentVolumeApi := NewPersistentVolumeApi(dependency.GetV1PersistentVolumeService())
