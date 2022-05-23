@@ -46,6 +46,11 @@ func GetV1DeploymentService() service.Deployment {
 	return logic.NewDeploymentService(mongo.NewDeploymentRepository(3000))
 }
 
+// GetV1IngressService returns service.Ingress
+func GetV1IngressService() service.Ingress {
+	return logic.NewIngressService(mongo.NewIngressRepository(3000))
+}
+
 // GetV1PersistentVolumeService returns service.PersistentVolume
 func GetV1PersistentVolumeService() service.PersistentVolume {
 	return logic.NewPersistentVolumeService(mongo.NewPersistentVolumeRepository(3000))

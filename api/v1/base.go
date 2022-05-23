@@ -17,6 +17,7 @@ func Router(g *echo.Group) {
 	ConfigMapRouter(g.Group("/config-maps"))
 	DaemonSetRouter(g.Group("/daemon-sets"))
 	DeploymentRouter(g.Group("/deployments"))
+	IngressRouter(g.Group("/ingresses"))
 }
 
 // PodRouter api/v1/pods/* router
@@ -77,4 +78,10 @@ func PersistentVolumeCLaimRouter(g *echo.Group) {
 func DeploymentRouter(g *echo.Group) {
 	deploymentApi := NewDeploymentApi(dependency.GetV1DeploymentService())
 	g.GET("", deploymentApi.Get)
+}
+
+// IngressRouter api/v1/ingresses/* router
+func IngressRouter(g *echo.Group) {
+	ingressApi := NewIngressApi(dependency.GetV1IngressService())
+	g.GET("", ingressApi.Get)
 }
