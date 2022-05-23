@@ -15,7 +15,7 @@ func (c clusterRoleService) Get(agent string, option v1.ResourceQueryOption) ([]
 }
 
 // NewClusterRoleService returns service.ClusterRole type service
-func NewClusterRoleService(clusterRoleRepo service.ClusterRole) service.ClusterRole {
+func NewClusterRoleService(clusterRoleRepo repository.ClusterRole) service.ClusterRole {
 	return &clusterRoleService{
 		clusterRoleRepo: clusterRoleRepo,
 	}
