@@ -41,6 +41,11 @@ func GetV1PersistentVolumeService() service.PersistentVolume {
 	return logic.NewPersistentVolumeService(mongo.NewPersistentVolumeRepository(3000))
 }
 
+// GetV1DaemonSetService returns service.DaemonSet
+func GetV1DaemonSetService() service.DaemonSet {
+	return logic.NewDaemonSetService(mongo.NewDaemonSetRepository(3000))
+}
+
 // GetV1PersistentVolumeClaimService returns service.PersistentVolumeClaim
 func GetV1PersistentVolumeClaimService() service.PersistentVolumeClaim {
 	return logic.NewPersistentVolumeClaimService(mongo.NewPersistentVolumeClaimRepository(3000))

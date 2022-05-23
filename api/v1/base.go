@@ -13,7 +13,9 @@ func Router(g *echo.Group) {
 	PersistentVolumeRouter(g.Group("/persistent-volumes"))
 	PersistentVolumeCLaimRouter(g.Group("/persistent-volume-claims"))
 	ClusterRoleRouter(g.Group("/cluster-roles"))
-	ClusterRoleRouter(g.Group("/cluster-role-bindings"))
+	ClusterRoleBindingRouter(g.Group("/cluster-role-bindings"))
+	ConfigMapRouter(g.Group("/config-maps"))
+	DaemonSetRouter(g.Group("/daemon-sets"))
 }
 
 // PodRouter api/v1/pods/* router
@@ -50,6 +52,12 @@ func ClusterRoleBindingRouter(g *echo.Group) {
 func ConfigMapRouter(g *echo.Group) {
 	configMapApi := NewConfigMapApi(dependency.GetV1ConfigMapService())
 	g.GET("", configMapApi.Get)
+}
+
+// DaemonSetRouter api/v1/daemon-sets/* router
+func DaemonSetRouter(g *echo.Group) {
+	daemonSetApi := NewDaemonSetApi(dependency.GetV1DaemonSetService())
+	g.GET("", daemonSetApi.Get)
 }
 
 // PersistentVolumeRouter api/v1/persistent-volume/* router
