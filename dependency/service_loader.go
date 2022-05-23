@@ -95,3 +95,8 @@ func GetV1ServiceAccountService() service.ServiceAccount {
 func GetV1RoleBindingService() service.RoleBinding {
 	return logic.NewRoleBindingService(mongo.NewRoleBindingRepository(3000))
 }
+
+// GetV1ServiceService returns service.Service
+func GetV1ServiceService() service.Service {
+	return logic.NewServiceService(mongo.NewServiceRepository(3000))
+}

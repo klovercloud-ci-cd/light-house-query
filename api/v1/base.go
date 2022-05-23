@@ -25,6 +25,7 @@ func Router(g *echo.Group) {
 	NetworkPolicyRouter(g.Group("/network-policies"))
 	StatefulSetRouter(g.Group("/stateful-sets"))
 	ServiceAccountRouter(g.Group("/service-accounts"))
+	ServiceRouter(g.Group("/services"))
 }
 
 // PodRouter api/v1/pods/* router
@@ -133,4 +134,10 @@ func StatefulSetRouter(g *echo.Group) {
 func ServiceAccountRouter(g *echo.Group) {
 	serviceAccountApi := NewServiceAccountApi(dependency.GetV1ServiceAccountService())
 	g.GET("", serviceAccountApi.Get)
+}
+
+// ServiceRouter api/v1/services/* router
+func ServiceRouter(g *echo.Group) {
+	serviceApi := NewServiceApi(dependency.GetV1ServiceService())
+	g.GET("", serviceApi.Get)
 }
