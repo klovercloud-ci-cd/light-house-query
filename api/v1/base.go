@@ -7,14 +7,7 @@ import (
 
 // Router api/v1 base router
 func Router(g *echo.Group) {
-	PodRouter(g.Group("/pods"))
 	CertificateRouter(g.Group("/certificates"))
-	NodeRouter(g.Group("/nodes"))
-	PersistentVolumeRouter(g.Group("/persistent-volumes"))
-	PersistentVolumeCLaimRouter(g.Group("/persistent-volume-claims"))
-	ReplicaSetRouter(g.Group("/replica-sets"))
-	RoleRouter(g.Group("/roles"))
-	RoleBindingRouter(g.Group("/role-bindings"))
 	ClusterRoleRouter(g.Group("/cluster-roles"))
 	ClusterRoleBindingRouter(g.Group("/cluster-role-bindings"))
 	ConfigMapRouter(g.Group("/config-maps"))
@@ -23,27 +16,23 @@ func Router(g *echo.Group) {
 	IngressRouter(g.Group("/ingresses"))
 	NamespaceRouter(g.Group("/namespaces"))
 	NetworkPolicyRouter(g.Group("/network-policies"))
-	StatefulSetRouter(g.Group("/stateful-sets"))
-	ServiceAccountRouter(g.Group("/service-accounts"))
+	NodeRouter(g.Group("/nodes"))
+	PodRouter(g.Group("/pods"))
+	PersistentVolumeRouter(g.Group("/persistent-volumes"))
+	PersistentVolumeClaimRouter(g.Group("/persistent-volume-claims"))
+	ReplicaSetRouter(g.Group("/replica-sets"))
+	RoleRouter(g.Group("/roles"))
+	RoleBindingRouter(g.Group("/role-bindings"))
+	SecretRouter(g.Group("/secrets"))
 	ServiceRouter(g.Group("/services"))
-}
-
-// PodRouter api/v1/pods/* router
-func PodRouter(g *echo.Group) {
-	podApi := NewPodApi(dependency.GetV1PodService())
-	g.GET("", podApi.Get)
+	ServiceAccountRouter(g.Group("/service-accounts"))
+	StatefulSetRouter(g.Group("/stateful-sets"))
 }
 
 // CertificateRouter api/v1/certificates/* router
 func CertificateRouter(g *echo.Group) {
 	certificateApi := NewCertificateApi(dependency.GetV1CertificateService())
 	g.GET("", certificateApi.Get)
-}
-
-// NodeRouter api/v1/nodes/* router
-func NodeRouter(g *echo.Group) {
-	nodeApi := NewNodeApi(dependency.GetV1NodeService())
-	g.GET("", nodeApi.Get)
 }
 
 // ClusterRoleRouter api/v1/cluster-roles/* router
@@ -76,8 +65,8 @@ func PersistentVolumeRouter(g *echo.Group) {
 	g.GET("", persistentVolumeApi.Get)
 }
 
-// PersistentVolumeCLaimRouter api/v1/persistent-volume-claims/* router
-func PersistentVolumeCLaimRouter(g *echo.Group) {
+// PersistentVolumeClaimRouter api/v1/persistent-volume-claims/* router
+func PersistentVolumeClaimRouter(g *echo.Group) {
 	persistentVolumeClaimApi := NewPersistentVolumeClaimApi(dependency.GetV1PersistentVolumeClaimService())
 	g.GET("", persistentVolumeClaimApi.Get)
 }
@@ -124,6 +113,18 @@ func NetworkPolicyRouter(g *echo.Group) {
 	g.GET("", networkPolicyApi.Get)
 }
 
+// NodeRouter api/v1/nodes/* router
+func NodeRouter(g *echo.Group) {
+	nodeApi := NewNodeApi(dependency.GetV1NodeService())
+	g.GET("", nodeApi.Get)
+}
+
+// PodRouter api/v1/pods/* router
+func PodRouter(g *echo.Group) {
+	podApi := NewPodApi(dependency.GetV1PodService())
+	g.GET("", podApi.Get)
+}
+
 // StatefulSetRouter api/v1/stateful-sets/* router
 func StatefulSetRouter(g *echo.Group) {
 	statefulSetApi := NewStatefulSetApi(dependency.GetV1StatefulSetService())
@@ -140,4 +141,10 @@ func ServiceAccountRouter(g *echo.Group) {
 func ServiceRouter(g *echo.Group) {
 	serviceApi := NewServiceApi(dependency.GetV1ServiceService())
 	g.GET("", serviceApi.Get)
+}
+
+// SecretRouter api/v1/secrets/* router
+func SecretRouter(g *echo.Group) {
+	secretApi := NewSecretApi(dependency.GetV1SecretService())
+	g.GET("", secretApi.Get)
 }

@@ -100,3 +100,8 @@ func GetV1RoleBindingService() service.RoleBinding {
 func GetV1ServiceService() service.Service {
 	return logic.NewServiceService(mongo.NewServiceRepository(3000))
 }
+
+// GetV1SecretService returns service.Secret
+func GetV1SecretService() service.Secret {
+	return logic.NewSecretService(mongo.NewSecretRepository(3000))
+}
