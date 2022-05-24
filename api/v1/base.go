@@ -59,7 +59,7 @@ func DaemonSetRouter(g *echo.Group) {
 	g.GET("", daemonSetApi.Get)
 }
 
-// PersistentVolumeRouter api/v1/persistent-volume/* router
+// PersistentVolumeRouter api/v1/persistent-volumes/* router
 func PersistentVolumeRouter(g *echo.Group) {
 	persistentVolumeApi := NewPersistentVolumeApi(dependency.GetV1PersistentVolumeService())
 	g.GET("", persistentVolumeApi.Get)

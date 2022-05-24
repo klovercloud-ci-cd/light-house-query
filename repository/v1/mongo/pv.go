@@ -54,7 +54,7 @@ func (p persistentVolumeRepository) Get(agent string, option v1.ResourceQueryOpt
 	return results, count
 }
 
-// NewPersistentVolumeRepository returns repository.ClusterRole type repository
+// NewPersistentVolumeRepository returns repository.PersistentVolume type repository
 func NewPersistentVolumeRepository(timeout int) repository.PersistentVolume {
 	return &persistentVolumeRepository{
 		manager: GetDmManager(),

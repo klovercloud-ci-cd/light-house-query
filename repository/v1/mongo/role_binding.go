@@ -54,7 +54,7 @@ func (r roleBindingRepository) Get(agent string, option v1.ResourceQueryOption) 
 	return results, count
 }
 
-// NewRoleBindingRepository returns repository.RoleRepository type repository
+// NewRoleBindingRepository returns repository.RoleBinding type repository
 func NewRoleBindingRepository(timeout int) repository.RoleBinding {
 	return &roleBindingRepository{
 		manager: GetDmManager(),

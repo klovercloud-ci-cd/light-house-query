@@ -15,7 +15,7 @@ type persistentVolumeApi struct {
 
 // Get... Get Api
 // @Summary Get api
-// @Description Api for getiing all Persistent Volume Claims by agent name
+// @Description Api for getiing all persistent volumes by agent name
 // @Tags PersistentVolume
 // @Produce json
 // @Param agent query string true "Agent Name"
@@ -25,7 +25,7 @@ type persistentVolumeApi struct {
 // @Success 200 {object} common.ResponseDTO{data=[]v1.PersistentVolume{}}
 // @Forbidden 403 {object} common.ResponseDTO
 // @Failure 400 {object} common.ResponseDTO
-// @Router /api/v1/persistentVolumes [GET]
+// @Router /api/v1/persistent-volumes [GET]
 func (p persistentVolumeApi) Get(context echo.Context) error {
 	agent := context.QueryParam("agent")
 	option := GetQueryOption(context)

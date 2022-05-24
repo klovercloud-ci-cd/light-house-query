@@ -7,16 +7,16 @@ import (
 )
 
 type roleBindingService struct {
-	roleBindingServiceRepo repository.RoleBinding
+	roleBindingRepo repository.RoleBinding
 }
 
 func (r roleBindingService) Get(agent string, option v1.ResourceQueryOption) ([]v1.RoleBinding, int64) {
-	return r.roleBindingServiceRepo.Get(agent, option)
+	return r.roleBindingRepo.Get(agent, option)
 }
 
-// NewRoleBindingService returns service.RoleBindingService type service
+// NewRoleBindingService returns service.RoleBinding type service
 func NewRoleBindingService(roleBindingRepo repository.RoleBinding) service.RoleBinding {
 	return &roleBindingService{
-		roleBindingServiceRepo: roleBindingRepo,
+		roleBindingRepo: roleBindingRepo,
 	}
 }

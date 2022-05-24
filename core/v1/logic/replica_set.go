@@ -7,16 +7,16 @@ import (
 )
 
 type replicaSetService struct {
-	replicaSetServiceRepo repository.ReplicaSet
+	replicaSetRepo repository.ReplicaSet
 }
 
 func (r replicaSetService) Get(agent string, option v1.ResourceQueryOption) ([]v1.ReplicaSet, int64) {
-	return r.replicaSetServiceRepo.Get(agent, option)
+	return r.replicaSetRepo.Get(agent, option)
 }
 
-// NewReplicaSetService returns service.ReplicaSetService type service
+// NewReplicaSetService returns service.ReplicaSet type service
 func NewReplicaSetService(replicaSetRepo repository.ReplicaSet) service.ReplicaSet {
 	return &replicaSetService{
-		replicaSetServiceRepo: replicaSetRepo,
+		replicaSetRepo: replicaSetRepo,
 	}
 }

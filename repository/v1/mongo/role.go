@@ -54,7 +54,7 @@ func (r roleRepository) Get(agent string, option v1.ResourceQueryOption) ([]v1.R
 	return results, count
 }
 
-// NewRoleRepository returns repository.RoleRepository type repository
+// NewRoleRepository returns repository.Role type repository
 func NewRoleRepository(timeout int) repository.Role {
 	return &roleRepository{
 		manager: GetDmManager(),

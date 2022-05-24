@@ -15,7 +15,7 @@ type roleBindingApi struct {
 
 // Get... Get Api
 // @Summary Get api
-// @Description Api for getiing all Persistent Volume Claims by agent name
+// @Description Api for getiing all role bindings by agent name
 // @Tags RoleBinding
 // @Produce json
 // @Param agent query string true "Agent Name"
@@ -43,7 +43,7 @@ func (r roleBindingApi) Get(context echo.Context) error {
 		&metadata, "Successful")
 }
 
-// NewRoleBindingApi returns api.RoleBindingApi type api
+// NewRoleBindingApi returns api.RoleBinding type api
 func NewRoleBindingApi(roleBindingService service.RoleBinding) api.RoleBinding {
 	return &roleBindingApi{
 		roleBindingService: roleBindingService,

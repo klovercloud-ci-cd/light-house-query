@@ -14,7 +14,7 @@ func (p persistentVolumeClaimService) Get(agent string, option v1.ResourceQueryO
 	return p.persistentVolumeClaimRepo.Get(agent, option)
 }
 
-// NewPersistentVolumeClaimService returns service.PersistentVolumeClaimService type service
+// NewPersistentVolumeClaimService returns service.PersistentVolumeClaim type service
 func NewPersistentVolumeClaimService(persistentVolumeClaimRepo repository.PersistentVolumeClaim) service.PersistentVolumeClaim {
 	return &persistentVolumeClaimService{
 		persistentVolumeClaimRepo: persistentVolumeClaimRepo,

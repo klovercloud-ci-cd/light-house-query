@@ -15,7 +15,7 @@ type replicaSetApi struct {
 
 // Get... Get Api
 // @Summary Get api
-// @Description Api for getiing all Persistent Volume Claims by agent name
+// @Description Api for getiing all replica sets by agent name
 // @Tags ReplicaSet
 // @Produce json
 // @Param agent query string true "Agent Name"
@@ -25,7 +25,7 @@ type replicaSetApi struct {
 // @Success 200 {object} common.ResponseDTO{data=[]v1.ReplicaSet{}}
 // @Forbidden 403 {object} common.ResponseDTO
 // @Failure 400 {object} common.ResponseDTO
-// @Router /api/v1/replicaSets [GET]
+// @Router /api/v1/replica-sets [GET]
 func (r replicaSetApi) Get(context echo.Context) error {
 	agent := context.QueryParam("agent")
 	option := GetQueryOption(context)
@@ -43,7 +43,7 @@ func (r replicaSetApi) Get(context echo.Context) error {
 		&metadata, "Successful")
 }
 
-// NewReplicaSetApi returns api.ReplicaSetApi type api
+// NewReplicaSetApi returns api.ReplicaSet type api
 func NewReplicaSetApi(replicaSetService service.ReplicaSet) api.ReplicaSet {
 	return &replicaSetApi{
 		replicaSetService: replicaSetService,

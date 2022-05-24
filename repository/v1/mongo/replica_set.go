@@ -54,7 +54,7 @@ func (r replicaSetRepository) Get(agent string, option v1.ResourceQueryOption) (
 	return results, count
 }
 
-// NewReplicaSetRepository returns repository.ReplicaSetRepository type repository
+// NewReplicaSetRepository returns repository.ReplicaSet type repository
 func NewReplicaSetRepository(timeout int) repository.ReplicaSet {
 	return &replicaSetRepository{
 		manager: GetDmManager(),

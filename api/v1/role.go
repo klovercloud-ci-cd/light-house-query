@@ -15,7 +15,7 @@ type roleApi struct {
 
 // Get... Get Api
 // @Summary Get api
-// @Description Api for getiing all Persistent Volume Claims by agent name
+// @Description Api for getiing all roles by agent name
 // @Tags Role
 // @Produce json
 // @Param agent query string true "Agent Name"
@@ -43,7 +43,7 @@ func (r roleApi) Get(context echo.Context) error {
 		&metadata, "Successful")
 }
 
-// NewRoleApi returns api.RoleApi type api
+// NewRoleApi returns api.Role type api
 func NewRoleApi(roleService service.Role) api.Role {
 	return &roleApi{
 		roleService: roleService,
