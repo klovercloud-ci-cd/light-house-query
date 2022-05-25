@@ -96,6 +96,7 @@ func NetworkPolicyRouter(g *echo.Group) {
 func NodeRouter(g *echo.Group) {
 	nodeApi := NewNodeApi(dependency.GetV1NodeService())
 	g.GET("", nodeApi.Get)
+	g.GET("/:owner-reference", nodeApi.GetByOwnerReference)
 }
 
 // PodRouter api/v1/pods/* router

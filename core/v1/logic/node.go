@@ -14,6 +14,10 @@ func (n nodeService) Get(agent string, option v1.ResourceQueryOption) ([]v1.Node
 	return n.nodeRepo.Get(agent, option)
 }
 
+func (n nodeService) GetByOwnerReference(agent, ownerReference string, option v1.ResourceQueryOption) ([]v1.Node, int64) {
+	return n.nodeRepo.GetByOwnerReference(agent, ownerReference, option)
+}
+
 // NewNodeService returns service.Node type service
 func NewNodeService(nodeRepo repository.Node) service.Node {
 	return &nodeService{
