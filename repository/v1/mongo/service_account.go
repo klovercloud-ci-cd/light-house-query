@@ -62,7 +62,7 @@ func (s serviceAccountRepository) GetByOwnerReference(agent, ownerReference stri
 			{"obj.metadata.uid": ownerReference},
 		},
 	}
-	coll := s.manager.Db.Collection(ServiceCollection)
+	coll := s.manager.Db.Collection(ServiceAccountCollection)
 	skip := option.Pagination.Page * option.Pagination.Limit
 	findOptions := options.FindOptions{
 		Limit: &option.Pagination.Limit,

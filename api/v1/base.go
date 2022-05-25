@@ -140,6 +140,7 @@ func SecretRouter(g *echo.Group) {
 func ServiceRouter(g *echo.Group) {
 	serviceApi := NewServiceApi(dependency.GetV1ServiceService())
 	g.GET("", serviceApi.Get)
+	g.GET("/:owner-reference", serviceApi.GetByOwnerReference)
 }
 
 // ServiceAccountRouter api/v1/service-accounts/* router
