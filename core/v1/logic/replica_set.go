@@ -14,6 +14,10 @@ func (r replicaSetService) Get(agent string, option v1.ResourceQueryOption) ([]v
 	return r.replicaSetRepo.Get(agent, option)
 }
 
+func (r replicaSetService) GetByOwnerReference(agent, ownerReference string, option v1.ResourceQueryOption) ([]v1.ReplicaSet, int64) {
+	return r.replicaSetRepo.GetByOwnerReference(agent, ownerReference, option)
+}
+
 // NewReplicaSetService returns service.ReplicaSet type service
 func NewReplicaSetService(replicaSetRepo repository.ReplicaSet) service.ReplicaSet {
 	return &replicaSetService{
