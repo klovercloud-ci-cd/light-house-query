@@ -103,6 +103,7 @@ func NodeRouter(g *echo.Group) {
 func PodRouter(g *echo.Group) {
 	podApi := NewPodApi(dependency.GetV1PodService())
 	g.GET("", podApi.Get)
+	g.GET("/:owner-reference", podApi.GetByOwnerReference)
 }
 
 // PersistentVolumeRouter api/v1/persistent-volumes/* router

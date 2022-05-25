@@ -14,6 +14,10 @@ func (p podService) Get(agent string, option v1.ResourceQueryOption) ([]v1.Pod, 
 	return p.podRepo.Get(agent, option)
 }
 
+func (p podService) GetByOwnerReference(agent, ownerReference string, option v1.ResourceQueryOption) ([]v1.Pod, int64) {
+	return p.podRepo.GetByOwnerReference(agent, ownerReference, option)
+}
+
 // NewPodService returns service.Pod type service
 func NewPodService(podRepo repository.Pod) service.Pod {
 	return &podService{
