@@ -45,7 +45,7 @@ func (i ingressApi) Get(context echo.Context) error {
 
 // Get... Get Api
 // @Summary Get api
-// @Description Api for getiing all ingresses by agent name
+// @Description Api for getiing all ingresses by agent name and owner reference
 // @Tags Ingress
 // @Produce json
 // @Param owner-reference path string true "Owner Reference"

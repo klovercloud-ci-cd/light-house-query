@@ -14,6 +14,10 @@ func (n namespaceService) Get(agent string, option v1.ResourceQueryOption) ([]v1
 	return n.namespaceRepo.Get(agent, option)
 }
 
+func (n namespaceService) GetByOwnerReference(agent, ownerReference string, option v1.ResourceQueryOption) ([]v1.Namespace, int64) {
+	return n.namespaceRepo.GetByOwnerReference(agent, ownerReference, option)
+}
+
 // NewNamespaceService returns service.Namespace type service
 func NewNamespaceService(namespaceRepo repository.Namespace) service.Namespace {
 	return &namespaceService{
