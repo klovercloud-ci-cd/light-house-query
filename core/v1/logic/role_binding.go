@@ -14,6 +14,10 @@ func (r roleBindingService) Get(agent string, option v1.ResourceQueryOption) ([]
 	return r.roleBindingRepo.Get(agent, option)
 }
 
+func (r roleBindingService) GetByOwnerReference(agent, ownerReference string, option v1.ResourceQueryOption) ([]v1.RoleBinding, int64) {
+	return r.roleBindingRepo.GetByOwnerReference(agent, ownerReference, option)
+}
+
 // NewRoleBindingService returns service.RoleBinding type service
 func NewRoleBindingService(roleBindingRepo repository.RoleBinding) service.RoleBinding {
 	return &roleBindingService{
