@@ -89,6 +89,7 @@ func NamespaceRouter(g *echo.Group) {
 func NetworkPolicyRouter(g *echo.Group) {
 	networkPolicyApi := NewNetworkPolicyApi(dependency.GetV1NetworkPolicyService())
 	g.GET("", networkPolicyApi.Get)
+	g.GET("/:owner-reference", networkPolicyApi.GetByOwnerReference)
 }
 
 // NodeRouter api/v1/nodes/* router

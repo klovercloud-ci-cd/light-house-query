@@ -14,6 +14,10 @@ func (n networkPolicyService) Get(agent string, option v1.ResourceQueryOption) (
 	return n.networkPolicyRepo.Get(agent, option)
 }
 
+func (n networkPolicyService) GetByOwnerReference(agent, ownerReference string, option v1.ResourceQueryOption) ([]v1.NetworkPolicy, int64) {
+	return n.networkPolicyRepo.GetByOwnerReference(agent, ownerReference, option)
+}
+
 // NewNetworkPolicyService returns service.NetworkPolicy type service
 func NewNetworkPolicyService(networkPolicyRepo repository.NetworkPolicy) service.NetworkPolicy {
 	return &networkPolicyService{
