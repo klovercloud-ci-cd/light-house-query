@@ -48,8 +48,8 @@ func (c certificateApi) Get(context echo.Context) error {
 // @Description Api for getiing all certificates by agent name and owner reference uid
 // @Tags Certificate
 // @Produce json
-// @Param agent query string true "Agent Name"
 // @Param owner-reference path string true "Owner Reference"
+// @Param agent query string true "Agent Name"
 // @Param page query int64 false "Page Number"
 // @Param limit query int64 false "Limit"
 // @Param sort query bool false "Sort By Created Time"
@@ -60,7 +60,7 @@ func (c certificateApi) Get(context echo.Context) error {
 func (c certificateApi) GetByOwnerReference(context echo.Context) error {
 	agent := context.QueryParam("agent")
 	option := GetQueryOption(context)
-	ownerReference := context.QueryParam("owner-reference")
+	ownerReference := context.Param("owner-reference")
 	data, total := c.certificateService.GetByOwnerReference(agent, ownerReference, option)
 	metadata := common.GetPaginationMetadata(option.Pagination.Page, option.Pagination.Limit, total, int64(len(data)))
 	uri := strings.Split(context.Request().RequestURI, "?")[0]
