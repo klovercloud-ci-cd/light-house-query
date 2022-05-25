@@ -82,6 +82,7 @@ func IngressRouter(g *echo.Group) {
 func NamespaceRouter(g *echo.Group) {
 	namespaceApi := NewNamespaceApi(dependency.GetV1NamespaceService())
 	g.GET("", namespaceApi.Get)
+	g.GET("/:owner-reference", namespaceApi.GetByOwnerReference)
 }
 
 // NetworkPolicyRouter api/v1/network-policies/* router
