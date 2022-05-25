@@ -13,6 +13,9 @@ type serviceAccountService struct {
 func (s serviceAccountService) Get(agent string, option v1.ResourceQueryOption) ([]v1.ServiceAccount, int64) {
 	return s.serviceAccountRepo.Get(agent, option)
 }
+func (s serviceAccountService) GetByOwnerReference(agent, ownerReference string, option v1.ResourceQueryOption) ([]v1.ServiceAccount, int64) {
+	return s.serviceAccountRepo.GetByOwnerReference(agent, ownerReference, option)
+}
 
 // NewServiceAccountService returns service.ServiceAccount type service
 func NewServiceAccountService(serviceAccountRepo repository.ServiceAccount) service.ServiceAccount {
