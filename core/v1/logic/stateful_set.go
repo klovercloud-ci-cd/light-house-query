@@ -14,6 +14,10 @@ func (s statefulSetService) Get(agent string, option v1.ResourceQueryOption) ([]
 	return s.statefulSetRepo.Get(agent, option)
 }
 
+func (s statefulSetService) GetByOwnerReference(agent, ownerReference string, option v1.ResourceQueryOption) ([]v1.StatefulSet, int64) {
+	return s.statefulSetRepo.GetByOwnerReference(agent, ownerReference, option)
+}
+
 // NewStatefulSetService returns service.StatefulSet type service
 func NewStatefulSetService(statefulSetRepo repository.StatefulSet) service.StatefulSet {
 	return &statefulSetService{

@@ -131,6 +131,7 @@ func PodRouter(g *echo.Group) {
 func StatefulSetRouter(g *echo.Group) {
 	statefulSetApi := NewStatefulSetApi(dependency.GetV1StatefulSetService())
 	g.GET("", statefulSetApi.Get)
+	g.GET("/:owner-reference", statefulSetApi.GetByOwnerReference)
 }
 
 // ServiceAccountRouter api/v1/service-accounts/* router
