@@ -14,6 +14,10 @@ func (d daemonSetService) Get(agent string, option v1.ResourceQueryOption) ([]v1
 	return d.daemonSetRepo.Get(agent, option)
 }
 
+func (d daemonSetService) GetByOwnerReference(agent, ownerReference string, option v1.ResourceQueryOption) ([]v1.DaemonSet, int64) {
+	return d.daemonSetRepo.GetByOwnerReference(agent, ownerReference, option)
+}
+
 // NewDaemonSetService returns service.Certificate type service
 func NewDaemonSetService(daemonSetRepo repository.DaemonSet) service.DaemonSet {
 	return &daemonSetService{

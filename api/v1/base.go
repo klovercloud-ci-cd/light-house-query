@@ -54,12 +54,14 @@ func ClusterRoleBindingRouter(g *echo.Group) {
 func ConfigMapRouter(g *echo.Group) {
 	configMapApi := NewConfigMapApi(dependency.GetV1ConfigMapService())
 	g.GET("", configMapApi.Get)
+	g.GET("/:owner-reference", configMapApi.GetByOwnerReference)
 }
 
 // DaemonSetRouter api/v1/daemon-sets/* router
 func DaemonSetRouter(g *echo.Group) {
 	daemonSetApi := NewDaemonSetApi(dependency.GetV1DaemonSetService())
 	g.GET("", daemonSetApi.Get)
+	g.GET("/:owner-reference", daemonSetApi.GetByOwnerReference)
 }
 
 // DeploymentRouter api/v1/deployments/* router
