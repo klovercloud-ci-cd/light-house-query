@@ -109,6 +109,7 @@ func PodRouter(g *echo.Group) {
 func PersistentVolumeRouter(g *echo.Group) {
 	persistentVolumeApi := NewPersistentVolumeApi(dependency.GetV1PersistentVolumeService())
 	g.GET("", persistentVolumeApi.Get)
+	g.GET("/:owner-reference", persistentVolumeApi.GetByOwnerReference)
 }
 
 // PersistentVolumeClaimRouter api/v1/persistent-volume-claims/* router
