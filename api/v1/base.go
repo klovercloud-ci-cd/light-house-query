@@ -33,6 +33,7 @@ func Router(g *echo.Group) {
 func CertificateRouter(g *echo.Group) {
 	certificateApi := NewCertificateApi(dependency.GetV1CertificateService())
 	g.GET("", certificateApi.Get)
+	g.GET("/:owner-reference", certificateApi.GetByOwnerReference)
 }
 
 // ClusterRoleRouter api/v1/cluster-roles/* router
