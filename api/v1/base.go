@@ -47,6 +47,7 @@ func ClusterRoleRouter(g *echo.Group) {
 func ClusterRoleBindingRouter(g *echo.Group) {
 	clusterRoleBindingApi := NewClusterRoleBindingApi(dependency.GetV1ClusterRoleBindingService())
 	g.GET("", clusterRoleBindingApi.Get)
+	g.GET("/:owner-reference", clusterRoleBindingApi.GetByOwnerReference)
 }
 
 // ConfigMapRouter api/v1/config-maps/* router
