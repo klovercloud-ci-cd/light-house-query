@@ -136,6 +136,7 @@ func RoleBindingRouter(g *echo.Group) {
 func SecretRouter(g *echo.Group) {
 	secretApi := NewSecretApi(dependency.GetV1SecretService())
 	g.GET("", secretApi.Get)
+	g.GET("/:owner-reference", secretApi.GetByOwnerReference)
 }
 
 // ServiceRouter api/v1/services/* router
