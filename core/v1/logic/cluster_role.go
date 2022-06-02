@@ -10,16 +10,8 @@ type clusterRoleService struct {
 	clusterRoleRepo repository.ClusterRole
 }
 
-func (c clusterRoleService) Get(agent string, option v1.ResourceQueryOption) ([]v1.ClusterRole, int64) {
-	return c.clusterRoleRepo.Get(agent, option)
-}
-
-func (c clusterRoleService) GetByOwnerReference(agent, ownerReference string, option v1.ResourceQueryOption) ([]v1.ClusterRole, int64) {
-	return c.clusterRoleRepo.GetByOwnerReference(agent, ownerReference, option)
-}
-
-func (c clusterRoleService) GetByProcessId(agent, processId string, option v1.ResourceQueryOption) ([]v1.ClusterRole, int64) {
-	return c.clusterRoleRepo.GetByProcessId(agent, processId, option)
+func (c clusterRoleService) Get(agent, ownerReference, processId string, option v1.ResourceQueryOption) ([]v1.ClusterRole, int64) {
+	return c.clusterRoleRepo.Get(agent, ownerReference, processId, option)
 }
 
 // NewClusterRoleService returns service.ClusterRole type service

@@ -39,8 +39,6 @@ func CertificateRouter(g *echo.Group) {
 func ClusterRoleRouter(g *echo.Group) {
 	clusterRoleApi := NewClusterRoleApi(dependency.GetV1ClusterRoleService())
 	g.GET("", clusterRoleApi.Get)
-	g.GET("/:owner-reference", clusterRoleApi.GetByOwnerReference)
-	g.GET("/:processId", clusterRoleApi.GetByProcessId)
 
 }
 
