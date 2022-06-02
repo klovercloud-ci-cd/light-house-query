@@ -10,12 +10,8 @@ type roleBindingService struct {
 	roleBindingRepo repository.RoleBinding
 }
 
-func (r roleBindingService) Get(agent string, option v1.ResourceQueryOption) ([]v1.RoleBinding, int64) {
-	return r.roleBindingRepo.Get(agent, option)
-}
-
-func (r roleBindingService) GetByOwnerReference(agent, ownerReference string, option v1.ResourceQueryOption) ([]v1.RoleBinding, int64) {
-	return r.roleBindingRepo.GetByOwnerReference(agent, ownerReference, option)
+func (r roleBindingService) Get(agent, ownerReference, processId string, option v1.ResourceQueryOption) ([]v1.RoleBinding, int64) {
+	return r.roleBindingRepo.Get(agent, ownerReference, processId, option)
 }
 
 // NewRoleBindingService returns service.RoleBinding type service
