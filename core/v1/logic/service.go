@@ -10,12 +10,8 @@ type serviceService struct {
 	serviceRepo repository.Service
 }
 
-func (s serviceService) Get(agent string, option v1.ResourceQueryOption) ([]v1.Service, int64) {
-	return s.serviceRepo.Get(agent, option)
-}
-
-func (s serviceService) GetByOwnerReference(agent, ownerReference string, option v1.ResourceQueryOption) ([]v1.Service, int64) {
-	return s.serviceRepo.GetByOwnerReference(agent, ownerReference, option)
+func (s serviceService) Get(agent, ownerReference, processId string, option v1.ResourceQueryOption) ([]v1.Service, int64) {
+	return s.serviceRepo.Get(agent, ownerReference, processId, option)
 }
 
 // NewServiceService returns service.Service type service
