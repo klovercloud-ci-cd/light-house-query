@@ -10,16 +10,8 @@ type configMapService struct {
 	configMapRepo repository.ConfigMap
 }
 
-func (c configMapService) Get(agent string, option v1.ResourceQueryOption) ([]v1.ConfigMap, int64) {
-	return c.configMapRepo.Get(agent, option)
-}
-
-func (c configMapService) GetByOwnerReference(agent, ownerReference string, option v1.ResourceQueryOption) ([]v1.ConfigMap, int64) {
-	return c.configMapRepo.GetByOwnerReference(agent, ownerReference, option)
-}
-
-func (c configMapService) GetByProcessId(agent, processId string, option v1.ResourceQueryOption) ([]v1.ConfigMap, int64) {
-	return c.configMapRepo.GetByProcessId(agent, processId, option)
+func (c configMapService) Get(agent, ownerReference, processId string, option v1.ResourceQueryOption) ([]v1.ConfigMap, int64) {
+	return c.configMapRepo.Get(agent, ownerReference, processId, option)
 }
 
 // NewConfigMapService returns service.ConfigMap type service

@@ -52,8 +52,6 @@ func ClusterRoleBindingRouter(g *echo.Group) {
 func ConfigMapRouter(g *echo.Group) {
 	configMapApi := NewConfigMapApi(dependency.GetV1ConfigMapService())
 	g.GET("", configMapApi.Get)
-	g.GET("/:owner-reference", configMapApi.GetByOwnerReference)
-	g.GET("/:processId", configMapApi.GetByProcessId)
 }
 
 // DaemonSetRouter api/v1/daemon-sets/* router
