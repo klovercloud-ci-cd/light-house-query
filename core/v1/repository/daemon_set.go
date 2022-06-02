@@ -6,4 +6,5 @@ import v1 "github.com/klovercloud-ci-cd/light-house-query/core/v1"
 type DaemonSet interface {
 	Get(agent string, option v1.ResourceQueryOption) ([]v1.DaemonSet, int64)
 	GetByOwnerReference(agent, ownerReference string, option v1.ResourceQueryOption) ([]v1.DaemonSet, int64)
+	GetByProcessId(agent, processId string, option v1.ResourceQueryOption) ([]v1.DaemonSet, int64)
 }

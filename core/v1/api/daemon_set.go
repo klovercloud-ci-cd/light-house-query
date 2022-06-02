@@ -8,4 +8,5 @@ import (
 type DaemonSet interface {
 	Get(context echo.Context) error
 	GetByOwnerReference(context echo.Context) error
+	GetByProcessId(context echo.Context) error
 }
