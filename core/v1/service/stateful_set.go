@@ -4,6 +4,5 @@ import v1 "github.com/klovercloud-ci-cd/light-house-query/core/v1"
 
 // StatefulSet business operations.
 type StatefulSet interface {
-	Get(agent string, option v1.ResourceQueryOption) ([]v1.StatefulSet, int64)
-	GetByOwnerReference(agent, ownerReference string, option v1.ResourceQueryOption) ([]v1.StatefulSet, int64)
+	Get(agent, ownerReference, processId string, option v1.ResourceQueryOption) ([]v1.StatefulSet, int64)
 }

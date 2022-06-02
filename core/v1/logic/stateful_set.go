@@ -10,12 +10,8 @@ type statefulSetService struct {
 	statefulSetRepo repository.StatefulSet
 }
 
-func (s statefulSetService) Get(agent string, option v1.ResourceQueryOption) ([]v1.StatefulSet, int64) {
-	return s.statefulSetRepo.Get(agent, option)
-}
-
-func (s statefulSetService) GetByOwnerReference(agent, ownerReference string, option v1.ResourceQueryOption) ([]v1.StatefulSet, int64) {
-	return s.statefulSetRepo.GetByOwnerReference(agent, ownerReference, option)
+func (s statefulSetService) Get(agent, ownerReference, processId string, option v1.ResourceQueryOption) ([]v1.StatefulSet, int64) {
+	return s.statefulSetRepo.Get(agent, ownerReference, processId, option)
 }
 
 // NewStatefulSetService returns service.StatefulSet type service
