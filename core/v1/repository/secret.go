@@ -4,6 +4,5 @@ import v1 "github.com/klovercloud-ci-cd/light-house-query/core/v1"
 
 // Secret Repository operations.
 type Secret interface {
-	Get(agent string, option v1.ResourceQueryOption) ([]v1.Secret, int64)
-	GetByOwnerReference(agent, ownerReference string, option v1.ResourceQueryOption) ([]v1.Secret, int64)
+	Get(agent, ownerReference, processId string, option v1.ResourceQueryOption) ([]v1.Secret, int64)
 }
