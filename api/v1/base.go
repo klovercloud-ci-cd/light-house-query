@@ -112,7 +112,6 @@ func PersistentVolumeClaimRouter(g *echo.Group) {
 func ReplicaSetRouter(g *echo.Group) {
 	replicaSetApi := NewReplicaSetApi(dependency.GetV1ReplicaSetService())
 	g.GET("", replicaSetApi.Get)
-	g.GET("/:owner-reference", replicaSetApi.GetByOwnerReference)
 }
 
 // RoleRouter api/v1/roles/* router
