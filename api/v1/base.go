@@ -70,7 +70,6 @@ func DeploymentRouter(g *echo.Group) {
 func IngressRouter(g *echo.Group) {
 	ingressApi := NewIngressApi(dependency.GetV1IngressService())
 	g.GET("", ingressApi.Get)
-	g.GET("/:owner-reference", ingressApi.GetByOwnerReference)
 }
 
 // NamespaceRouter api/v1/namespaces/* router
