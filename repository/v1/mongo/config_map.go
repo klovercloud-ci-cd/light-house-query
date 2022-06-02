@@ -11,7 +11,7 @@ import (
 )
 
 var (
-	ConfigMapCollection = "configMapCollection"
+	ConfigMapCollection = "configmapCollection"
 )
 
 type configMapRepository struct {
