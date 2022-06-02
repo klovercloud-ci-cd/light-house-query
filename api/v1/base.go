@@ -142,7 +142,6 @@ func ServiceRouter(g *echo.Group) {
 func ServiceAccountRouter(g *echo.Group) {
 	serviceAccountApi := NewServiceAccountApi(dependency.GetV1ServiceAccountService())
 	g.GET("", serviceAccountApi.Get)
-	g.GET("/:owner-reference", serviceAccountApi.GetByOwnerReference)
 }
 
 // StatefulSetRouter api/v1/stateful-sets/* router
