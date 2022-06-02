@@ -6,19 +6,9 @@ import (
 	"github.com/klovercloud-ci-cd/light-house-query/repository/v1/mongo"
 )
 
-// GetV1PodService returns service.Pod
-func GetV1PodService() service.Pod {
-	return logic.NewPodService(mongo.NewPodRepository(3000))
-}
-
 // GetV1CertificateService returns service.Certificate
 func GetV1CertificateService() service.Certificate {
 	return logic.NewCertificateService(mongo.NewCertificateRepository(3000))
-}
-
-// GetV1NodeService returns service.Node
-func GetV1NodeService() service.Node {
-	return logic.NewNodeService(mongo.NewNodeRepository(3000))
 }
 
 // GetV1ClusterRoleService returns service.ClusterRole
@@ -29,11 +19,6 @@ func GetV1ClusterRoleService() service.ClusterRole {
 // GetV1ClusterRoleBindingService returns service.ClusterRoleBinding
 func GetV1ClusterRoleBindingService() service.ClusterRoleBinding {
 	return logic.NewClusterRoleBindingService(mongo.NewClusterRoleBindingRepository(3000))
-}
-
-// GetV1ConfigMapService returns service.ConfigMap
-func GetV1ConfigMapService() service.ConfigMap {
-	return logic.NewConfigMapService(mongo.NewConfigMapRepository(3000))
 }
 
 // GetV1DaemonSetService returns service.DaemonSet
@@ -56,6 +41,26 @@ func GetV1NamespaceService() service.Namespace {
 	return logic.NewNamespaceService(mongo.NewNamespaceRepository(3000))
 }
 
+// GetV1NetworkPolicyService returns service.NetworkPolicy
+func GetV1NetworkPolicyService() service.NetworkPolicy {
+	return logic.NewNetworkPolicyService(mongo.NewNetworkPolicyRepository(3000))
+}
+
+// GetV1NodeService returns service.Node
+func GetV1NodeService() service.Node {
+	return logic.NewNodeService(mongo.NewNodeRepository(3000))
+}
+
+// GetV1PodService returns service.Pod
+func GetV1PodService() service.Pod {
+	return logic.NewPodService(mongo.NewPodRepository(3000))
+}
+
+// GetV1ConfigMapService returns service.ConfigMap
+func GetV1ConfigMapService() service.ConfigMap {
+	return logic.NewConfigMapService(mongo.NewConfigMapRepository(3000))
+}
+
 // GetV1PersistentVolumeService returns service.PersistentVolume
 func GetV1PersistentVolumeService() service.PersistentVolume {
 	return logic.NewPersistentVolumeService(mongo.NewPersistentVolumeRepository(3000))
@@ -76,24 +81,14 @@ func GetV1RoleService() service.Role {
 	return logic.NewRoleService(mongo.NewRoleRepository(3000))
 }
 
-// GetV1NetworkPolicyService returns service.NetworkPolicy
-func GetV1NetworkPolicyService() service.NetworkPolicy {
-	return logic.NewNetworkPolicyService(mongo.NewNetworkPolicyRepository(3000))
-}
-
-// GetV1StatefulSetService returns service.StatefulSet
-func GetV1StatefulSetService() service.StatefulSet {
-	return logic.NewStatefulSetService(mongo.NewStatefulSetRepository(3000))
-}
-
-// GetV1ServiceAccountService returns service.ServiceAccount
-func GetV1ServiceAccountService() service.ServiceAccount {
-	return logic.NewServiceAccountService(mongo.NewServiceAccountRepository(3000))
-}
-
 // GetV1RoleBindingService returns service.RoleBinding
 func GetV1RoleBindingService() service.RoleBinding {
 	return logic.NewRoleBindingService(mongo.NewRoleBindingRepository(3000))
+}
+
+// GetV1SecretService returns service.Secret
+func GetV1SecretService() service.Secret {
+	return logic.NewSecretService(mongo.NewSecretRepository(3000))
 }
 
 // GetV1ServiceService returns service.Service
@@ -101,7 +96,12 @@ func GetV1ServiceService() service.Service {
 	return logic.NewServiceService(mongo.NewServiceRepository(3000))
 }
 
-// GetV1SecretService returns service.Secret
-func GetV1SecretService() service.Secret {
-	return logic.NewSecretService(mongo.NewSecretRepository(3000))
+// GetV1ServiceAccountService returns service.ServiceAccount
+func GetV1ServiceAccountService() service.ServiceAccount {
+	return logic.NewServiceAccountService(mongo.NewServiceAccountRepository(3000))
+}
+
+// GetV1StatefulSetService returns service.StatefulSet
+func GetV1StatefulSetService() service.StatefulSet {
+	return logic.NewStatefulSetService(mongo.NewStatefulSetRepository(3000))
 }

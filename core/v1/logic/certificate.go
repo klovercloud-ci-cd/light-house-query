@@ -18,6 +18,10 @@ func (c certificateService) GetByOwnerReference(agent, ownerReference string, op
 	return c.certificateRepo.GetByOwnerReference(agent, ownerReference, option)
 }
 
+func (c certificateService) GetByProcessId(agent, processId string, option v1.ResourceQueryOption) ([]v1.Certificate, int64) {
+	return c.certificateRepo.GetByProcessId(agent, processId, option)
+}
+
 // NewCertificateService returns service.Certificate type service
 func NewCertificateService(certificateRepo repository.Certificate) service.Certificate {
 	return &certificateService{
