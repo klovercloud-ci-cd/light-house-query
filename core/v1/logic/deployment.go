@@ -10,16 +10,8 @@ type deploymentService struct {
 	deploymentRepo repository.Deployment
 }
 
-func (d deploymentService) Get(agent string, option v1.ResourceQueryOption) ([]v1.Deployment, int64) {
-	return d.deploymentRepo.Get(agent, option)
-}
-
-func (d deploymentService) GetByOwnerReference(agent, ownerReference string, option v1.ResourceQueryOption) ([]v1.Deployment, int64) {
-	return d.deploymentRepo.GetByOwnerReference(agent, ownerReference, option)
-}
-
-func (d deploymentService) GetByProcessId(agent, processId string, option v1.ResourceQueryOption) ([]v1.Deployment, int64) {
-	return d.deploymentRepo.GetByProcessId(agent, processId, option)
+func (d deploymentService) Get(agent, ownerReference, processId string, option v1.ResourceQueryOption) ([]v1.Deployment, int64) {
+	return d.deploymentRepo.Get(agent, ownerReference, processId, option)
 }
 
 // NewDeploymentService returns service.Deployment type service
