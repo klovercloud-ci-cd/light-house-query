@@ -18,6 +18,10 @@ func (c clusterRoleBindingService) GetByOwnerReference(agent, ownerReference str
 	return c.clusterRoleBindingRepo.GetByOwnerReference(agent, ownerReference, option)
 }
 
+func (c clusterRoleBindingService) GetByProcessId(agent, processId string, option v1.ResourceQueryOption) ([]v1.ClusterRoleBinding, int64) {
+	return c.clusterRoleBindingRepo.GetByProcessId(agent, processId, option)
+}
+
 // NewClusterRoleBindingService returns service.ClusterRoleBinding type service
 func NewClusterRoleBindingService(clusterRoleBindingRepo repository.ClusterRoleBinding) service.ClusterRoleBinding {
 	return &clusterRoleBindingService{
