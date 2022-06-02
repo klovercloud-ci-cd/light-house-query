@@ -18,6 +18,10 @@ func (c configMapService) GetByOwnerReference(agent, ownerReference string, opti
 	return c.configMapRepo.GetByOwnerReference(agent, ownerReference, option)
 }
 
+func (c configMapService) GetByProcessId(agent, processId string, option v1.ResourceQueryOption) ([]v1.ConfigMap, int64) {
+	return c.configMapRepo.GetByProcessId(agent, processId, option)
+}
+
 // NewConfigMapService returns service.ConfigMap type service
 func NewConfigMapService(configMapRepo repository.ConfigMap) service.ConfigMap {
 	return &configMapService{
