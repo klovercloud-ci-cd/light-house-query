@@ -34,6 +34,7 @@ func CertificateRouter(g *echo.Group) {
 	certificateApi := NewCertificateApi(dependency.GetV1CertificateService())
 	g.GET("", certificateApi.Get)
 	g.GET("/:owner-reference", certificateApi.GetByOwnerReference)
+	g.GET("/:processId", certificateApi.GetByProcessId)
 }
 
 // ClusterRoleRouter api/v1/cluster-roles/* router
@@ -41,7 +42,7 @@ func ClusterRoleRouter(g *echo.Group) {
 	clusterRoleApi := NewClusterRoleApi(dependency.GetV1ClusterRoleService())
 	g.GET("", clusterRoleApi.Get)
 	g.GET("/:owner-reference", clusterRoleApi.GetByOwnerReference)
-	g.GET("/:owner-reference", clusterRoleApi.GetByProcessId)
+	g.GET("/:processId", clusterRoleApi.GetByProcessId)
 }
 
 // ClusterRoleBindingRouter api/v1/cluster-role-bindings/* router
