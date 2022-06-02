@@ -10,12 +10,8 @@ type persistentVolumeClaimService struct {
 	persistentVolumeClaimRepo repository.PersistentVolumeClaim
 }
 
-func (p persistentVolumeClaimService) Get(agent string, option v1.ResourceQueryOption) ([]v1.PersistentVolumeClaim, int64) {
-	return p.persistentVolumeClaimRepo.Get(agent, option)
-}
-
-func (p persistentVolumeClaimService) GetByOwnerReference(agent, ownerReference string, option v1.ResourceQueryOption) ([]v1.PersistentVolumeClaim, int64) {
-	return p.persistentVolumeClaimRepo.GetByOwnerReference(agent, ownerReference, option)
+func (p persistentVolumeClaimService) Get(agent, ownerReference, processId string, option v1.ResourceQueryOption) ([]v1.PersistentVolumeClaim, int64) {
+	return p.persistentVolumeClaimRepo.Get(agent, ownerReference, processId, option)
 }
 
 // NewPersistentVolumeClaimService returns service.PersistentVolumeClaim type service
