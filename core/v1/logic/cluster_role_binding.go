@@ -10,16 +10,8 @@ type clusterRoleBindingService struct {
 	clusterRoleBindingRepo repository.ClusterRoleBinding
 }
 
-func (c clusterRoleBindingService) Get(agent string, option v1.ResourceQueryOption) ([]v1.ClusterRoleBinding, int64) {
-	return c.clusterRoleBindingRepo.Get(agent, option)
-}
-
-func (c clusterRoleBindingService) GetByOwnerReference(agent, ownerReference string, option v1.ResourceQueryOption) ([]v1.ClusterRoleBinding, int64) {
-	return c.clusterRoleBindingRepo.GetByOwnerReference(agent, ownerReference, option)
-}
-
-func (c clusterRoleBindingService) GetByProcessId(agent, processId string, option v1.ResourceQueryOption) ([]v1.ClusterRoleBinding, int64) {
-	return c.clusterRoleBindingRepo.GetByProcessId(agent, processId, option)
+func (c clusterRoleBindingService) Get(agent, ownerReference, processId string, option v1.ResourceQueryOption) ([]v1.ClusterRoleBinding, int64) {
+	return c.clusterRoleBindingRepo.Get(agent, ownerReference, processId, option)
 }
 
 // NewClusterRoleBindingService returns service.ClusterRoleBinding type service
