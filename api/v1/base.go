@@ -74,6 +74,7 @@ func DeploymentRouter(g *echo.Group) {
 	deploymentApi := NewDeploymentApi(dependency.GetV1DeploymentService())
 	g.GET("", deploymentApi.Get)
 	g.GET("/:owner-reference", deploymentApi.GetByOwnerReference)
+	g.GET("/:processId", deploymentApi.GetByProcessId)
 }
 
 // IngressRouter api/v1/ingresses/* router

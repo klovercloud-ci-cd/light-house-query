@@ -18,6 +18,10 @@ func (d deploymentService) GetByOwnerReference(agent, ownerReference string, opt
 	return d.deploymentRepo.GetByOwnerReference(agent, ownerReference, option)
 }
 
+func (d deploymentService) GetByProcessId(agent, processId string, option v1.ResourceQueryOption) ([]v1.Deployment, int64) {
+	return d.deploymentRepo.GetByProcessId(agent, processId, option)
+}
+
 // NewDeploymentService returns service.Deployment type service
 func NewDeploymentService(deploymentRepo repository.Deployment) service.Deployment {
 	return &deploymentService{
