@@ -10,16 +10,8 @@ type certificateService struct {
 	certificateRepo repository.Certificate
 }
 
-func (c certificateService) Get(agent string, option v1.ResourceQueryOption) ([]v1.Certificate, int64) {
-	return c.certificateRepo.Get(agent, option)
-}
-
-func (c certificateService) GetByOwnerReference(agent, ownerReference string, option v1.ResourceQueryOption) ([]v1.Certificate, int64) {
-	return c.certificateRepo.GetByOwnerReference(agent, ownerReference, option)
-}
-
-func (c certificateService) GetByProcessId(agent, processId string, option v1.ResourceQueryOption) ([]v1.Certificate, int64) {
-	return c.certificateRepo.GetByProcessId(agent, processId, option)
+func (c certificateService) Get(agent, ownerReference, processId string, option v1.ResourceQueryOption) ([]v1.Certificate, int64) {
+	return c.certificateRepo.Get(agent, ownerReference, processId, option)
 }
 
 // NewCertificateService returns service.Certificate type service
