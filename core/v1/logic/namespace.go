@@ -10,12 +10,8 @@ type namespaceService struct {
 	namespaceRepo repository.Namespace
 }
 
-func (n namespaceService) Get(agent string, option v1.ResourceQueryOption) ([]v1.Namespace, int64) {
-	return n.namespaceRepo.Get(agent, option)
-}
-
-func (n namespaceService) GetByOwnerReference(agent, ownerReference string, option v1.ResourceQueryOption) ([]v1.Namespace, int64) {
-	return n.namespaceRepo.GetByOwnerReference(agent, ownerReference, option)
+func (n namespaceService) Get(agent, ownerReference, processId string, option v1.ResourceQueryOption) ([]v1.Namespace, int64) {
+	return n.namespaceRepo.Get(agent, ownerReference, processId, option)
 }
 
 // NewNamespaceService returns service.Namespace type service
