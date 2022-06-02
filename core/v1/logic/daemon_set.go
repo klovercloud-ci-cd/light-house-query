@@ -10,16 +10,8 @@ type daemonSetService struct {
 	daemonSetRepo repository.DaemonSet
 }
 
-func (d daemonSetService) Get(agent string, option v1.ResourceQueryOption) ([]v1.DaemonSet, int64) {
-	return d.daemonSetRepo.Get(agent, option)
-}
-
-func (d daemonSetService) GetByOwnerReference(agent, ownerReference string, option v1.ResourceQueryOption) ([]v1.DaemonSet, int64) {
-	return d.daemonSetRepo.GetByOwnerReference(agent, ownerReference, option)
-}
-
-func (d daemonSetService) GetByProcessId(agent, processId string, option v1.ResourceQueryOption) ([]v1.DaemonSet, int64) {
-	return d.daemonSetRepo.GetByOwnerReference(agent, processId, option)
+func (d daemonSetService) Get(agent, ownerReference, processId string, option v1.ResourceQueryOption) ([]v1.DaemonSet, int64) {
+	return d.daemonSetRepo.Get(agent, ownerReference, processId, option)
 }
 
 // NewDaemonSetService returns service.Certificate type service

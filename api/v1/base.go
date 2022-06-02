@@ -58,8 +58,6 @@ func ConfigMapRouter(g *echo.Group) {
 func DaemonSetRouter(g *echo.Group) {
 	daemonSetApi := NewDaemonSetApi(dependency.GetV1DaemonSetService())
 	g.GET("", daemonSetApi.Get)
-	g.GET("/:owner-reference", daemonSetApi.GetByOwnerReference)
-	g.GET("/:processId", daemonSetApi.GetByProcessId)
 }
 
 // DeploymentRouter api/v1/deployments/* router
