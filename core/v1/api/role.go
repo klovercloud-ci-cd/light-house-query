@@ -5,5 +5,4 @@ import "github.com/labstack/echo/v4"
 // Role api operations
 type Role interface {
 	Get(context echo.Context) error
-	GetByOwnerReference(context echo.Context) error
 }

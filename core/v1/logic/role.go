@@ -10,12 +10,8 @@ type roleService struct {
 	roleRepo repository.Role
 }
 
-func (r roleService) Get(agent string, option v1.ResourceQueryOption) ([]v1.Role, int64) {
-	return r.roleRepo.Get(agent, option)
-}
-
-func (r roleService) GetByOwnerReference(agent, ownerReference string, option v1.ResourceQueryOption) ([]v1.Role, int64) {
-	return r.roleRepo.GetByOwnerReference(agent, ownerReference, option)
+func (r roleService) Get(agent, ownerReference, processId string, option v1.ResourceQueryOption) ([]v1.Role, int64) {
+	return r.roleRepo.Get(agent, ownerReference, processId, option)
 }
 
 // NewRoleService returns service.Role type service

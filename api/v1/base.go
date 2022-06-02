@@ -118,7 +118,6 @@ func ReplicaSetRouter(g *echo.Group) {
 func RoleRouter(g *echo.Group) {
 	roleApi := NewRoleApi(dependency.GetV1RoleService())
 	g.GET("", roleApi.Get)
-	g.GET("/:owner-reference", roleApi.GetByOwnerReference)
 }
 
 // RoleBindingRouter api/v1/role-bindings/* router
