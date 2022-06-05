@@ -14,7 +14,7 @@
 ```
 
 ## Responsibility
-- Query all the K8S objects like Pods, ConfigMap, ServiceAccounts from database.
+- Query all K8S objects from database.
 
 
 
