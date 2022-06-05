@@ -3,6 +3,7 @@ package api
 import (
 	v1 "github.com/klovercloud-ci-cd/light-house-query/api/v1"
 	"github.com/labstack/echo/v4"
+	echoSwagger "github.com/swaggo/echo-swagger"
 	"net/http"
 )
 
@@ -12,7 +13,7 @@ func Routes(e *echo.Echo) {
 	e.GET("/", index)
 	// Health Page
 	e.GET("/health", health)
-	//e.GET("/swagger/*", echoSwagger.WrapHandler)
+	e.GET("/swagger/*", echoSwagger.WrapHandler)
 
 	v1.Router(e.Group("/api/v1"))
 }
