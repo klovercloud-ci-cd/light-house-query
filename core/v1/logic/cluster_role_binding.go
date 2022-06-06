@@ -11,7 +11,10 @@ type clusterRoleBindingService struct {
 }
 
 func (c clusterRoleBindingService) Get(agent, ownerReference, processId string, option v1.ResourceQueryOption) ([]v1.ClusterRoleBinding, int64) {
-	return c.clusterRoleBindingRepo.Get(agent, ownerReference, processId, option)
+	if ownerReference == "" {
+		return c.clusterRoleBindingRepo.GetByAgentAndProcessId(agent, processId, option)
+	}
+	return c.clusterRoleBindingRepo.GetByAgentAndProcessIdAndOwnerReference(agent, ownerReference, processId, option)
 }
 
 // NewClusterRoleBindingService returns service.ClusterRoleBinding type service

@@ -11,7 +11,10 @@ type clusterRoleService struct {
 }
 
 func (c clusterRoleService) Get(agent, ownerReference, processId string, option v1.ResourceQueryOption) ([]v1.ClusterRole, int64) {
-	return c.clusterRoleRepo.Get(agent, ownerReference, processId, option)
+	if ownerReference == "" {
+		return c.clusterRoleRepo.GetByAgentAndProcessId(agent, processId, option)
+	}
+	return c.clusterRoleRepo.GetByAgentAndProcessIdAndOwnerReference(agent, ownerReference, processId, option)
 }
 
 // NewClusterRoleService returns service.ClusterRole type service

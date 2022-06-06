@@ -15,7 +15,7 @@ type certificateApi struct {
 
 // Get... Get Api
 // @Summary Get api
-// @Description Api for getiing all certificates by agent name, owner reference and process id
+// @Description Api for getting all certificates by agent name, owner reference and process id
 // @Tags Certificate
 // @Produce json
 // @Param owner-reference query string false "Owner Reference"

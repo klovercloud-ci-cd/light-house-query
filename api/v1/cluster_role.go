@@ -15,10 +15,10 @@ type clusterRoleApi struct {
 
 // Get... Get Api
 // @Summary Get api
-// @Description Api for getiing all Cluster Roles by agent name, owner reference and process id
+// @Description Api for getting all Cluster Roles by agent name, owner reference and process id
 // @Tags ClusterRole
 // @Produce json
-// @Param owner-reference path string true "Owner Reference"
+// @Param owner-reference path string false "Owner Reference"
 // @Param processId query string true "Process Id"
 // @Param agent query string true "Agent Name"
 // @Param page query int64 false "Page Number"
