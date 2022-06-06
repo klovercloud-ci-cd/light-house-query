@@ -11,7 +11,10 @@ type namespaceService struct {
 }
 
 func (n namespaceService) Get(agent, ownerReference, processId string, option v1.ResourceQueryOption) ([]v1.Namespace, int64) {
-	return n.namespaceRepo.Get(agent, ownerReference, processId, option)
+	if ownerReference == "" {
+		return n.namespaceRepo.GetByAgentAndProcessId(agent, processId, option)
+	}
+	return n.namespaceRepo.GetByAgentAndProcessIdAndOwnerReference(agent, ownerReference, processId, option)
 }
 
 // NewNamespaceService returns service.Namespace type service
