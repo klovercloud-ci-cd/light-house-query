@@ -11,7 +11,10 @@ type secretService struct {
 }
 
 func (s secretService) Get(agent, ownerReference, processId string, option v1.ResourceQueryOption) ([]v1.Secret, int64) {
-	return s.secretRepo.Get(agent, ownerReference, processId, option)
+	if ownerReference == "" {
+		return s.secretRepo.GetByAgentAndProcessId(agent, processId, option)
+	}
+	return s.secretRepo.GetByAgentAndProcessIdAndOwnerReference(agent, ownerReference, processId, option)
 }
 
 // NewSecretService returns service.Secret type service
