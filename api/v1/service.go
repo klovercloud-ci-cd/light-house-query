@@ -15,7 +15,7 @@ type serviceApi struct {
 
 // Get... Get Api
 // @Summary Get api
-// @Description Api for getiing all Services by name, owner reference and process id
+// @Description Api for getting all Services by name, owner reference and process id
 // @Tags ServiceAccount
 // @Produce json
 // @Param owner-reference path string false "Owner Reference"

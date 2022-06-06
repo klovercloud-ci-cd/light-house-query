@@ -15,7 +15,7 @@ type nodeApi struct {
 
 // Get... Get Api
 // @Summary Get api
-// @Description Api for getiing all pods by agent name, owner reference and process id
+// @Description Api for getting all pods by agent name, owner reference and process id
 // @Tags Pod
 // @Produce json
 // @Param agent query string true "Agent Name"

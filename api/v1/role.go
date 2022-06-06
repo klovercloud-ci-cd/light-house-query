@@ -15,7 +15,7 @@ type roleApi struct {
 
 // Get... Get Api
 // @Summary Get api
-// @Description Api for getiing all Roles by agent name, owner reference and process id
+// @Description Api for getting all Roles by agent name, owner reference and process id
 // @Tags Role
 // @Produce json
 // @Param owner-reference path string false "Owner Reference"

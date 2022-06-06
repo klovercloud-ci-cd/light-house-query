@@ -15,7 +15,7 @@ type persistentVolumeClaimApi struct {
 
 // Get... Get Api
 // @Summary Get api
-// @Description Api for getiing all persistent volume claim  by agent name, owner reference and process id
+// @Description Api for getting all persistent volume claim  by agent name, owner reference and process id
 // @Tags PersistentVolumeClaim
 // @Produce json
 // @Param owner-reference path string false "Owner Reference"

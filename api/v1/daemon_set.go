@@ -15,7 +15,7 @@ type daemonSetApi struct {
 
 // Get... Get Api
 // @Summary Get api
-// @Description Api for getiing all DaemonSets by agent name, owner reference and process
+// @Description Api for getting all DaemonSets by agent name, owner reference and process
 // @Tags DaemonSet
 // @Produce json
 // @Param owner-reference path string true "Owner Reference"

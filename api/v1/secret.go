@@ -15,7 +15,7 @@ type secretApi struct {
 
 // Get... Get Api
 // @Summary Get api
-// @Description Api for getiing all Secrets by agent name, owner reference and process id
+// @Description Api for getting all Secrets by agent name, owner reference and process id
 // @Tags Secret
 // @Produce json
 // @Param owner-reference path string false "Owner Reference"
