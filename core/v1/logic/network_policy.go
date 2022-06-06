@@ -11,7 +11,10 @@ type networkPolicyService struct {
 }
 
 func (n networkPolicyService) Get(agent, ownerReference, processId string, option v1.ResourceQueryOption) ([]v1.NetworkPolicy, int64) {
-	return n.networkPolicyRepo.Get(agent, ownerReference, processId, option)
+	if ownerReference == "" {
+		return n.networkPolicyRepo.GetByAgentAndProcessId(agent, processId, option)
+	}
+	return n.networkPolicyRepo.GetByAgentAndProcessIdAndOwnerReference(agent, ownerReference, processId, option)
 }
 
 // NewNetworkPolicyService returns service.NetworkPolicy type service
