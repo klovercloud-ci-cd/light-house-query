@@ -11,7 +11,10 @@ type deploymentService struct {
 }
 
 func (d deploymentService) Get(agent, ownerReference, processId string, option v1.ResourceQueryOption) ([]v1.Deployment, int64) {
-	return d.deploymentRepo.Get(agent, ownerReference, processId, option)
+	if ownerReference == "" {
+		return d.deploymentRepo.GetByAgentAndProcessId(agent, processId, option)
+	}
+	return d.deploymentRepo.GetByAgentAndProcessIdAndOwnerReference(agent, ownerReference, processId, option)
 }
 
 // NewDeploymentService returns service.Deployment type service
