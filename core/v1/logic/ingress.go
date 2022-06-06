@@ -11,7 +11,10 @@ type ingressService struct {
 }
 
 func (i ingressService) Get(agent, ownerReference, processId string, option v1.ResourceQueryOption) ([]v1.Ingress, int64) {
-	return i.ingressRepo.Get(agent, ownerReference, processId, option)
+	if ownerReference == "" {
+		return i.ingressRepo.GetByAgentAndProcessId(agent, processId, option)
+	}
+	return i.ingressRepo.GetByAgentAndProcessIdAndOwnerReference(agent, ownerReference, processId, option)
 }
 
 // NewIngressService returns service.Ingress type service
