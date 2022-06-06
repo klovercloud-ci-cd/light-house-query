@@ -11,7 +11,10 @@ type replicaSetService struct {
 }
 
 func (r replicaSetService) Get(agent, ownerReference, processId string, option v1.ResourceQueryOption) ([]v1.ReplicaSet, int64) {
-	return r.replicaSetRepo.Get(agent, ownerReference, processId, option)
+	if ownerReference == "" {
+		return r.replicaSetRepo.GetByAgentAndProcessId(agent, processId, option)
+	}
+	return r.replicaSetRepo.GetByAgentAndProcessIdAndOwnerReference(agent, ownerReference, processId, option)
 }
 
 // NewReplicaSetService returns service.ReplicaSet type service
