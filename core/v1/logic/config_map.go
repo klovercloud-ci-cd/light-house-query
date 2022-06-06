@@ -11,7 +11,10 @@ type configMapService struct {
 }
 
 func (c configMapService) Get(agent, ownerReference, processId string, option v1.ResourceQueryOption) ([]v1.ConfigMap, int64) {
-	return c.configMapRepo.Get(agent, ownerReference, processId, option)
+	if ownerReference == "" {
+		return c.configMapRepo.GetByAgentAndProcessId(agent, processId, option)
+	}
+	return c.configMapRepo.GetByAgentAndProcessIdAndOwnerReference(agent, ownerReference, processId, option)
 }
 
 // NewConfigMapService returns service.ConfigMap type service

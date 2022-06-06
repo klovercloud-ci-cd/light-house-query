@@ -18,7 +18,7 @@ type configMapApi struct {
 // @Description Api for getting all ConfigMaps by agent name, owner reference and process
 // @Tags ConfigMap
 // @Produce json
-// @Param owner-reference path string true "Owner Reference"
+// @Param owner-reference path string false "Owner Reference"
 // @Param processId query string true "Process Id"
 // @Param agent query string true "Agent Name"
 // @Param page query int64 false "Page Number"
