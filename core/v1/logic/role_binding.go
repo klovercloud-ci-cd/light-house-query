@@ -11,7 +11,10 @@ type roleBindingService struct {
 }
 
 func (r roleBindingService) Get(agent, ownerReference, processId string, option v1.ResourceQueryOption) ([]v1.RoleBinding, int64) {
-	return r.roleBindingRepo.Get(agent, ownerReference, processId, option)
+	if ownerReference == "" {
+		return r.roleBindingRepo.GetByAgentAndProcessId(agent, processId, option)
+	}
+	return r.roleBindingRepo.GetByAgentAndProcessIdAndOwnerReference(agent, ownerReference, processId, option)
 }
 
 // NewRoleBindingService returns service.RoleBinding type service
