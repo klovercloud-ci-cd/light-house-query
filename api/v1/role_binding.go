@@ -15,7 +15,7 @@ type roleBindingApi struct {
 
 // Get... Get Api
 // @Summary Get api
-// @Description Api for getiing all Role Bindings by agent name, owner reference and process id
+// @Description Api for getting all Role Bindings by agent name, owner reference and process id
 // @Tags RoleBinding
 // @Produce json
 // @Param owner-reference path string false "Owner Reference"

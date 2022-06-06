@@ -15,7 +15,7 @@ type deploymentApi struct {
 
 // Get... Get Api
 // @Summary Get api
-// @Description Api for getiing all Deployments by agent name, owner reference and process
+// @Description Api for getting all Deployments by agent name, owner reference and process
 // @Tags Deployment
 // @Produce json
 // @Param owner-reference path string true "Owner Reference"

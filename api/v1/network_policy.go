@@ -15,7 +15,7 @@ type networkPolicyApi struct {
 
 // Get... Get Api
 // @Summary Get api
-// @Description Api for getiing all Network Policies by agent name, owner reference and process
+// @Description Api for getting all Network Policies by agent name, owner reference and process
 // @Tags Certificate
 // @Produce json
 // @Param owner-reference path string true "Owner Reference"

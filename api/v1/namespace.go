@@ -15,7 +15,7 @@ type namespaceApi struct {
 
 // Get... Get Api
 // @Summary Get api
-// @Description Api for getiing all namespaces by agent name, owner reference and process
+// @Description Api for getting all namespaces by agent name, owner reference and process
 // @Tags Namespace
 // @Produce json
 // @Param owner-reference path string true "Owner Reference"

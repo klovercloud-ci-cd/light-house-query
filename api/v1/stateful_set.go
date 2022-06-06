@@ -15,7 +15,7 @@ type statefulSetApi struct {
 
 // Get... Get Api
 // @Summary Get api
-// @Description Api for getiing all stateful sets by agent name, owner reference and process id
+// @Description Api for getting all stateful sets by agent name, owner reference and process id
 // @Tags StatufulSet
 // @Produce json
 // @Param owner-reference path string false "Owner Reference"
