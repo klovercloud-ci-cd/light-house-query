@@ -11,7 +11,10 @@ type certificateService struct {
 }
 
 func (c certificateService) Get(agent, ownerReference, processId string, option v1.ResourceQueryOption) ([]v1.Certificate, int64) {
-	return c.certificateRepo.Get(agent, ownerReference, processId, option)
+	if ownerReference == "" {
+		return c.certificateRepo.GetByAgentAndProcessId(agent, processId, option)
+	}
+	return c.certificateRepo.GetByAgentAndProcessIdAndOwnerReference(agent, ownerReference, processId, option)
 }
 
 // NewCertificateService returns service.Certificate type service
