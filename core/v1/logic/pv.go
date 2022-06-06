@@ -11,7 +11,10 @@ type persistentVolumeService struct {
 }
 
 func (p persistentVolumeService) Get(agent, ownerReference, processId string, option v1.ResourceQueryOption) ([]v1.PersistentVolume, int64) {
-	return p.persistentVolumeRepo.Get(agent, ownerReference, processId, option)
+	if ownerReference == "" {
+		return p.persistentVolumeRepo.GetByAgentAndProcessId(agent, processId, option)
+	}
+	return p.persistentVolumeRepo.GetByAgentAndProcessIdAndOwnerReference(agent, ownerReference, processId, option)
 }
 
 // NewPersistentVolumeService returns service.PersistentVolume type service
