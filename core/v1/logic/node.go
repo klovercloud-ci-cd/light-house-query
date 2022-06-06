@@ -11,7 +11,10 @@ type nodeService struct {
 }
 
 func (n nodeService) Get(agent, ownerReference, processId string, option v1.ResourceQueryOption) ([]v1.Node, int64) {
-	return n.nodeRepo.Get(agent, ownerReference, processId, option)
+	if ownerReference == "" {
+		return n.nodeRepo.GetByAgentAndProcessId(agent, processId, option)
+	}
+	return n.nodeRepo.GetByAgentAndProcessIdAndOwnerReference(agent, ownerReference, processId, option)
 }
 
 // NewNodeService returns service.Node type service
