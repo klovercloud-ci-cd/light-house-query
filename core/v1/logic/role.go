@@ -11,7 +11,10 @@ type roleService struct {
 }
 
 func (r roleService) Get(agent, ownerReference, processId string, option v1.ResourceQueryOption) ([]v1.Role, int64) {
-	return r.roleRepo.Get(agent, ownerReference, processId, option)
+	if ownerReference == "" {
+		return r.roleRepo.GetByAgentAndProcessId(agent, processId, option)
+	}
+	return r.roleRepo.GetByAgentAndProcessIdAndOwnerReference(agent, ownerReference, processId, option)
 }
 
 // NewRoleService returns service.Role type service
