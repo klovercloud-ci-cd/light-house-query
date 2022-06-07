@@ -25,7 +25,7 @@ var doc = `{
     "paths": {
         "/api/v1/certificates": {
             "get": {
-                "description": "Api for getiing all certificates by agent name, owner reference and process id",
+                "description": "Api for getting all Certificates by agent name, owner reference and process id",
                 "produces": [
                     "application/json"
                 ],
@@ -38,8 +38,7 @@ var doc = `{
                         "type": "string",
                         "description": "Owner Reference",
                         "name": "owner-reference",
-                        "in": "query",
-                        "required": true
+                        "in": "query"
                     },
                     {
                         "type": "string",
@@ -107,7 +106,7 @@ var doc = `{
         },
         "/api/v1/cluster-roles": {
             "get": {
-                "description": "Api for getiing all Cluster Roles by agent name, owner reference and process id",
+                "description": "Api for getting all Cluster Roles by agent name, owner reference and process id",
                 "produces": [
                     "application/json"
                 ],
@@ -120,8 +119,7 @@ var doc = `{
                         "type": "string",
                         "description": "Owner Reference",
                         "name": "owner-reference",
-                        "in": "path",
-                        "required": true
+                        "in": "path"
                     },
                     {
                         "type": "string",
@@ -189,7 +187,7 @@ var doc = `{
         },
         "/api/v1/cluster_role_bindings": {
             "get": {
-                "description": "Api for getiing all ClusterRoleBindings by agent name, owner reference and process id",
+                "description": "Api for getting all ClusterRoleBindings by agent name, owner reference and process id",
                 "produces": [
                     "application/json"
                 ],
@@ -202,8 +200,7 @@ var doc = `{
                         "type": "string",
                         "description": "Owner Reference",
                         "name": "owner-reference",
-                        "in": "path",
-                        "required": true
+                        "in": "path"
                     },
                     {
                         "type": "string",
@@ -271,7 +268,7 @@ var doc = `{
         },
         "/api/v1/config-maps": {
             "get": {
-                "description": "Api for getiing all ConfigMaps by agent name, owner reference and process",
+                "description": "Api for getting all ConfigMaps by agent name, owner reference and process",
                 "produces": [
                     "application/json"
                 ],
@@ -284,8 +281,7 @@ var doc = `{
                         "type": "string",
                         "description": "Owner Reference",
                         "name": "owner-reference",
-                        "in": "path",
-                        "required": true
+                        "in": "path"
                     },
                     {
                         "type": "string",
@@ -353,7 +349,7 @@ var doc = `{
         },
         "/api/v1/daemon-sets": {
             "get": {
-                "description": "Api for getiing all DaemonSets by agent name, owner reference and process",
+                "description": "Api for getting all DaemonSets by agent name, owner reference and process",
                 "produces": [
                     "application/json"
                 ],
@@ -366,8 +362,7 @@ var doc = `{
                         "type": "string",
                         "description": "Owner Reference",
                         "name": "owner-reference",
-                        "in": "path",
-                        "required": true
+                        "in": "path"
                     },
                     {
                         "type": "string",
@@ -435,7 +430,7 @@ var doc = `{
         },
         "/api/v1/deployments": {
             "get": {
-                "description": "Api for getiing all Deployments by agent name, owner reference and process",
+                "description": "Api for getting all Deployments by agent name, owner reference and process",
                 "produces": [
                     "application/json"
                 ],
@@ -448,8 +443,7 @@ var doc = `{
                         "type": "string",
                         "description": "Owner Reference",
                         "name": "owner-reference",
-                        "in": "path",
-                        "required": true
+                        "in": "path"
                     },
                     {
                         "type": "string",
@@ -517,7 +511,7 @@ var doc = `{
         },
         "/api/v1/ingresses": {
             "get": {
-                "description": "Api for getiing all ingresses by agent name, owner reference and process id",
+                "description": "Api for getting all Ingresses by agent name, owner reference and process id",
                 "produces": [
                     "application/json"
                 ],
@@ -530,8 +524,7 @@ var doc = `{
                         "type": "string",
                         "description": "Owner Reference",
                         "name": "owner-reference",
-                        "in": "path",
-                        "required": true
+                        "in": "path"
                     },
                     {
                         "type": "string",
@@ -599,7 +592,7 @@ var doc = `{
         },
         "/api/v1/namespaces": {
             "get": {
-                "description": "Api for getiing all namespaces by agent name, owner reference and process",
+                "description": "Api for getting all Namespaces by agent name, owner reference and process",
                 "produces": [
                     "application/json"
                 ],
@@ -612,8 +605,7 @@ var doc = `{
                         "type": "string",
                         "description": "Owner Reference",
                         "name": "owner-reference",
-                        "in": "path",
-                        "required": true
+                        "in": "path"
                     },
                     {
                         "type": "string",
@@ -681,7 +673,7 @@ var doc = `{
         },
         "/api/v1/network-policies": {
             "get": {
-                "description": "Api for getiing all Network Policies by agent name, owner reference and process",
+                "description": "Api for getting all Network Policies by agent name, owner reference and process",
                 "produces": [
                     "application/json"
                 ],
@@ -694,8 +686,7 @@ var doc = `{
                         "type": "string",
                         "description": "Owner Reference",
                         "name": "owner-reference",
-                        "in": "path",
-                        "required": true
+                        "in": "path"
                     },
                     {
                         "type": "string",
@@ -763,7 +754,7 @@ var doc = `{
         },
         "/api/v1/nodes": {
             "get": {
-                "description": "Api for getiing all pods by agent name, owner reference and process",
+                "description": "Api for getting all nodes by agent name, owner reference and process id",
                 "produces": [
                     "application/json"
                 ],
@@ -785,6 +776,12 @@ var doc = `{
                         "name": "processId",
                         "in": "query",
                         "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Owner Reference",
+                        "name": "owner-reference",
+                        "in": "path"
                     },
                     {
                         "type": "integer",
@@ -838,7 +835,7 @@ var doc = `{
         },
         "/api/v1/persistent-volume-claims": {
             "get": {
-                "description": "Api for getiing all persistent volume claim  by agent name, owner reference and process id",
+                "description": "Api for getting all Persistent Volumes claim  by agent name, owner reference and process id",
                 "produces": [
                     "application/json"
                 ],
@@ -851,8 +848,7 @@ var doc = `{
                         "type": "string",
                         "description": "Owner Reference",
                         "name": "owner-reference",
-                        "in": "path",
-                        "required": true
+                        "in": "path"
                     },
                     {
                         "type": "string",
@@ -920,7 +916,7 @@ var doc = `{
         },
         "/api/v1/persistent-volumes": {
             "get": {
-                "description": "Api for getiing all persistent volume  by agent name, owner reference and process id",
+                "description": "Api for getting all Persistent volumes  by agent name, owner reference and process id",
                 "produces": [
                     "application/json"
                 ],
@@ -933,8 +929,7 @@ var doc = `{
                         "type": "string",
                         "description": "Owner Reference",
                         "name": "owner-reference",
-                        "in": "path",
-                        "required": true
+                        "in": "path"
                     },
                     {
                         "type": "string",
@@ -1002,7 +997,7 @@ var doc = `{
         },
         "/api/v1/pods": {
             "get": {
-                "description": "Api for getiing all pod  by agent name, owner reference and process id",
+                "description": "Api for getting all Pods  by agent name, owner reference and process id",
                 "produces": [
                     "application/json"
                 ],
@@ -1015,8 +1010,7 @@ var doc = `{
                         "type": "string",
                         "description": "Owner Reference",
                         "name": "owner-reference",
-                        "in": "path",
-                        "required": true
+                        "in": "path"
                     },
                     {
                         "type": "string",
@@ -1084,7 +1078,7 @@ var doc = `{
         },
         "/api/v1/replica-sets": {
             "get": {
-                "description": "Api for getiing all Replica Sets by agent name, owner reference and process id",
+                "description": "Api for getting all Replica Sets by agent name, owner reference and process id",
                 "produces": [
                     "application/json"
                 ],
@@ -1097,8 +1091,7 @@ var doc = `{
                         "type": "string",
                         "description": "Owner Reference",
                         "name": "owner-reference",
-                        "in": "path",
-                        "required": true
+                        "in": "path"
                     },
                     {
                         "type": "string",
@@ -1166,7 +1159,7 @@ var doc = `{
         },
         "/api/v1/role-bindings": {
             "get": {
-                "description": "Api for getiing all Role Bindings by agent name, owner reference and process id",
+                "description": "Api for getting all Role Bindings by agent name, owner reference and process id",
                 "produces": [
                     "application/json"
                 ],
@@ -1179,8 +1172,7 @@ var doc = `{
                         "type": "string",
                         "description": "Owner Reference",
                         "name": "owner-reference",
-                        "in": "path",
-                        "required": true
+                        "in": "path"
                     },
                     {
                         "type": "string",
@@ -1248,7 +1240,7 @@ var doc = `{
         },
         "/api/v1/roles": {
             "get": {
-                "description": "Api for getiing all Roles by agent name, owner reference and process id",
+                "description": "Api for getting all Roles by agent name, owner reference and process id",
                 "produces": [
                     "application/json"
                 ],
@@ -1261,8 +1253,7 @@ var doc = `{
                         "type": "string",
                         "description": "Owner Reference",
                         "name": "owner-reference",
-                        "in": "path",
-                        "required": true
+                        "in": "path"
                     },
                     {
                         "type": "string",
@@ -1330,7 +1321,7 @@ var doc = `{
         },
         "/api/v1/secrets": {
             "get": {
-                "description": "Api for getiing all Secrets by agent name, owner reference and process id",
+                "description": "Api for getting all Secrets by agent name, owner reference and process id",
                 "produces": [
                     "application/json"
                 ],
@@ -1343,8 +1334,7 @@ var doc = `{
                         "type": "string",
                         "description": "Owner Reference",
                         "name": "owner-reference",
-                        "in": "path",
-                        "required": true
+                        "in": "path"
                     },
                     {
                         "type": "string",
@@ -1412,7 +1402,7 @@ var doc = `{
         },
         "/api/v1/service-accounts": {
             "get": {
-                "description": "Api for getiing all Service Accounts by agent name, owner reference and process id",
+                "description": "Api for getting all Service Accounts by agent name, owner reference and process id",
                 "produces": [
                     "application/json"
                 ],
@@ -1425,8 +1415,7 @@ var doc = `{
                         "type": "string",
                         "description": "Owner Reference",
                         "name": "owner-reference",
-                        "in": "path",
-                        "required": true
+                        "in": "path"
                     },
                     {
                         "type": "string",
@@ -1494,7 +1483,7 @@ var doc = `{
         },
         "/api/v1/services": {
             "get": {
-                "description": "Api for getiing all Services by name, owner reference and process id",
+                "description": "Api for getting all Services by name, owner reference and process id",
                 "produces": [
                     "application/json"
                 ],
@@ -1507,8 +1496,7 @@ var doc = `{
                         "type": "string",
                         "description": "Owner Reference",
                         "name": "owner-reference",
-                        "in": "path",
-                        "required": true
+                        "in": "path"
                     },
                     {
                         "type": "string",
@@ -1576,7 +1564,7 @@ var doc = `{
         },
         "/api/v1/stateful-sets": {
             "get": {
-                "description": "Api for getiing all stateful sets by agent name, owner reference and process id",
+                "description": "Api for getting all Stateful sets by agent name, owner reference and process id",
                 "produces": [
                     "application/json"
                 ],
@@ -1589,8 +1577,7 @@ var doc = `{
                         "type": "string",
                         "description": "Owner Reference",
                         "name": "owner-reference",
-                        "in": "path",
-                        "required": true
+                        "in": "path"
                     },
                     {
                         "type": "string",

@@ -15,7 +15,7 @@ type ingressApi struct {
 
 // Get... Get Api
 // @Summary Get api
-// @Description Api for getting all ingresses by agent name, owner reference and process id
+// @Description Api for getting all Ingresses by agent name, owner reference and process id
 // @Tags Ingress
 // @Produce json
 // @Param owner-reference path string false "Owner Reference"

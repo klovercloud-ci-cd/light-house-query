@@ -15,7 +15,7 @@ type podApi struct {
 
 // Get... Get Api
 // @Summary Get api
-// @Description Api for getting all pod  by agent name, owner reference and process id
+// @Description Api for getting all Pods  by agent name, owner reference and process id
 // @Tags Pod
 // @Produce json
 // @Param owner-reference path string false "Owner Reference"
