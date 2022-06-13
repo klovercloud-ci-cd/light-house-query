@@ -15,7 +15,7 @@ type podApi struct {
 
 // Get... Get Api
 // @Summary Get api
-// @Description Api for getting all Pods  by agent name, owner reference and process id
+// @Description Api for getting all Pods by agent name, owner reference and process id
 // @Tags Pod
 // @Produce json
 // @Param owner-reference path string false "Owner Reference"
@@ -29,6 +29,12 @@ type podApi struct {
 // @Failure 400 {object} common.ResponseDTO
 // @Router /api/v1/pods [GET]
 func (p podApi) Get(context echo.Context) error {
+	action := context.QueryParam("action")
+	if action == "dashboard_data" {
+		companyId := context.QueryParam("companyId")
+		data := p.podService.GetDashboardData(companyId)
+		return common.GenerateSuccessResponse(context, data, nil, "Operation Successful")
+	}
 	agent := context.QueryParam("agent")
 	ownerReference := context.QueryParam("owner-reference")
 	processId := context.QueryParam("processId")

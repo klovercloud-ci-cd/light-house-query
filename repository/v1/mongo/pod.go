@@ -19,6 +19,75 @@ type podRepository struct {
 	timeout time.Duration
 }
 
+func (p podRepository) GetContainerStatusesMap(companyId, agent string) []v1.PodShortDto {
+	var results []v1.PodShortDto
+	query := bson.M{
+		"$and": []bson.M{
+			{"agent_name": agent},
+			{"obj.metadata.labels.company": companyId},
+			{"obj.status.containerStatuses": bson.M{"$ne": nil}},
+			{"obj.status.phase": bson.M{"$ne": v1.PodSucceeded}},
+		},
+	}
+	coll := p.manager.Db.Collection(PodCollection)
+	result, err := coll.Find(p.manager.Ctx, query, nil)
+	if err != nil {
+		log.Println(err.Error())
+	}
+	for result.Next(context.TODO()) {
+		elemValue := new(v1.PodShortDto)
+		err := result.Decode(elemValue)
+		if err != nil {
+			log.Println("[ERROR]", err)
+			break
+		}
+		results = append(results, *elemValue)
+	}
+	return results
+}
+
+func (p podRepository) GetNullContainerStatusesMap(companyId, agent string) []v1.PodShortDto {
+	var results []v1.PodShortDto
+	query := bson.M{
+		"$and": []bson.M{
+			{"agent_name": agent},
+			{"obj.metadata.labels.company": companyId},
+			{"obj.status.containerStatuses": nil},
+			{"obj.status.phase": bson.M{"$ne": v1.PodSucceeded}},
+		},
+	}
+	coll := p.manager.Db.Collection(PodCollection)
+	result, err := coll.Find(p.manager.Ctx, query, nil)
+	if err != nil {
+		log.Println(err.Error())
+	}
+	for result.Next(context.TODO()) {
+		elemValue := new(v1.PodShortDto)
+		err := result.Decode(elemValue)
+		if err != nil {
+			log.Println("[ERROR]", err)
+			break
+		}
+		results = append(results, *elemValue)
+	}
+	return results
+}
+
+func (p podRepository) CountSucceededStatusByCompanyIdAndAgent(companyId, agent string) int64 {
+	query := bson.M{
+		"$and": []bson.M{
+			{"obj.metadata.labels.company": companyId},
+			{"agent_name": agent},
+			{"obj.status.phase": v1.PodSucceeded},
+		},
+	}
+	total, err := p.manager.Db.Collection(PodCollection).CountDocuments(p.manager.Ctx, query)
+	if err != nil {
+		log.Println(err.Error())
+	}
+	return total
+}
+
 func (p podRepository) GetByAgentAndProcessId(agent, processId string, option v1.ResourceQueryOption) ([]v1.Pod, int64) {
 	var results []v1.Pod
 	query := bson.M{

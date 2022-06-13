@@ -19,6 +19,34 @@ type deploymentRepository struct {
 	timeout time.Duration
 }
 
+func (d deploymentRepository) CountDeploymentsByCompanyIdAndGroupByAgent(companyId string) map[string]int64 {
+	results := make(map[string]int64)
+	query := bson.M{
+		"$and": []bson.M{
+			{"obj.metadata.labels.company": companyId},
+		},
+	}
+	coll := d.manager.Db.Collection(DeploymentCollection)
+	result, err := coll.Find(d.manager.Ctx, query, nil)
+	if err != nil {
+		log.Println(err.Error())
+	}
+	for result.Next(context.TODO()) {
+		elemValue := new(v1.DeploymentShortDto)
+		err := result.Decode(elemValue)
+		if err != nil {
+			log.Println("[ERROR]", err)
+			break
+		}
+		if val, ok := results[elemValue.AgentName]; ok {
+			results[elemValue.AgentName] = val + 1
+		} else {
+			results[elemValue.AgentName] = 1
+		}
+	}
+	return results
+}
+
 func (d deploymentRepository) GetByAgentAndProcessId(agent, processId string, option v1.ResourceQueryOption) ([]v1.Deployment, int64) {
 	var results []v1.Deployment
 	query := bson.M{

@@ -53,7 +53,7 @@ func GetV1NodeService() service.Node {
 
 // GetV1PodService returns service.Pod
 func GetV1PodService() service.Pod {
-	return logic.NewPodService(mongo.NewPodRepository(3000))
+	return logic.NewPodService(mongo.NewPodRepository(3000), mongo.NewDeploymentRepository(3000))
 }
 
 // GetV1ConfigMapService returns service.ConfigMap

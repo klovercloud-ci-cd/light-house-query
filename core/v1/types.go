@@ -5450,3 +5450,49 @@ func DefaultKeyUsages() []KeyUsage {
 	// CAs can (and often do) opt to automatically add usages.
 	return []KeyUsage{UsageDigitalSignature, UsageKeyEncipherment}
 }
+
+// PodDashboardData contains pod dashboard data info
+type PodDashboardData struct {
+	Data struct {
+		Agent []PodCountAgentDataDto `json:"agent"`
+	} `json:"data"`
+}
+
+type PodCountAgentDataDto struct {
+	Name       string           `json:"name"`
+	Pods       map[string]int64 `json:"pods"`
+	Deployment struct {
+		Count int64 `json:"count"`
+	} `json:"deployment"`
+}
+
+// DeploymentShortDto contains deployment agent name info for counting purpose
+type DeploymentShortDto struct {
+	AgentName string `bson:"agent_name" json:"agent_name"`
+}
+
+// PodShortDto contains short pod info for counting purpose
+type PodShortDto struct {
+	Obj struct {
+		Status struct {
+			Phase             PodPhase                       `json:"phase,omitempty" protobuf:"bytes,1,opt,name=phase,casttype=PodPhase" bson:"phase"`
+			Reason            string                         `json:"reason,omitempty" protobuf:"bytes,4,opt,name=reason" bson:"reason"`
+			ContainerStatuses []PodShortContainerStatusesDto `json:"containerStatuses,omitempty" protobuf:"bytes,8,rep,name=containerStatuses" bson:"containerStatuses"`
+		} `json:"status,omitempty" protobuf:"bytes,3,opt,name=status" bson:"status"`
+	} `bson:"obj" json:"obj"`
+	AgentName string `bson:"agent_name" json:"agent_name"`
+}
+
+type PodShortContainerStatusesDto struct {
+	State struct {
+		Waiting    *ContainerStateDto     `json:"waiting,omitempty" protobuf:"bytes,1,opt,name=waiting" bson:"waiting"`
+		Running    *ContainerStateRunning `json:"running,omitempty" protobuf:"bytes,2,opt,name=running" bson:"running"`
+		Terminated *ContainerStateDto     `json:"terminated,omitempty" protobuf:"bytes,3,opt,name=terminated" bson:"terminated"`
+	} `json:"state,omitempty" protobuf:"bytes,2,opt,name=state" bson:"state"`
+	Ready bool `json:"ready" protobuf:"varint,4,opt,name=ready" bson:"ready"`
+}
+
+type ContainerStateDto struct {
+	Reason  string `json:"reason,omitempty" protobuf:"bytes,1,opt,name=reason" bson:"reason"`
+	Message string `json:"message,omitempty" protobuf:"bytes,2,opt,name=message" bson:"message"`
+}
