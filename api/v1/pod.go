@@ -19,12 +19,13 @@ type podApi struct {
 // @Tags Pod
 // @Produce json
 // @Param owner-reference path string false "Owner Reference"
+// @Param processId action string true "action [dashboard_data]"
 // @Param processId query string true "Process Id"
 // @Param agent query string true "Agent Name"
 // @Param page query int64 false "Page Number"
 // @Param limit query int64 false "Limit"
 // @Param sort query bool false "Sort By Created Time"
-// @Success 200 {object} common.ResponseDTO{data=[]v1.Pod{}}
+// @Success 200 {object} common.ResponseDTO{data=[]v1.Pod{}, v1.DashboardData{}}
 // @Forbidden 403 {object} common.ResponseDTO
 // @Failure 400 {object} common.ResponseDTO
 // @Router /api/v1/pods [GET]
