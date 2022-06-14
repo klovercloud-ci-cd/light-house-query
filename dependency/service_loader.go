@@ -105,3 +105,8 @@ func GetV1ServiceAccountService() service.ServiceAccount {
 func GetV1StatefulSetService() service.StatefulSet {
 	return logic.NewStatefulSetService(mongo.NewStatefulSetRepository(3000))
 }
+
+// GetV1AgentService returns service.Agent
+func GetV1AgentService() service.Agent {
+	return logic.NewAgentService(mongo.NewAgentRepository(3000))
+}

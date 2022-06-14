@@ -27,6 +27,7 @@ func Router(g *echo.Group) {
 	ServiceRouter(g.Group("/services"))
 	ServiceAccountRouter(g.Group("/service-accounts"))
 	StatefulSetRouter(g.Group("/stateful-sets"))
+	AgentRouter(g.Group("/agents"))
 }
 
 // CertificateRouter api/v1/certificates/* router
@@ -148,4 +149,10 @@ func ServiceAccountRouter(g *echo.Group) {
 func StatefulSetRouter(g *echo.Group) {
 	statefulSetApi := NewStatefulSetApi(dependency.GetV1StatefulSetService())
 	g.GET("", statefulSetApi.Get)
+}
+
+// AgentRouter api/v1/agents/* router
+func AgentRouter(g *echo.Group) {
+	agentApi := NewAgentApi(dependency.GetV1AgentService())
+	g.GET("", agentApi.Get)
 }
