@@ -18,7 +18,7 @@ func (p podService) Get(agent, ownerReference, processId string, option v1.Resou
 	return p.podRepo.GetByAgentAndProcessIdAndOwnerReference(agent, ownerReference, processId, option)
 }
 
-func (p podService) GetDashboardData(companyId, agentName string) v1.PodDashboardData {
+func (p podService) GetDashboardData(companyId, agentName string) v1.PodCountAgentDataDto {
 	deploymentCount := p.deploymentRepo.CountDeploymentsByCompanyIdAndAgent(companyId, agentName)
 
 	podStatusMap := make(map[string]int64)
@@ -29,29 +29,16 @@ func (p podService) GetDashboardData(companyId, agentName string) v1.PodDashboar
 
 	podStatusMap = p.GetContainerStatusesMap(companyId, agentName, podStatusMap)
 
-	return v1.PodDashboardData{
-		Data: struct {
-			Agent v1.PodCountAgentDataDto `json:"agent"`
+	return v1.PodCountAgentDataDto{
+		Name: agentName,
+		Pods: podStatusMap,
+		Deployment: struct {
+			Count int64 `json:"count"`
 		}(struct {
-			Agent v1.PodCountAgentDataDto
+			Count int64
 		}{
-			Agent: v1.PodCountAgentDataDto(struct {
-				Name       string
-				Pods       map[string]int64
-				Deployment struct {
-					Count int64 `json:"count"`
-				}
-			}{
-				Name: agentName,
-				Pods: podStatusMap,
-				Deployment: struct {
-					Count int64 `json:"count"`
-				}(struct {
-					Count int64
-				}{
-					Count: deploymentCount,
-				})})}),
-	}
+			Count: deploymentCount,
+		})}
 }
 
 func (p podService) GetNullContainerStatusesMap(companyId, agentName string, podStatusMap map[string]int64) map[string]int64 {
