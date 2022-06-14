@@ -5454,7 +5454,7 @@ func DefaultKeyUsages() []KeyUsage {
 // PodDashboardData contains pod dashboard data info
 type PodDashboardData struct {
 	Data struct {
-		Agent []PodCountAgentDataDto `json:"agent"`
+		Agent PodCountAgentDataDto `json:"agent"`
 	} `json:"data"`
 }
 

@@ -19,6 +19,20 @@ type deploymentRepository struct {
 	timeout time.Duration
 }
 
+func (d deploymentRepository) CountDeploymentsByCompanyIdAndAgent(companyId, agentName string) int64 {
+	query := bson.M{
+		"$and": []bson.M{
+			{"obj.metadata.labels.company": companyId},
+			{"agent_name": agentName},
+		},
+	}
+	total, err := d.manager.Db.Collection(DeploymentCollection).CountDocuments(d.manager.Ctx, query)
+	if err != nil {
+		log.Println(err.Error())
+	}
+	return total
+}
+
 func (d deploymentRepository) CountDeploymentsByCompanyIdAndGroupByAgent(companyId string) map[string]int64 {
 	results := make(map[string]int64)
 	query := bson.M{

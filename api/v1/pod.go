@@ -19,7 +19,8 @@ type podApi struct {
 // @Tags Pod
 // @Produce json
 // @Param owner-reference path string false "Owner Reference"
-// @Param processId action string true "action [dashboard_data]"
+// @Param action string true "action [dashboard_data]"
+// @Param companyId string false "Company Id when action is dashboard_data"
 // @Param processId query string true "Process Id"
 // @Param agent query string true "Agent Name"
 // @Param page query int64 false "Page Number"
@@ -31,12 +32,12 @@ type podApi struct {
 // @Router /api/v1/pods [GET]
 func (p podApi) Get(context echo.Context) error {
 	action := context.QueryParam("action")
+	agent := context.QueryParam("agent")
 	if action == "dashboard_data" {
 		companyId := context.QueryParam("companyId")
-		data := p.podService.GetDashboardData(companyId)
+		data := p.podService.GetDashboardData(companyId, agent)
 		return common.GenerateSuccessResponse(context, data, nil, "Operation Successful")
 	}
-	agent := context.QueryParam("agent")
 	ownerReference := context.QueryParam("owner-reference")
 	processId := context.QueryParam("processId")
 	option := GetQueryOption(context)
