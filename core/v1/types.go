@@ -5451,6 +5451,10 @@ func DefaultKeyUsages() []KeyUsage {
 	return []KeyUsage{UsageDigitalSignature, UsageKeyEncipherment}
 }
 
+type PodDashboardData struct {
+	Agent PodCountAgentDataDto `json:"agent"`
+}
+
 type PodCountAgentDataDto struct {
 	Name       string           `json:"name"`
 	Pods       map[string]int64 `json:"pods"`
