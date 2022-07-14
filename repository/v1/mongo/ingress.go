@@ -62,7 +62,7 @@ func (i ingressRepository) GetByAgentAndProcessIdAndOwnerReference(agent, ownerR
 	query := bson.M{
 		"$and": []bson.M{
 			{"agent_name": agent},
-			{"obj.metadata.uid": ownerReference},
+			{"obj.metadata.ownerReferences.uid": ownerReference},
 			{"obj.metadata.labels.process_id": processId},
 		},
 	}
