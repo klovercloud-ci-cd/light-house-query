@@ -35,8 +35,7 @@ func (a agentService) Get(companyId string) []v1.Agent {
 }
 
 func (a agentService) GetPodsByCertificate(agent, processId, certificateId string) []v1.K8sPod {
-	// certificate := a.certificateService.GetById(certificateId, agent, processId)
-	// pods := a.podService.GetByAgentAndProcessIdAndLabels(agent, processId, certificate.Obj.Spec.)
+	panic("implement me")
 }
 
 func (a agentService) GetPodsByClusterRole(agent, processId, clusterRoleId string) []v1.K8sPod {
@@ -47,7 +46,7 @@ func (a agentService) GetPodsByClusterRoleBinding(agent, processId, clusterRoleB
 	panic("implement me")
 }
 
-func (a agentService) GetPodsBConfigMap(agent, processId, configMapId string) []v1.K8sPod {
+func (a agentService) GetPodsByConfigMap(agent, processId, configMapId string) []v1.K8sPod {
 	panic("implement me")
 }
 
@@ -74,7 +73,13 @@ func (a agentService) GetPodsByNamespace(agent, processId, namespaceId string) [
 }
 
 func (a agentService) GetPodsByNetworkPolicy(agent, processId, networkPolicyId string) []v1.K8sPod {
-	panic("implement me")
+	networkPolicy := a.networkPolicyService.GetById(networkPolicyId, agent, processId)
+	pods := a.podService.GetByAgentAndProcessIdAndLabels(agent, processId, networkPolicy.Obj.Spec.PodSelector.MatchLabels)
+	var k8sPods []v1.K8sPod
+	for _, each := range pods {
+		k8sPods = append(k8sPods, each.Obj)
+	}
+	return k8sPods
 }
 
 func (a agentService) GetPodsByNode(agent, processId, nodeId string) []v1.K8sPod {
@@ -86,11 +91,23 @@ func (a agentService) GetPodsByPV(agent, processId, PVId string) []v1.K8sPod {
 }
 
 func (a agentService) GetPodsByPVC(agent, processId, PVCId string) []v1.K8sPod {
-	panic("implement me")
+	pvc := a.persistentVolumeClaimService.GetById(PVCId, agent, processId)
+	pods := a.podService.GetByAgentAndProcessIdAndLabels(agent, processId, pvc.Obj.Spec.Selector.MatchLabels)
+	var k8sPods []v1.K8sPod
+	for _, each := range pods {
+		k8sPods = append(k8sPods, each.Obj)
+	}
+	return k8sPods
 }
 
 func (a agentService) GetPodsByReplicaSet(agent, processId, replicaSetId string) []v1.K8sPod {
-	panic("implement me")
+	replicaSet := a.replicaSetService.GetById(replicaSetId, agent, processId)
+	pods := a.podService.GetByAgentAndProcessIdAndLabels(agent, processId, replicaSet.Obj.Spec.Selector.MatchLabels)
+	var k8sPods []v1.K8sPod
+	for _, each := range pods {
+		k8sPods = append(k8sPods, each.Obj)
+	}
+	return k8sPods
 }
 
 func (a agentService) GetPodsByRole(agent, processId, roleId string) []v1.K8sPod {
@@ -106,7 +123,13 @@ func (a agentService) GetPodsBySecret(agent, processId, secretId string) []v1.K8
 }
 
 func (a agentService) GetPodsByService(agent, processId, serviceId string) []v1.K8sPod {
-	panic("implement me")
+	serviceObj := a.serviceService.GetById(serviceId, agent, processId)
+	pods := a.podService.GetByAgentAndProcessIdAndLabels(agent, processId, serviceObj.Obj.Spec.Selector)
+	var k8sPods []v1.K8sPod
+	for _, each := range pods {
+		k8sPods = append(k8sPods, each.Obj)
+	}
+	return k8sPods
 }
 
 func (a agentService) GetPodsByServiceAccount(agent, processId, serviceAccountId string) []v1.K8sPod {
@@ -114,7 +137,13 @@ func (a agentService) GetPodsByServiceAccount(agent, processId, serviceAccountId
 }
 
 func (a agentService) GetPodsByStatefulSet(agent, processId, statefulSetId string) []v1.K8sPod {
-	panic("implement me")
+	statefulSet := a.statefulSetService.GetById(statefulSetId, agent, processId)
+	pods := a.podService.GetByAgentAndProcessIdAndLabels(agent, processId, statefulSet.Obj.Spec.Selector.MatchLabels)
+	var k8sPods []v1.K8sPod
+	for _, each := range pods {
+		k8sPods = append(k8sPods, each.Obj)
+	}
+	return k8sPods
 }
 
 func (a agentService) GetK8sObjs(agent, processId string) v1.K8sObjsInfo {

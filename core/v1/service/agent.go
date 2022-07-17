@@ -9,7 +9,7 @@ type Agent interface {
 	GetPodsByCertificate(agent, processId, certificateId string) []v1.K8sPod
 	GetPodsByClusterRole(agent, processId, clusterRoleId string) []v1.K8sPod
 	GetPodsByClusterRoleBinding(agent, processId, clusterRoleBindingId string) []v1.K8sPod
-	GetPodsBConfigMap(agent, processId, configMapId string) []v1.K8sPod
+	GetPodsByConfigMap(agent, processId, configMapId string) []v1.K8sPod
 	GetPodsByDaemonSet(agent, processId, daemonSetId string) []v1.K8sPod
 	GetPodsByDeployment(agent, processId, deploymentId string) []v1.K8sPod
 	GetPodsByIngress(agent, processId, ingressId string) []v1.K8sPod

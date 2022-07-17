@@ -81,11 +81,11 @@ func (a agentApi) GetPodsByClusterRoleBinding(context echo.Context) error {
 	return common.GenerateSuccessResponse(context, data, nil, "Operation Successful")
 }
 
-func (a agentApi) GetPodsBConfigMap(context echo.Context) error {
+func (a agentApi) GetPodsByConfigMap(context echo.Context) error {
 	agent := context.Param("agent")
 	processId := context.QueryParam("processId")
 	configMapId := context.QueryParam("configMapId")
-	data := a.agentService.GetPodsBConfigMap(agent, processId, configMapId)
+	data := a.agentService.GetPodsByConfigMap(agent, processId, configMapId)
 	return common.GenerateSuccessResponse(context, data, nil, "Operation Successful")
 }
 

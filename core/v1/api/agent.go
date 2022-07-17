@@ -8,7 +8,7 @@ type Agent interface {
 	GetPodsByCertificate(context echo.Context) error
 	GetPodsByClusterRole(context echo.Context) error
 	GetPodsByClusterRoleBinding(context echo.Context) error
-	GetPodsBConfigMap(context echo.Context) error
+	GetPodsByConfigMap(context echo.Context) error
 	GetPodsByDaemonSet(context echo.Context) error
 	GetPodsByDeployment(context echo.Context) error
 	GetPodsByIngress(context echo.Context) error
