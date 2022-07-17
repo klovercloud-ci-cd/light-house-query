@@ -19,6 +19,52 @@ type statefulSetRepository struct {
 	timeout time.Duration
 }
 
+func (s statefulSetRepository) GetById(id, agent, processId string) v1.StatefulSet {
+	query := bson.M{
+		"$and": []bson.M{
+			{"agent_name": agent},
+			{"obj.metadata.labels.process_id": processId},
+			{"obj.metadata.uid": id},
+		},
+	}
+	coll := s.manager.Db.Collection(StatefulSetCollection)
+	result := coll.FindOne(s.manager.Ctx, query, nil)
+	elemValue := new(v1.StatefulSet)
+	err := result.Decode(elemValue)
+	if err != nil {
+		log.Println("[ERROR]", err)
+	}
+	return *elemValue
+}
+
+func (s statefulSetRepository) GetByAgentAndProcessIdWithoutPagination(agent, processId string) []v1.StatefulSet {
+	var results []v1.StatefulSet
+	query := bson.M{
+		"$and": []bson.M{
+			{"agent_name": agent},
+			{"obj.metadata.labels.process_id": processId},
+		},
+	}
+	coll := s.manager.Db.Collection(StatefulSetCollection)
+	findOptions := options.FindOptions{
+		Sort: bson.M{"created_at": -1},
+	}
+	result, err := coll.Find(s.manager.Ctx, query, &findOptions)
+	if err != nil {
+		log.Println(err.Error())
+	}
+	for result.Next(context.TODO()) {
+		elemValue := new(v1.StatefulSet)
+		err := result.Decode(elemValue)
+		if err != nil {
+			log.Println("[ERROR]", err)
+			break
+		}
+		results = append(results, *elemValue)
+	}
+	return results
+}
+
 func (s statefulSetRepository) GetByAgentAndProcessId(agent, processId string, option v1.ResourceQueryOption) ([]v1.StatefulSet, int64) {
 	var results []v1.StatefulSet
 	query := bson.M{

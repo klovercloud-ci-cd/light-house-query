@@ -10,6 +10,14 @@ type clusterRoleService struct {
 	clusterRoleRepo repository.ClusterRole
 }
 
+func (c clusterRoleService) GetById(id, agent, processId string) v1.ClusterRole {
+	return c.clusterRoleRepo.GetById(id, agent, processId)
+}
+
+func (c clusterRoleService) GetByAgentAndProcessIdWithoutPagination(agent, processId string) []v1.ClusterRole {
+	return c.clusterRoleRepo.GetByAgentAndProcessIdWithoutPagination(agent, processId)
+}
+
 func (c clusterRoleService) Get(agent, ownerReference, processId string, option v1.ResourceQueryOption) ([]v1.ClusterRole, int64) {
 	if ownerReference == "" {
 		return c.clusterRoleRepo.GetByAgentAndProcessId(agent, processId, option)

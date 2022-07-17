@@ -614,7 +614,7 @@ type DaemonSetUpdateStrategy struct {
 	Type DaemonSetUpdateStrategyType `json:"type,omitempty" protobuf:"bytes,1,opt,name=type" bson:"type"`
 
 	// Rolling Update config params. Present only if type = "RollingUpdate".
-	//---
+	// ---
 	// TODO: Update this to follow our convention for oneOf, whatever we decide it
 	// to be. Same as Deployment `strategy.rollingUpdate`.
 	// See https://github.com/kubernetes/kubernetes/issues/35345
@@ -629,7 +629,7 @@ type DeploymentStrategy struct {
 
 	// Rolling Update config params. Present only if DeploymentStrategyType =
 	// RollingUpdate.
-	//---
+	// ---
 	// TODO: Update this to follow our convention for oneOf, whatever we decide it
 	// to be.
 	// +optional
@@ -1339,7 +1339,7 @@ type ServiceAccountTokenProjection struct {
 	// must identify itself with an identifier specified in the audience of the
 	// token, and otherwise should reject the token. The audience defaults to the
 	// identifier of the apiserver.
-	//+optional
+	// +optional
 	Audience string `json:"audience,omitempty" protobuf:"bytes,1,rep,name=audience" bson:"audience"`
 	// ExpirationSeconds is the requested duration of validity of the service
 	// account token. As the token approaches expiration, the kubelet volume
@@ -1347,7 +1347,7 @@ type ServiceAccountTokenProjection struct {
 	// start trying to rotate the token if the token is older than 80 percent of
 	// its time to live or if the token is older than 24 hours.Defaults to 1 hour
 	// and must be at least 10 minutes.
-	//+optional
+	// +optional
 	ExpirationSeconds *int64 `json:"expirationSeconds,omitempty" protobuf:"varint,2,opt,name=expirationSeconds" bson:"expirationSeconds"`
 	// Path is the path relative to the mount point of the file to project the
 	// token into.
@@ -2269,7 +2269,7 @@ type NodeSelectorTerm struct {
 }
 
 type NodeSelector struct {
-	//Required. A list of node selector terms. The terms are ORed.
+	// Required. A list of node selector terms. The terms are ORed.
 	NodeSelectorTerms []NodeSelectorTerm `json:"nodeSelectorTerms" protobuf:"bytes,1,rep,name=nodeSelectorTerms" bson:"nodeSelectorTerms"`
 }
 
@@ -2988,7 +2988,7 @@ type HTTPIngressPath struct {
 }
 
 type IngressRuleValue struct {
-	//TODO:
+	// TODO:
 	// 1. Consider renaming this resource and the associated rules so they
 	// aren't tied to Ingress. They can be used to route intra-cluster traffic.
 	// 2. Consider adding fields for ingress-type specific global options
@@ -4971,7 +4971,7 @@ type NodeStatus struct {
 	Config *NodeConfigStatus `json:"config,omitempty" protobuf:"bytes,11,opt,name=config" bson:"config"`
 }
 
-/// /// ///
+// / /// ///
 // +kubebuilder:validation:Enum=RSA;ECDSA;Ed25519
 type PrivateKeyAlgorithm string
 
@@ -5492,4 +5492,68 @@ type PodShortContainerStatusesDto struct {
 type ContainerStateDto struct {
 	Reason  string `json:"reason,omitempty" protobuf:"bytes,1,opt,name=reason" bson:"reason"`
 	Message string `json:"message,omitempty" protobuf:"bytes,2,opt,name=message" bson:"message"`
+}
+
+type K8sObjsInfo struct {
+	Deployments            []DeploymentShortInfo  `json:"deployments"`
+	Services               []K8sObjShortInfo      `json:"services"`
+	ConfigMaps             []K8sObjShortInfo      `json:"config_maps"`
+	StatefulSets           []StatefulSetShortInfo `json:"stateful_sets"`
+	ClusterRoles           []K8sObjShortInfo      `json:"cluster_roles"`
+	ClusterRoleBindings    []K8sObjShortInfo      `json:"cluster_role_bindings"`
+	DaemonSets             []DaemonSetShortInfo   `json:"daemon_sets"`
+	Ingresses              []K8sObjShortInfo      `json:"ingresses"`
+	Namespaces             []K8sObjShortInfo      `json:"namespaces"`
+	NetworkPolicies        []K8sObjShortInfo      `json:"network_policies"`
+	Nodes                  []K8sObjShortInfo      `json:"nodes"`
+	PersistentVolumes      []K8sObjShortInfo      `json:"persistent_volumes"`
+	PersistentVolumeClaims []K8sObjShortInfo      `json:"persistent_volume_claims"`
+	ReplicaSets            []ReplicaSetShortInfo  `json:"replica_sets"`
+	Roles                  []K8sObjShortInfo      `json:"roles"`
+	RoleBindings           []K8sObjShortInfo      `json:"role_bindings"`
+	Secrets                []K8sObjShortInfo      `json:"secrets"`
+	ServiceAccounts        []K8sObjShortInfo      `json:"service_accounts"`
+	Certificates           []K8sObjShortInfo      `json:"certificates"`
+}
+
+type K8sObjShortInfo struct {
+	Name      string `json:"name"`
+	Namespace string `json:"namespace"`
+	UID       string `json:"uid"`
+}
+
+type DeploymentShortInfo struct {
+	Name                string `json:"name"`
+	Namespace           string `json:"namespace"`
+	UID                 string `json:"uid"`
+	Replicas            int32  `json:"replicas"`
+	AvailableReplicas   int32  `json:"available_replicas"`
+	UnavailableReplicas int32  `json:"unavailable_replicas"`
+	ReadyReplicas       int32  `json:"ready_replicas"`
+}
+
+type StatefulSetShortInfo struct {
+	Name          string `json:"name"`
+	Namespace     string `json:"namespace"`
+	UID           string `json:"uid"`
+	Replicas      int32  `json:"replicas"`
+	ReadyReplicas int32  `json:"ready_replicas"`
+}
+
+type ReplicaSetShortInfo struct {
+	Name              string `json:"name"`
+	Namespace         string `json:"namespace"`
+	UID               string `json:"uid"`
+	Replicas          int32  `json:"replicas"`
+	AvailableReplicas int32  `json:"available_replicas"`
+	ReadyReplicas     int32  `json:"ready_replicas"`
+}
+
+type DaemonSetShortInfo struct {
+	Name              string `json:"name"`
+	Namespace         string `json:"namespace"`
+	UID               string `json:"uid"`
+	NumberReady       int32  `json:"number_ready"`
+	NumberAvailable   int32  `json:"number_available"`
+	NumberUnavailable int32  `json:"number_unavailable"`
 }

@@ -19,6 +19,52 @@ type persistentVolumeClaimRepository struct {
 	timeout time.Duration
 }
 
+func (p persistentVolumeClaimRepository) GetById(id, agent, processId string) v1.PersistentVolumeClaim {
+	query := bson.M{
+		"$and": []bson.M{
+			{"agent_name": agent},
+			{"obj.metadata.labels.process_id": processId},
+			{"obj.metadata.uid": id},
+		},
+	}
+	coll := p.manager.Db.Collection(PVCCollection)
+	result := coll.FindOne(p.manager.Ctx, query, nil)
+	elemValue := new(v1.PersistentVolumeClaim)
+	err := result.Decode(elemValue)
+	if err != nil {
+		log.Println("[ERROR]", err)
+	}
+	return *elemValue
+}
+
+func (p persistentVolumeClaimRepository) GetByAgentAndProcessIdWithoutPagination(agent, processId string) []v1.PersistentVolumeClaim {
+	var results []v1.PersistentVolumeClaim
+	query := bson.M{
+		"$and": []bson.M{
+			{"agent_name": agent},
+			{"obj.metadata.labels.process_id": processId},
+		},
+	}
+	coll := p.manager.Db.Collection(PVCCollection)
+	findOptions := options.FindOptions{
+		Sort: bson.M{"created_at": -1},
+	}
+	result, err := coll.Find(p.manager.Ctx, query, &findOptions)
+	if err != nil {
+		log.Println(err.Error())
+	}
+	for result.Next(context.TODO()) {
+		elemValue := new(v1.PersistentVolumeClaim)
+		err := result.Decode(elemValue)
+		if err != nil {
+			log.Println("[ERROR]", err)
+			break
+		}
+		results = append(results, *elemValue)
+	}
+	return results
+}
+
 func (p persistentVolumeClaimRepository) GetByAgentAndProcessId(agent, processId string, option v1.ResourceQueryOption) ([]v1.PersistentVolumeClaim, int64) {
 	var results []v1.PersistentVolumeClaim
 	query := bson.M{

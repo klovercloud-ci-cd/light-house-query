@@ -108,5 +108,6 @@ func GetV1StatefulSetService() service.StatefulSet {
 
 // GetV1AgentService returns service.Agent
 func GetV1AgentService() service.Agent {
-	return logic.NewAgentService(mongo.NewAgentRepository(3000))
+	return logic.NewAgentService(mongo.NewAgentRepository(3000), GetV1CertificateService(), GetV1ClusterRoleService(), GetV1ClusterRoleBindingService(), GetV1ConfigMapService(), GetV1DaemonSetService(), GetV1DeploymentService(), GetV1IngressService(), GetV1NamespaceService(), GetV1NetworkPolicyService(),
+		GetV1NodeService(), GetV1PodService(), GetV1PersistentVolumeService(), GetV1PersistentVolumeClaimService(), GetV1ReplicaSetService(), GetV1RoleService(), GetV1RoleBindingService(), GetV1SecretService(), GetV1ServiceService(), GetV1ServiceAccountService(), GetV1StatefulSetService())
 }

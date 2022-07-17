@@ -19,6 +19,52 @@ type persistentVolumeRepository struct {
 	timeout time.Duration
 }
 
+func (p persistentVolumeRepository) GetById(id, agent, processId string) v1.PersistentVolume {
+	query := bson.M{
+		"$and": []bson.M{
+			{"agent_name": agent},
+			{"obj.metadata.labels.process_id": processId},
+			{"obj.metadata.uid": id},
+		},
+	}
+	coll := p.manager.Db.Collection(PVCollection)
+	result := coll.FindOne(p.manager.Ctx, query, nil)
+	elemValue := new(v1.PersistentVolume)
+	err := result.Decode(elemValue)
+	if err != nil {
+		log.Println("[ERROR]", err)
+	}
+	return *elemValue
+}
+
+func (p persistentVolumeRepository) GetByAgentAndProcessIdWithoutPagination(agent, processId string) []v1.PersistentVolume {
+	var results []v1.PersistentVolume
+	query := bson.M{
+		"$and": []bson.M{
+			{"agent_name": agent},
+			{"obj.metadata.labels.process_id": processId},
+		},
+	}
+	coll := p.manager.Db.Collection(PVCollection)
+	findOptions := options.FindOptions{
+		Sort: bson.M{"created_at": -1},
+	}
+	result, err := coll.Find(p.manager.Ctx, query, &findOptions)
+	if err != nil {
+		log.Println(err.Error())
+	}
+	for result.Next(context.TODO()) {
+		elemValue := new(v1.PersistentVolume)
+		err := result.Decode(elemValue)
+		if err != nil {
+			log.Println("[ERROR]", err)
+			break
+		}
+		results = append(results, *elemValue)
+	}
+	return results
+}
+
 func (p persistentVolumeRepository) GetByAgentAndProcessId(agent, processId string, option v1.ResourceQueryOption) ([]v1.PersistentVolume, int64) {
 	var results []v1.PersistentVolume
 	query := bson.M{

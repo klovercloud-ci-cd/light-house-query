@@ -9,4 +9,5 @@ type Pod interface {
 	CountSucceededStatusByCompanyIdAndAgent(companyId, agent string) int64
 	GetNullContainerStatusesMap(companyId, agent string) []v1.PodShortDto
 	GetContainerStatusesMap(companyId, agent string) []v1.PodShortDto
+	GetByAgentAndProcessIdAndLabels(agent, processId string, labels map[string]string) []v1.Pod
 }

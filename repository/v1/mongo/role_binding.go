@@ -19,6 +19,52 @@ type roleBindingRepository struct {
 	timeout time.Duration
 }
 
+func (r roleBindingRepository) GetById(id, agent, processId string) v1.RoleBinding {
+	query := bson.M{
+		"$and": []bson.M{
+			{"agent_name": agent},
+			{"obj.metadata.labels.process_id": processId},
+			{"obj.metadata.uid": id},
+		},
+	}
+	coll := r.manager.Db.Collection(RoleBindingCollection)
+	result := coll.FindOne(r.manager.Ctx, query, nil)
+	elemValue := new(v1.RoleBinding)
+	err := result.Decode(elemValue)
+	if err != nil {
+		log.Println("[ERROR]", err)
+	}
+	return *elemValue
+}
+
+func (r roleBindingRepository) GetByAgentAndProcessIdWithoutPagination(agent, processId string) []v1.RoleBinding {
+	var results []v1.RoleBinding
+	query := bson.M{
+		"$and": []bson.M{
+			{"agent_name": agent},
+			{"obj.metadata.labels.process_id": processId},
+		},
+	}
+	coll := r.manager.Db.Collection(RoleBindingCollection)
+	findOptions := options.FindOptions{
+		Sort: bson.M{"created_at": -1},
+	}
+	result, err := coll.Find(r.manager.Ctx, query, &findOptions)
+	if err != nil {
+		log.Println(err.Error())
+	}
+	for result.Next(context.TODO()) {
+		elemValue := new(v1.RoleBinding)
+		err := result.Decode(elemValue)
+		if err != nil {
+			log.Println("[ERROR]", err)
+			break
+		}
+		results = append(results, *elemValue)
+	}
+	return results
+}
+
 func (r roleBindingRepository) GetByAgentAndProcessId(agent, processId string, option v1.ResourceQueryOption) ([]v1.RoleBinding, int64) {
 	var results []v1.RoleBinding
 	query := bson.M{

@@ -10,11 +10,19 @@ type statefulSetService struct {
 	statefulSetRepo repository.StatefulSet
 }
 
+func (s statefulSetService) GetById(id, agent, processId string) v1.StatefulSet {
+	return s.statefulSetRepo.GetById(id, agent, processId)
+}
+
 func (s statefulSetService) Get(agent, ownerReference, processId string, option v1.ResourceQueryOption) ([]v1.StatefulSet, int64) {
 	if ownerReference == "" {
 		return s.statefulSetRepo.GetByAgentAndProcessId(agent, processId, option)
 	}
 	return s.statefulSetRepo.GetByAgentAndProcessIdAndOwnerReference(agent, ownerReference, processId, option)
+}
+
+func (s statefulSetService) GetByAgentAndProcessIdWithoutPagination(agent, processId string) []v1.StatefulSet {
+	return s.statefulSetRepo.GetByAgentAndProcessIdWithoutPagination(agent, processId)
 }
 
 // NewStatefulSetService returns service.StatefulSet type service

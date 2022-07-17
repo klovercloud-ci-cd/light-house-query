@@ -19,6 +19,32 @@ type podRepository struct {
 	timeout time.Duration
 }
 
+func (p podRepository) GetByAgentAndProcessIdAndLabels(agent, processId string, labels map[string]string) []v1.Pod {
+	var results []v1.Pod
+	query := bson.M{
+		"$and": []bson.M{
+			{"agent_name": agent},
+			{"obj.metadata.labels.process_id": processId},
+			{"obj.metadata.labels": labels},
+		},
+	}
+	coll := p.manager.Db.Collection(PodCollection)
+	result, err := coll.Find(p.manager.Ctx, query, nil)
+	if err != nil {
+		log.Println(err.Error())
+	}
+	for result.Next(context.TODO()) {
+		elemValue := new(v1.Pod)
+		err := result.Decode(elemValue)
+		if err != nil {
+			log.Println("[ERROR]", err)
+			break
+		}
+		results = append(results, *elemValue)
+	}
+	return results
+}
+
 func (p podRepository) GetContainerStatusesMap(companyId, agent string) []v1.PodShortDto {
 	var results []v1.PodShortDto
 	query := bson.M{

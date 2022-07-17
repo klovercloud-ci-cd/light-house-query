@@ -155,4 +155,5 @@ func StatefulSetRouter(g *echo.Group) {
 func AgentRouter(g *echo.Group) {
 	agentApi := NewAgentApi(dependency.GetV1AgentService())
 	g.GET("", agentApi.Get)
+	g.GET(":agent/k8sobjs", agentApi.GetK8sObjs)
 }

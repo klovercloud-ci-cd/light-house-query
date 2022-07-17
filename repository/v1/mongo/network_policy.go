@@ -19,6 +19,52 @@ type networkPolicyRepository struct {
 	timeout time.Duration
 }
 
+func (n networkPolicyRepository) GetById(id, agent, processId string) v1.NetworkPolicy {
+	query := bson.M{
+		"$and": []bson.M{
+			{"agent_name": agent},
+			{"obj.metadata.labels.process_id": processId},
+			{"obj.metadata.uid": id},
+		},
+	}
+	coll := n.manager.Db.Collection(NetworkPolicyCollection)
+	result := coll.FindOne(n.manager.Ctx, query, nil)
+	elemValue := new(v1.NetworkPolicy)
+	err := result.Decode(elemValue)
+	if err != nil {
+		log.Println("[ERROR]", err)
+	}
+	return *elemValue
+}
+
+func (n networkPolicyRepository) GetByAgentAndProcessIdWithoutPagination(agent, processId string) []v1.NetworkPolicy {
+	var results []v1.NetworkPolicy
+	query := bson.M{
+		"$and": []bson.M{
+			{"agent_name": agent},
+			{"obj.metadata.labels.process_id": processId},
+		},
+	}
+	coll := n.manager.Db.Collection(NetworkPolicyCollection)
+	findOptions := options.FindOptions{
+		Sort: bson.M{"created_at": -1},
+	}
+	result, err := coll.Find(n.manager.Ctx, query, &findOptions)
+	if err != nil {
+		log.Println(err.Error())
+	}
+	for result.Next(context.TODO()) {
+		elemValue := new(v1.NetworkPolicy)
+		err := result.Decode(elemValue)
+		if err != nil {
+			log.Println("[ERROR]", err)
+			break
+		}
+		results = append(results, *elemValue)
+	}
+	return results
+}
+
 func (n networkPolicyRepository) GetByAgentAndProcessId(agent, processId string, option v1.ResourceQueryOption) ([]v1.NetworkPolicy, int64) {
 	var results []v1.NetworkPolicy
 	query := bson.M{

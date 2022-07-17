@@ -19,6 +19,24 @@ type clusterRoleRepository struct {
 	timeout time.Duration
 }
 
+func (c clusterRoleRepository) GetById(id, agent, processId string) v1.ClusterRole {
+	query := bson.M{
+		"$and": []bson.M{
+			{"agent_name": agent},
+			{"obj.metadata.labels.process_id": processId},
+			{"obj.metadata.uid": id},
+		},
+	}
+	coll := c.manager.Db.Collection(ClusterRoleCollection)
+	result := coll.FindOne(c.manager.Ctx, query, nil)
+	elemValue := new(v1.ClusterRole)
+	err := result.Decode(elemValue)
+	if err != nil {
+		log.Println("[ERROR]", err)
+	}
+	return *elemValue
+}
+
 func (c clusterRoleRepository) GetByAgentAndProcessId(agent, processId string, option v1.ResourceQueryOption) ([]v1.ClusterRole, int64) {
 	var results []v1.ClusterRole
 	query := bson.M{
@@ -55,6 +73,34 @@ func (c clusterRoleRepository) GetByAgentAndProcessId(agent, processId string, o
 		log.Println(err.Error())
 	}
 	return results, count
+}
+
+func (c clusterRoleRepository) GetByAgentAndProcessIdWithoutPagination(agent, processId string) []v1.ClusterRole {
+	var results []v1.ClusterRole
+	query := bson.M{
+		"$and": []bson.M{
+			{"agent_name": agent},
+			{"obj.metadata.labels.process_id": processId},
+		},
+	}
+	coll := c.manager.Db.Collection(ClusterRoleCollection)
+	findOptions := options.FindOptions{
+		Sort: bson.M{"created_at": -1},
+	}
+	result, err := coll.Find(c.manager.Ctx, query, &findOptions)
+	if err != nil {
+		log.Println(err.Error())
+	}
+	for result.Next(context.TODO()) {
+		elemValue := new(v1.ClusterRole)
+		err := result.Decode(elemValue)
+		if err != nil {
+			log.Println("[ERROR]", err)
+			break
+		}
+		results = append(results, *elemValue)
+	}
+	return results
 }
 
 func (c clusterRoleRepository) GetByAgentAndProcessIdAndOwnerReference(agent, ownerReference, processId string, option v1.ResourceQueryOption) ([]v1.ClusterRole, int64) {

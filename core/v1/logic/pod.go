@@ -11,6 +11,10 @@ type podService struct {
 	deploymentRepo repository.Deployment
 }
 
+func (p podService) GetByAgentAndProcessIdAndLabels(agent, processId string, labels map[string]string) []v1.Pod {
+	return p.podRepo.GetByAgentAndProcessIdAndLabels(agent, processId, labels)
+}
+
 func (p podService) Get(agent, ownerReference, processId string, option v1.ResourceQueryOption) ([]v1.Pod, int64) {
 	if ownerReference == "" {
 		return p.podRepo.GetByAgentAndProcessId(agent, processId, option)
