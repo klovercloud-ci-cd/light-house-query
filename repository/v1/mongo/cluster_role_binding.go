@@ -33,6 +33,7 @@ func (c clusterRoleBindingRepository) GetById(id, agent, processId string) v1.Cl
 	err := result.Decode(elemValue)
 	if err != nil {
 		log.Println("[ERROR]", err)
+		return *elemValue
 	}
 	return *elemValue
 }
@@ -52,6 +53,7 @@ func (c clusterRoleBindingRepository) GetByAgentAndProcessIdWithoutPagination(ag
 	result, err := coll.Find(c.manager.Ctx, query, &findOptions)
 	if err != nil {
 		log.Println(err.Error())
+		return results
 	}
 	for result.Next(context.TODO()) {
 		elemValue := new(v1.ClusterRoleBinding)
@@ -86,6 +88,7 @@ func (c clusterRoleBindingRepository) GetByAgentAndProcessId(agent, processId st
 	result, err := coll.Find(c.manager.Ctx, query, &findOptions)
 	if err != nil {
 		log.Println(err.Error())
+		return results, 0
 	}
 	for result.Next(context.TODO()) {
 		elemValue := new(v1.ClusterRoleBinding)
@@ -99,6 +102,7 @@ func (c clusterRoleBindingRepository) GetByAgentAndProcessId(agent, processId st
 	count, err := coll.CountDocuments(c.manager.Ctx, query)
 	if err != nil {
 		log.Println(err.Error())
+		return results, 0
 	}
 	return results, count
 }
@@ -125,6 +129,7 @@ func (c clusterRoleBindingRepository) GetByAgentAndProcessIdAndOwnerReference(ag
 	result, err := coll.Find(c.manager.Ctx, query, &findOptions)
 	if err != nil {
 		log.Println(err.Error())
+		return results, 0
 	}
 	for result.Next(context.TODO()) {
 		elemValue := new(v1.ClusterRoleBinding)
@@ -138,6 +143,7 @@ func (c clusterRoleBindingRepository) GetByAgentAndProcessIdAndOwnerReference(ag
 	count, err := coll.CountDocuments(c.manager.Ctx, query)
 	if err != nil {
 		log.Println(err.Error())
+		return results, 0
 	}
 	return results, count
 }

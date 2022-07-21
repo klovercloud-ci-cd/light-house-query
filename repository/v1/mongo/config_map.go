@@ -33,6 +33,7 @@ func (c configMapRepository) GetById(id, agent, processId string) v1.ConfigMap {
 	err := result.Decode(elemValue)
 	if err != nil {
 		log.Println("[ERROR]", err)
+		return *elemValue
 	}
 	return *elemValue
 }
@@ -52,6 +53,7 @@ func (c configMapRepository) GetByAgentAndProcessIdWithoutPagination(agent, proc
 	result, err := coll.Find(c.manager.Ctx, query, &findOptions)
 	if err != nil {
 		log.Println(err.Error())
+		return results
 	}
 	for result.Next(context.TODO()) {
 		elemValue := new(v1.ConfigMap)
@@ -86,6 +88,7 @@ func (c configMapRepository) GetByAgentAndProcessId(agent, processId string, opt
 	result, err := coll.Find(c.manager.Ctx, query, &findOptions)
 	if err != nil {
 		log.Println(err.Error())
+		return results, 0
 	}
 	for result.Next(context.TODO()) {
 		elemValue := new(v1.ConfigMap)
@@ -125,6 +128,7 @@ func (c configMapRepository) GetByAgentAndProcessIdAndOwnerReference(agent, owne
 	result, err := coll.Find(c.manager.Ctx, query, &findOptions)
 	if err != nil {
 		log.Println(err.Error())
+		return results, 0
 	}
 	for result.Next(context.TODO()) {
 		elemValue := new(v1.ConfigMap)

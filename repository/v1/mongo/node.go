@@ -52,6 +52,7 @@ func (n nodeRepository) GetByAgentAndProcessIdWithoutPagination(agent, processId
 	result, err := coll.Find(n.manager.Ctx, query, &findOptions)
 	if err != nil {
 		log.Println(err.Error())
+		return results
 	}
 	for result.Next(context.TODO()) {
 		elemValue := new(v1.Node)
@@ -86,6 +87,7 @@ func (n nodeRepository) GetByAgentAndProcessId(agent, processId string, option v
 	result, err := coll.Find(n.manager.Ctx, query, &findOptions)
 	if err != nil {
 		log.Println(err.Error())
+		return results, 0
 	}
 	for result.Next(context.TODO()) {
 		elemValue := new(v1.Node)
@@ -125,6 +127,7 @@ func (n nodeRepository) GetByAgentAndProcessIdAndOwnerReference(agent, ownerRefe
 	result, err := coll.Find(n.manager.Ctx, query, &findOptions)
 	if err != nil {
 		log.Println(err.Error())
+		return results, 0
 	}
 	for result.Next(context.TODO()) {
 		elemValue := new(v1.Node)

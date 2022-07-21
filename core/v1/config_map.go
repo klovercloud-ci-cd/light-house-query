@@ -7,8 +7,8 @@ import (
 type K8sConfigMap struct {
 	TypeMeta   `json:",inline" bson:",inline"`
 	ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata" bson:"metadata"`
-	Data       map[string]string `json:"data,omitempty" protobuf:"bytes,2,rep,name=data" bson:"data"`
-	BinaryData map[string][]byte `json:"binaryData,omitempty" protobuf:"bytes,3,rep,name=binaryData" bson:"binaryData"`
+	Data       map[string]interface{} `json:"data,omitempty" protobuf:"bytes,2,rep,name=data" bson:"data"`
+	BinaryData map[string][]byte      `json:"binaryData,omitempty" protobuf:"bytes,3,rep,name=binaryData" bson:"binaryData"`
 }
 
 type ConfigMap struct {

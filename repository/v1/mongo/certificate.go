@@ -33,6 +33,7 @@ func (c certificateRepository) GetById(id, agent, processId string) v1.Certifica
 	err := result.Decode(elemValue)
 	if err != nil {
 		log.Println("[ERROR]", err)
+		return *elemValue
 	}
 	return *elemValue
 }
@@ -52,6 +53,7 @@ func (c certificateRepository) GetByAgentAndProcessIdWithoutPagination(agent, pr
 	result, err := coll.Find(c.manager.Ctx, query, &findOptions)
 	if err != nil {
 		log.Println(err.Error())
+		return results
 	}
 	for result.Next(context.TODO()) {
 		elemValue := new(v1.Certificate)
@@ -86,6 +88,7 @@ func (c certificateRepository) GetByAgentAndProcessId(agent, processId string, o
 	result, err := coll.Find(c.manager.Ctx, query, &findOptions)
 	if err != nil {
 		log.Println(err.Error())
+		return results, 0
 	}
 	for result.Next(context.TODO()) {
 		elemValue := new(v1.Certificate)
@@ -99,6 +102,7 @@ func (c certificateRepository) GetByAgentAndProcessId(agent, processId string, o
 	count, err := coll.CountDocuments(c.manager.Ctx, query)
 	if err != nil {
 		log.Println(err.Error())
+		return results, 0
 	}
 	return results, count
 }
@@ -125,6 +129,7 @@ func (c certificateRepository) GetByAgentAndProcessIdAndOwnerReference(agent, ow
 	result, err := coll.Find(c.manager.Ctx, query, &findOptions)
 	if err != nil {
 		log.Println(err.Error())
+		return results, 0
 	}
 	for result.Next(context.TODO()) {
 		elemValue := new(v1.Certificate)
@@ -138,6 +143,7 @@ func (c certificateRepository) GetByAgentAndProcessIdAndOwnerReference(agent, ow
 	count, err := coll.CountDocuments(c.manager.Ctx, query)
 	if err != nil {
 		log.Println(err.Error())
+		return results, 0
 	}
 	return results, count
 }

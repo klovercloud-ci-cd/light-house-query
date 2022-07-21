@@ -52,6 +52,7 @@ func (r replicaSetRepository) GetByAgentAndProcessIdWithoutPagination(agent, pro
 	result, err := coll.Find(r.manager.Ctx, query, &findOptions)
 	if err != nil {
 		log.Println(err.Error())
+		return results
 	}
 	for result.Next(context.TODO()) {
 		elemValue := new(v1.ReplicaSet)
@@ -86,6 +87,7 @@ func (r replicaSetRepository) GetByAgentAndProcessId(agent, processId string, op
 	result, err := coll.Find(r.manager.Ctx, query, &findOptions)
 	if err != nil {
 		log.Println(err.Error())
+		return results, 0
 	}
 	for result.Next(context.TODO()) {
 		elemValue := new(v1.ReplicaSet)
@@ -125,6 +127,7 @@ func (r replicaSetRepository) GetByAgentAndProcessIdAndOwnerReference(agent, own
 	result, err := coll.Find(r.manager.Ctx, query, &findOptions)
 	if err != nil {
 		log.Println(err.Error())
+		return results, 0
 	}
 	for result.Next(context.TODO()) {
 		elemValue := new(v1.ReplicaSet)

@@ -21,13 +21,16 @@ type podRepository struct {
 
 func (p podRepository) GetByAgentAndProcessIdAndLabels(agent, processId string, labels map[string]string) []v1.Pod {
 	var results []v1.Pod
-	query := bson.M{
-		"$and": []bson.M{
-			{"agent_name": agent},
-			{"obj.metadata.labels.process_id": processId},
-			{"obj.metadata.labels": labels},
-		},
+	var queryObj []bson.M
+	for key, val := range labels {
+		queryObj = append(queryObj, bson.M{"obj.metadata.labels." + key: val})
 	}
+	queryObj = append(queryObj, bson.M{"agent_name": agent})
+	queryObj = append(queryObj, bson.M{"obj.metadata.labels.process_id": processId})
+	query := bson.M{
+		"$and": queryObj,
+	}
+
 	coll := p.manager.Db.Collection(PodCollection)
 	result, err := coll.Find(p.manager.Ctx, query, nil)
 	if err != nil {
@@ -59,6 +62,7 @@ func (p podRepository) GetContainerStatusesMap(companyId, agent string) []v1.Pod
 	result, err := coll.Find(p.manager.Ctx, query, nil)
 	if err != nil {
 		log.Println(err.Error())
+		return results
 	}
 	for result.Next(context.TODO()) {
 		elemValue := new(v1.PodShortDto)
@@ -86,6 +90,7 @@ func (p podRepository) GetNullContainerStatusesMap(companyId, agent string) []v1
 	result, err := coll.Find(p.manager.Ctx, query, nil)
 	if err != nil {
 		log.Println(err.Error())
+		return results
 	}
 	for result.Next(context.TODO()) {
 		elemValue := new(v1.PodShortDto)
@@ -135,6 +140,7 @@ func (p podRepository) GetByAgentAndProcessId(agent, processId string, option v1
 	result, err := coll.Find(p.manager.Ctx, query, &findOptions)
 	if err != nil {
 		log.Println(err.Error())
+		return results, 0
 	}
 	for result.Next(context.TODO()) {
 		elemValue := new(v1.Pod)
@@ -174,6 +180,7 @@ func (p podRepository) GetByAgentAndProcessIdAndOwnerReference(agent, ownerRefer
 	result, err := coll.Find(p.manager.Ctx, query, &findOptions)
 	if err != nil {
 		log.Println(err.Error())
+		return results, 0
 	}
 	for result.Next(context.TODO()) {
 		elemValue := new(v1.Pod)

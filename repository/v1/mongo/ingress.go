@@ -52,6 +52,7 @@ func (i ingressRepository) GetByAgentAndProcessIdWithoutPagination(agent, proces
 	result, err := coll.Find(i.manager.Ctx, query, &findOptions)
 	if err != nil {
 		log.Println(err.Error())
+		return results
 	}
 	for result.Next(context.TODO()) {
 		elemValue := new(v1.Ingress)
@@ -86,6 +87,7 @@ func (i ingressRepository) GetByAgentAndProcessId(agent, processId string, optio
 	result, err := coll.Find(i.manager.Ctx, query, &findOptions)
 	if err != nil {
 		log.Println(err.Error())
+		return results, 0
 	}
 	for result.Next(context.TODO()) {
 		elemValue := new(v1.Ingress)
@@ -125,6 +127,7 @@ func (i ingressRepository) GetByAgentAndProcessIdAndOwnerReference(agent, ownerR
 	result, err := coll.Find(i.manager.Ctx, query, &findOptions)
 	if err != nil {
 		log.Println(err.Error())
+		return results, 0
 	}
 	for result.Next(context.TODO()) {
 		elemValue := new(v1.Ingress)

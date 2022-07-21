@@ -52,6 +52,7 @@ func (p persistentVolumeClaimRepository) GetByAgentAndProcessIdWithoutPagination
 	result, err := coll.Find(p.manager.Ctx, query, &findOptions)
 	if err != nil {
 		log.Println(err.Error())
+		return results
 	}
 	for result.Next(context.TODO()) {
 		elemValue := new(v1.PersistentVolumeClaim)
@@ -86,6 +87,7 @@ func (p persistentVolumeClaimRepository) GetByAgentAndProcessId(agent, processId
 	result, err := coll.Find(p.manager.Ctx, query, &findOptions)
 	if err != nil {
 		log.Println(err.Error())
+		return results, 0
 	}
 	for result.Next(context.TODO()) {
 		elemValue := new(v1.PersistentVolumeClaim)
@@ -125,6 +127,7 @@ func (p persistentVolumeClaimRepository) GetByAgentAndProcessIdAndOwnerReference
 	result, err := coll.Find(p.manager.Ctx, query, &findOptions)
 	if err != nil {
 		log.Println(err.Error())
+		return results, 0
 	}
 	for result.Next(context.TODO()) {
 		elemValue := new(v1.PersistentVolumeClaim)

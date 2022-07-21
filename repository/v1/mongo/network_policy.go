@@ -52,6 +52,7 @@ func (n networkPolicyRepository) GetByAgentAndProcessIdWithoutPagination(agent, 
 	result, err := coll.Find(n.manager.Ctx, query, &findOptions)
 	if err != nil {
 		log.Println(err.Error())
+		return results
 	}
 	for result.Next(context.TODO()) {
 		elemValue := new(v1.NetworkPolicy)
@@ -86,6 +87,7 @@ func (n networkPolicyRepository) GetByAgentAndProcessId(agent, processId string,
 	result, err := coll.Find(n.manager.Ctx, query, &findOptions)
 	if err != nil {
 		log.Println(err.Error())
+		return results, 0
 	}
 	for result.Next(context.TODO()) {
 		elemValue := new(v1.NetworkPolicy)
@@ -125,6 +127,7 @@ func (n networkPolicyRepository) GetByAgentAndProcessIdAndOwnerReference(agent, 
 	result, err := coll.Find(n.manager.Ctx, query, &findOptions)
 	if err != nil {
 		log.Println(err.Error())
+		return results, 0
 	}
 	for result.Next(context.TODO()) {
 		elemValue := new(v1.NetworkPolicy)

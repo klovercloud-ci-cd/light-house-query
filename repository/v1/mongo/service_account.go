@@ -52,6 +52,7 @@ func (s serviceAccountRepository) GetByAgentAndProcessIdWithoutPagination(agent,
 	result, err := coll.Find(s.manager.Ctx, query, &findOptions)
 	if err != nil {
 		log.Println(err.Error())
+		return results
 	}
 	for result.Next(context.TODO()) {
 		elemValue := new(v1.ServiceAccount)
@@ -86,6 +87,7 @@ func (s serviceAccountRepository) GetByAgentAndProcessId(agent, processId string
 	result, err := coll.Find(s.manager.Ctx, query, &findOptions)
 	if err != nil {
 		log.Println(err.Error())
+		return results, 0
 	}
 	for result.Next(context.TODO()) {
 		elemValue := new(v1.ServiceAccount)
@@ -125,6 +127,7 @@ func (s serviceAccountRepository) GetByAgentAndProcessIdAndOwnerReference(agent,
 	result, err := coll.Find(s.manager.Ctx, query, &findOptions)
 	if err != nil {
 		log.Println(err.Error())
+		return results, 0
 	}
 	for result.Next(context.TODO()) {
 		elemValue := new(v1.ServiceAccount)

@@ -52,6 +52,7 @@ func (s secretRepository) GetByAgentAndProcessIdWithoutPagination(agent, process
 	result, err := coll.Find(s.manager.Ctx, query, &findOptions)
 	if err != nil {
 		log.Println(err.Error())
+		return results
 	}
 	for result.Next(context.TODO()) {
 		elemValue := new(v1.Secret)
@@ -86,6 +87,7 @@ func (s secretRepository) GetByAgentAndProcessId(agent, processId string, option
 	result, err := coll.Find(s.manager.Ctx, query, &findOptions)
 	if err != nil {
 		log.Println(err.Error())
+		return results, 0
 	}
 	for result.Next(context.TODO()) {
 		elemValue := new(v1.Secret)
@@ -125,6 +127,7 @@ func (s secretRepository) GetByAgentAndProcessIdAndOwnerReference(agent, ownerRe
 	result, err := coll.Find(s.manager.Ctx, query, &findOptions)
 	if err != nil {
 		log.Println(err.Error())
+		return results, 0
 	}
 	for result.Next(context.TODO()) {
 		elemValue := new(v1.Secret)

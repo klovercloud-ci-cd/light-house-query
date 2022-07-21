@@ -62,6 +62,7 @@ func (d deploymentRepository) CountDeploymentsByCompanyIdAndGroupByAgent(company
 	result, err := coll.Find(d.manager.Ctx, query, nil)
 	if err != nil {
 		log.Println(err.Error())
+		return results
 	}
 	for result.Next(context.TODO()) {
 		elemValue := new(v1.DeploymentShortDto)
@@ -94,6 +95,7 @@ func (d deploymentRepository) GetByAgentAndProcessIdWithoutPagination(agent, pro
 	result, err := coll.Find(d.manager.Ctx, query, &findOptions)
 	if err != nil {
 		log.Println(err.Error())
+		return results
 	}
 	for result.Next(context.TODO()) {
 		elemValue := new(v1.Deployment)
@@ -128,6 +130,7 @@ func (d deploymentRepository) GetByAgentAndProcessId(agent, processId string, op
 	result, err := coll.Find(d.manager.Ctx, query, &findOptions)
 	if err != nil {
 		log.Println(err.Error())
+		return results, 0
 	}
 	for result.Next(context.TODO()) {
 		elemValue := new(v1.Deployment)
@@ -167,6 +170,7 @@ func (d deploymentRepository) GetByAgentAndProcessIdAndOwnerReference(agent, own
 	result, err := coll.Find(d.manager.Ctx, query, &findOptions)
 	if err != nil {
 		log.Println(err.Error())
+		return results, 0
 	}
 	for result.Next(context.TODO()) {
 		elemValue := new(v1.Deployment)

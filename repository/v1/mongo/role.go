@@ -52,6 +52,7 @@ func (r roleRepository) GetByAgentAndProcessIdWithoutPagination(agent, processId
 	result, err := coll.Find(r.manager.Ctx, query, &findOptions)
 	if err != nil {
 		log.Println(err.Error())
+		return results
 	}
 	for result.Next(context.TODO()) {
 		elemValue := new(v1.Role)
@@ -86,6 +87,7 @@ func (r roleRepository) GetByAgentAndProcessId(agent, processId string, option v
 	result, err := coll.Find(r.manager.Ctx, query, &findOptions)
 	if err != nil {
 		log.Println(err.Error())
+		return results, 0
 	}
 	for result.Next(context.TODO()) {
 		elemValue := new(v1.Role)
@@ -125,6 +127,7 @@ func (r roleRepository) GetByAgentAndProcessIdAndOwnerReference(agent, ownerRefe
 	result, err := coll.Find(r.manager.Ctx, query, &findOptions)
 	if err != nil {
 		log.Println(err.Error())
+		return results, 0
 	}
 	for result.Next(context.TODO()) {
 		elemValue := new(v1.Role)

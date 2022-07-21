@@ -52,6 +52,7 @@ func (s statefulSetRepository) GetByAgentAndProcessIdWithoutPagination(agent, pr
 	result, err := coll.Find(s.manager.Ctx, query, &findOptions)
 	if err != nil {
 		log.Println(err.Error())
+		return results
 	}
 	for result.Next(context.TODO()) {
 		elemValue := new(v1.StatefulSet)
@@ -86,6 +87,7 @@ func (s statefulSetRepository) GetByAgentAndProcessId(agent, processId string, o
 	result, err := coll.Find(s.manager.Ctx, query, &findOptions)
 	if err != nil {
 		log.Println(err.Error())
+		return results, 0
 	}
 	for result.Next(context.TODO()) {
 		elemValue := new(v1.StatefulSet)
@@ -125,6 +127,7 @@ func (s statefulSetRepository) GetByAgentAndProcessIdAndOwnerReference(agent, ow
 	result, err := coll.Find(s.manager.Ctx, query, &findOptions)
 	if err != nil {
 		log.Println(err.Error())
+		return results, 0
 	}
 	for result.Next(context.TODO()) {
 		elemValue := new(v1.StatefulSet)
