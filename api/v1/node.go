@@ -24,7 +24,7 @@ type nodeApi struct {
 // @Param page query int64 false "Page Number"
 // @Param limit query int64 false "Limit"
 // @Param sort query bool false "Sort By Created Time"
-// @Success 200 {object} common.ResponseDTO{data=[]v1.Pod{}}
+// @Success 200 {object} common.ResponseDTO{data=[]v1.Node{}}
 // @Forbidden 403 {object} common.ResponseDTO
 // @Failure 400 {object} common.ResponseDTO
 // @Router /api/v1/nodes [GET]
@@ -45,6 +45,26 @@ func (n nodeApi) Get(context echo.Context) error {
 	}
 	return common.GenerateSuccessResponse(context, data,
 		&metadata, "Successful")
+}
+
+// Get... Get by ID Api
+// @Summary Get by ID api
+// @Description Api for getting a Node by id, agent name, and process id
+// @Tags Node
+// @Produce json
+// @Param id query string true "ID"
+// @Param processId query string true "Process Id"
+// @Param agent query string true "Agent Name"
+// @Success 200 {object} common.ResponseDTO{data=v1.Node{}}
+// @Forbidden 403 {object} common.ResponseDTO
+// @Failure 400 {object} common.ResponseDTO
+// @Router /api/v1/nodes/{id} [GET]
+func (n nodeApi) GetByID(context echo.Context) error {
+	id := context.Param("id")
+	agent := context.QueryParam("agent")
+	processId := context.QueryParam("processId")
+	data := n.nodeService.GetById(id, agent, processId)
+	return common.GenerateSuccessResponse(context, data, nil, "Operation Successful")
 }
 
 // NewNodeApi returns api.Node type api

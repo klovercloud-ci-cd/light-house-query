@@ -27,6 +27,24 @@ func (a agentApi) Get(context echo.Context) error {
 	return common.GenerateSuccessResponse(context, data, nil, "Operation Successful")
 }
 
+// Get... Get by ID Api
+// @Summary Get by ID api
+// @Description Api for getting an Agent by name and company id
+// @Tags Agent
+// @Produce json
+// @Param agent path string true "Agent Name"
+// @Param companyId query string true "Company Id"
+// @Success 200 {object} common.ResponseDTO{data=v1.Agent{}}
+// @Forbidden 403 {object} common.ResponseDTO
+// @Failure 400 {object} common.ResponseDTO
+// @Router /api/v1/agents/{agent} [GET]
+func (a agentApi) GetByID(context echo.Context) error {
+	agent := context.Param("agent")
+	companyId := context.QueryParam("companyId")
+	data := a.agentService.GetByName(agent, companyId)
+	return common.GenerateSuccessResponse(context, data, nil, "Operation Successful")
+}
+
 // Get... Get K8sObjs Api
 // @Summary Get K8sObjs api
 // @Description Api for getting all K8sObjs short info by agent name and process id

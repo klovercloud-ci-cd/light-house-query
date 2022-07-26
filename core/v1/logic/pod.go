@@ -11,6 +11,10 @@ type podService struct {
 	deploymentRepo repository.Deployment
 }
 
+func (p podService) GetById(id, agent, processId string) v1.Pod {
+	return p.podRepo.GetById(id, agent, processId)
+}
+
 func (p podService) GetByAgentAndProcessIdAndLabels(agent, processId string, labels map[string]string) []v1.Pod {
 	return p.podRepo.GetByAgentAndProcessIdAndLabels(agent, processId, labels)
 }

@@ -15,7 +15,7 @@ type persistentVolumeApi struct {
 
 // Get... Get Api
 // @Summary Get api
-// @Description Api for getting all Persistent volumes  by agent name, owner reference and process id
+// @Description Api for getting all Persistent Volumes  by agent name, owner reference and process id
 // @Tags PersistentVolume
 // @Produce json
 // @Param owner-reference path string false "Owner Reference"
@@ -45,6 +45,26 @@ func (p persistentVolumeApi) Get(context echo.Context) error {
 	}
 	return common.GenerateSuccessResponse(context, data,
 		&metadata, "Successful")
+}
+
+// Get... Get by ID Api
+// @Summary Get by ID api
+// @Description Api for getting a Persistent Volume by id, agent name, and process id
+// @Tags PersistentVolume
+// @Produce json
+// @Param id query string true "ID"
+// @Param processId query string true "Process Id"
+// @Param agent query string true "Agent Name"
+// @Success 200 {object} common.ResponseDTO{data=v1.PersistentVolume{}}
+// @Forbidden 403 {object} common.ResponseDTO
+// @Failure 400 {object} common.ResponseDTO
+// @Router /api/v1/persistent-volumes/{id} [GET]
+func (p persistentVolumeApi) GetByID(context echo.Context) error {
+	id := context.Param("id")
+	agent := context.QueryParam("agent")
+	processId := context.QueryParam("processId")
+	data := p.persistentVolumeService.GetById(id, agent, processId)
+	return common.GenerateSuccessResponse(context, data, nil, "Operation Successful")
 }
 
 // NewPersistentVolumeApi returns api.PersistentVolume type api

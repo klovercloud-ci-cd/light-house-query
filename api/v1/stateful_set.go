@@ -47,6 +47,26 @@ func (s statefulSetApi) Get(context echo.Context) error {
 		&metadata, "Successful")
 }
 
+// Get... Get by ID Api
+// @Summary Get by ID api
+// @Description Api for getting a Statuful Set by id, agent name, and process id
+// @Tags StatufulSet
+// @Produce json
+// @Param id query string true "ID"
+// @Param processId query string true "Process Id"
+// @Param agent query string true "Agent Name"
+// @Success 200 {object} common.ResponseDTO{data=v1.StatufulSet{}}
+// @Forbidden 403 {object} common.ResponseDTO
+// @Failure 400 {object} common.ResponseDTO
+// @Router /api/v1/stateful-sets/{id} [GET]
+func (s statefulSetApi) GetByID(context echo.Context) error {
+	id := context.Param("id")
+	agent := context.QueryParam("agent")
+	processId := context.QueryParam("processId")
+	data := s.statefulSetService.GetById(id, agent, processId)
+	return common.GenerateSuccessResponse(context, data, nil, "Operation Successful")
+}
+
 // NewStatefulSetApi returns api.StatefulSet type api
 func NewStatefulSetApi(statefulSetService service.StatefulSet) api.StatefulSet {
 	return &statefulSetApi{

@@ -30,6 +30,10 @@ type agentService struct {
 	statefulSetService           service.StatefulSet
 }
 
+func (a agentService) GetByName(agent, companyId string) v1.Agent {
+	return a.agentRepo.GetByName(agent, companyId)
+}
+
 func (a agentService) Get(companyId string) []v1.Agent {
 	return a.agentRepo.Get(companyId)
 }

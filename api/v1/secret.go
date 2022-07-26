@@ -47,6 +47,26 @@ func (s secretApi) Get(context echo.Context) error {
 		&metadata, "Successful")
 }
 
+// Get... Get by ID Api
+// @Summary Get by ID api
+// @Description Api for getting a Secret by id, agent name, and process id
+// @Tags Secret
+// @Produce json
+// @Param id query string true "ID"
+// @Param processId query string true "Process Id"
+// @Param agent query string true "Agent Name"
+// @Success 200 {object} common.ResponseDTO{data=v1.Secret{}}
+// @Forbidden 403 {object} common.ResponseDTO
+// @Failure 400 {object} common.ResponseDTO
+// @Router /api/v1/secrets/{id} [GET]
+func (s secretApi) GetByID(context echo.Context) error {
+	id := context.Param("id")
+	agent := context.QueryParam("agent")
+	processId := context.QueryParam("processId")
+	data := s.secretService.GetById(id, agent, processId)
+	return common.GenerateSuccessResponse(context, data, nil, "Operation Successful")
+}
+
 // NewSecretApi returns api.Secret type api
 func NewSecretApi(serviceService service.Secret) api.Secret {
 	return &secretApi{

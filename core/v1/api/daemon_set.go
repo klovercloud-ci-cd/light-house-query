@@ -7,4 +7,5 @@ import (
 // DaemonSet api operations
 type DaemonSet interface {
 	Get(context echo.Context) error
+	GetByID(context echo.Context) error
 }

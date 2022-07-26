@@ -47,6 +47,26 @@ func (d daemonSetApi) Get(context echo.Context) error {
 		&metadata, "Successful")
 }
 
+// Get... Get by ID Api
+// @Summary Get by ID api
+// @Description Api for getting a DaemonSet by id, agent name, and process id
+// @Tags DaemonSet
+// @Produce json
+// @Param id query string true "ID"
+// @Param processId query string true "Process Id"
+// @Param agent query string true "Agent Name"
+// @Success 200 {object} common.ResponseDTO{data=v1.DaemonSet{}}
+// @Forbidden 403 {object} common.ResponseDTO
+// @Failure 400 {object} common.ResponseDTO
+// @Router /api/v1/daemon-sets/{id} [GET]
+func (d daemonSetApi) GetByID(context echo.Context) error {
+	id := context.Param("id")
+	agent := context.QueryParam("agent")
+	processId := context.QueryParam("processId")
+	data := d.daemonSetService.GetById(id, agent, processId)
+	return common.GenerateSuccessResponse(context, data, nil, "Operation Successful")
+}
+
 // NewDaemonSetApi returns api.DaemonSet type api
 func NewDaemonSetApi(daemonSetService service.DaemonSet) api.DaemonSet {
 	return &daemonSetApi{

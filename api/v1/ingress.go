@@ -47,6 +47,26 @@ func (i ingressApi) Get(context echo.Context) error {
 		&metadata, "Successful")
 }
 
+// Get... Get by ID Api
+// @Summary Get by ID api
+// @Description Api for getting a Ingress by id, agent name, and process id
+// @Tags Ingress
+// @Produce json
+// @Param id query string true "ID"
+// @Param processId query string true "Process Id"
+// @Param agent query string true "Agent Name"
+// @Success 200 {object} common.ResponseDTO{data=v1.Ingress{}}
+// @Forbidden 403 {object} common.ResponseDTO
+// @Failure 400 {object} common.ResponseDTO
+// @Router /api/v1/ingresses/{id} [GET]
+func (i ingressApi) GetByID(context echo.Context) error {
+	id := context.Param("id")
+	agent := context.QueryParam("agent")
+	processId := context.QueryParam("processId")
+	data := i.ingressService.GetById(id, agent, processId)
+	return common.GenerateSuccessResponse(context, data, nil, "Operation Successful")
+}
+
 // NewIngressApi returns api.Ingress type api
 func NewIngressApi(ingressService service.Ingress) api.Ingress {
 	return &ingressApi{

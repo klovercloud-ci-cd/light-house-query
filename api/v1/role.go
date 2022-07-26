@@ -47,6 +47,26 @@ func (r roleApi) Get(context echo.Context) error {
 		&metadata, "Successful")
 }
 
+// Get... Get by ID Api
+// @Summary Get by ID api
+// @Description Api for getting a Role by id, agent name, and process id
+// @Tags Role
+// @Produce json
+// @Param id query string true "ID"
+// @Param processId query string true "Process Id"
+// @Param agent query string true "Agent Name"
+// @Success 200 {object} common.ResponseDTO{data=v1.Role{}}
+// @Forbidden 403 {object} common.ResponseDTO
+// @Failure 400 {object} common.ResponseDTO
+// @Router /api/v1/roles/{id} [GET]
+func (r roleApi) GetByID(context echo.Context) error {
+	id := context.Param("id")
+	agent := context.QueryParam("agent")
+	processId := context.QueryParam("processId")
+	data := r.roleService.GetById(id, agent, processId)
+	return common.GenerateSuccessResponse(context, data, nil, "Operation Successful")
+}
+
 // NewRoleApi returns api.Role type api
 func NewRoleApi(roleService service.Role) api.Role {
 	return &roleApi{

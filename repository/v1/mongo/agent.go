@@ -18,6 +18,23 @@ type agentRepository struct {
 	timeout time.Duration
 }
 
+func (a agentRepository) GetByName(agent, companyId string) v1.Agent {
+	query := bson.M{
+		"$and": []bson.M{
+			{"company": companyId},
+			{"agent_name": agent},
+		},
+	}
+	coll := a.manager.Db.Collection(AgentIndexCollection)
+	result := coll.FindOne(a.manager.Ctx, query, nil)
+	elemValue := new(v1.Agent)
+	err := result.Decode(elemValue)
+	if err != nil {
+		log.Println("[ERROR]", err)
+	}
+	return *elemValue
+}
+
 func (a agentRepository) Get(companyId string) []v1.Agent {
 	var results []v1.Agent
 	query := bson.M{
