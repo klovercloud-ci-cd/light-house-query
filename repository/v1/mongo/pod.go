@@ -27,7 +27,7 @@ func (p podRepository) GetById(id, agent, processId string) v1.Pod {
 			{"obj.metadata.uid": id},
 		},
 	}
-	coll := p.manager.Db.Collection(NodeCollection)
+	coll := p.manager.Db.Collection(PodCollection)
 	result := coll.FindOne(p.manager.Ctx, query, nil)
 	elemValue := new(v1.Pod)
 	err := result.Decode(elemValue)
