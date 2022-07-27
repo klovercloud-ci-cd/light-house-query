@@ -14,7 +14,7 @@
 ```
 
 ## Responsibility
-- Query all K8S objects.
+- Fetches K8S objects and Events.
 
 
 | Versions | Descriptors  |
