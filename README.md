@@ -14,18 +14,18 @@
 ```
 
 ## Responsibility
-- Query all K8S objects from database.
+- Query all K8S objects.
 
 
+| Versions | Descriptors  |
+|----------|-------------|
+| [v0.0.1-beta](https://github.com/klovercloud-ci-cd/light-house-query/releases/tag/v0.0.1-beta) | [k8s](k8s/v0.0.1-beta) |
 
-| Versions | 
-|----------|
-| 0.0.1    |
 
 ## Want to contribute
 
-- See [CONTRIBUTING.md](markdownfiles/CONTRIBUTING.md)
-- See [DEVELOPMENT.md](markdownfiles/DEVELOPMENT.md) to get start
-- See [architecture](https://github.com/klovercloud-ci-cd/architecture)
+- See [CONTRIBUTING.md](https://github.com/klovercloud-ci-cd/core-engine/blob/master/markdownfiles/CONTRIBUTING.md)
+- See [DEVELOPMENT.md](https://github.com/klovercloud-ci-cd/core-engine/blob/master/markdownfiles/DEVELOPMENT.md) to get start
+- See [architecture](https://github.com/klovercloud-ci-cd/architecture/blob/master/README.md)
 - Look at our
   [our issues](https://github.com/klovercloud-ci-cd/light-house-query/issues)
