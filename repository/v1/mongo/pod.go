@@ -40,6 +40,7 @@ func (p podRepository) GetById(id, agent, processId string) v1.Pod {
 func (p podRepository) GetByAgentAndProcessIdAndLabels(agent, processId string, labels map[string]string) []v1.Pod {
 	var results []v1.Pod
 	var queryObj []bson.M
+	delete(labels, "claim")
 	for key, val := range labels {
 		queryObj = append(queryObj, bson.M{"obj.metadata.labels." + key: val})
 	}
