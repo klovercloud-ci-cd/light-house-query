@@ -42,6 +42,7 @@ func (a agentApi) GetByID(context echo.Context) error {
 	agent := context.Param("agent")
 	companyId := context.QueryParam("companyId")
 	data := a.agentService.GetByName(agent, companyId)
+	
 	return common.GenerateSuccessResponse(context, data, nil, "Operation Successful")
 }
 
