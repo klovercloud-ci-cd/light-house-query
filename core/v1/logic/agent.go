@@ -40,7 +40,7 @@ func (a agentService) Get(companyId string) []v1.Agent {
 
 func (a agentService) GetPodsByDaemonSet(agent, processId, daemonSetId string) []v1.K8sPod {
 	daemonSet := a.daemonSetService.GetById(daemonSetId, agent, processId)
-	pods := a.podService.GetByAgentAndProcessIdAndLabels(agent, processId, daemonSet.Obj.Spec.Selector.MatchLabels)
+	pods := a.podService.GetByAgentAndProcessIdAndLabels(agent, processId, daemonSet.Obj.ObjectMeta.Labels)
 	var k8sPods []v1.K8sPod
 	for _, each := range pods {
 		k8sPods = append(k8sPods, each.Obj)
@@ -50,7 +50,7 @@ func (a agentService) GetPodsByDaemonSet(agent, processId, daemonSetId string) [
 
 func (a agentService) GetPodsByDeployment(agent, processId, deploymentId string) []v1.K8sPod {
 	deployment := a.deploymentService.GetById(deploymentId, agent, processId)
-	pods := a.podService.GetByAgentAndProcessIdAndLabels(agent, processId, deployment.Obj.Spec.Selector.MatchLabels)
+	pods := a.podService.GetByAgentAndProcessIdAndLabels(agent, processId, deployment.Obj.ObjectMeta.Labels)
 	var k8sPods []v1.K8sPod
 	for _, each := range pods {
 		k8sPods = append(k8sPods, each.Obj)
@@ -60,7 +60,7 @@ func (a agentService) GetPodsByDeployment(agent, processId, deploymentId string)
 
 func (a agentService) GetPodsByReplicaSet(agent, processId, replicaSetId string) []v1.K8sPod {
 	replicaSet := a.replicaSetService.GetById(replicaSetId, agent, processId)
-	pods := a.podService.GetByAgentAndProcessIdAndLabels(agent, processId, replicaSet.Obj.Spec.Selector.MatchLabels)
+	pods := a.podService.GetByAgentAndProcessIdAndLabels(agent, processId, replicaSet.Obj.ObjectMeta.Labels)
 	var k8sPods []v1.K8sPod
 	for _, each := range pods {
 		k8sPods = append(k8sPods, each.Obj)
@@ -70,7 +70,7 @@ func (a agentService) GetPodsByReplicaSet(agent, processId, replicaSetId string)
 
 func (a agentService) GetPodsByStatefulSet(agent, processId, statefulSetId string) []v1.K8sPod {
 	statefulSet := a.statefulSetService.GetById(statefulSetId, agent, processId)
-	pods := a.podService.GetByAgentAndProcessIdAndLabels(agent, processId, statefulSet.Obj.Spec.Selector.MatchLabels)
+	pods := a.podService.GetByAgentAndProcessIdAndLabels(agent, processId, statefulSet.Obj.ObjectMeta.Labels)
 	var k8sPods []v1.K8sPod
 	for _, each := range pods {
 		k8sPods = append(k8sPods, each.Obj)
