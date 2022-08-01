@@ -5517,12 +5517,14 @@ type K8sObjsInfo struct {
 }
 
 type K8sObjShortInfo struct {
+	Kind      string `json:"kind"`
 	Name      string `json:"name"`
 	Namespace string `json:"namespace"`
 	UID       string `json:"uid"`
 }
 
 type DeploymentShortInfo struct {
+	Kind                string `json:"kind"`
 	Name                string `json:"name"`
 	Namespace           string `json:"namespace"`
 	UID                 string `json:"uid"`
@@ -5533,6 +5535,7 @@ type DeploymentShortInfo struct {
 }
 
 type StatefulSetShortInfo struct {
+	Kind          string `json:"kind"`
 	Name          string `json:"name"`
 	Namespace     string `json:"namespace"`
 	UID           string `json:"uid"`
@@ -5541,6 +5544,7 @@ type StatefulSetShortInfo struct {
 }
 
 type ReplicaSetShortInfo struct {
+	Kind              string `json:"kind"`
 	Name              string `json:"name"`
 	Namespace         string `json:"namespace"`
 	UID               string `json:"uid"`
@@ -5550,6 +5554,7 @@ type ReplicaSetShortInfo struct {
 }
 
 type DaemonSetShortInfo struct {
+	Kind              string `json:"kind"`
 	Name              string `json:"name"`
 	Namespace         string `json:"namespace"`
 	UID               string `json:"uid"`

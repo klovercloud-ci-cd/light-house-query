@@ -84,6 +84,7 @@ func (a agentService) GetK8sObjs(agent, processId string) v1.K8sObjsInfo {
 	var certificatesInfo []v1.K8sObjShortInfo
 	for _, each := range certificates {
 		certificatesInfo = append(certificatesInfo, v1.K8sObjShortInfo{
+			Kind:      each.Obj.Kind,
 			Name:      each.Obj.Name,
 			Namespace: each.Obj.Namespace,
 			UID:       string(each.Obj.UID),
@@ -94,6 +95,7 @@ func (a agentService) GetK8sObjs(agent, processId string) v1.K8sObjsInfo {
 	var clusterRolesInfo []v1.K8sObjShortInfo
 	for _, each := range clusterRoles {
 		clusterRolesInfo = append(clusterRolesInfo, v1.K8sObjShortInfo{
+			Kind:      each.Obj.Kind,
 			Name:      each.Obj.Name,
 			Namespace: each.Obj.Namespace,
 			UID:       string(each.Obj.UID),
@@ -104,6 +106,7 @@ func (a agentService) GetK8sObjs(agent, processId string) v1.K8sObjsInfo {
 	var clusterRoleBindingsInfo []v1.K8sObjShortInfo
 	for _, each := range clusterRoleBindings {
 		clusterRoleBindingsInfo = append(clusterRoleBindingsInfo, v1.K8sObjShortInfo{
+			Kind:      each.Obj.Kind,
 			Name:      each.Obj.Name,
 			Namespace: each.Obj.Namespace,
 			UID:       string(each.Obj.UID),
@@ -114,6 +117,7 @@ func (a agentService) GetK8sObjs(agent, processId string) v1.K8sObjsInfo {
 	var configMapsInfo []v1.K8sObjShortInfo
 	for _, each := range configMaps {
 		configMapsInfo = append(configMapsInfo, v1.K8sObjShortInfo{
+			Kind:      each.Obj.Kind,
 			Name:      each.Obj.Name,
 			Namespace: each.Obj.Namespace,
 			UID:       string(each.Obj.UID),
@@ -124,6 +128,7 @@ func (a agentService) GetK8sObjs(agent, processId string) v1.K8sObjsInfo {
 	var daemonSetInfo []v1.DaemonSetShortInfo
 	for _, each := range daemonSets {
 		daemonSetInfo = append(daemonSetInfo, v1.DaemonSetShortInfo{
+			Kind:              each.Obj.Kind,
 			Name:              each.Obj.Name,
 			Namespace:         each.Obj.Namespace,
 			UID:               string(each.Obj.UID),
@@ -137,6 +142,7 @@ func (a agentService) GetK8sObjs(agent, processId string) v1.K8sObjsInfo {
 	var deploymentsInfo []v1.DeploymentShortInfo
 	for _, each := range deployments {
 		deploymentsInfo = append(deploymentsInfo, v1.DeploymentShortInfo{
+			Kind:                each.Obj.Kind,
 			Name:                each.Obj.Name,
 			Namespace:           each.Obj.Namespace,
 			UID:                 string(each.Obj.UID),
@@ -151,6 +157,7 @@ func (a agentService) GetK8sObjs(agent, processId string) v1.K8sObjsInfo {
 	var ingressesInfo []v1.K8sObjShortInfo
 	for _, each := range ingresses {
 		ingressesInfo = append(ingressesInfo, v1.K8sObjShortInfo{
+			Kind:      each.Obj.Kind,
 			Name:      each.Obj.Name,
 			Namespace: each.Obj.Namespace,
 			UID:       string(each.Obj.UID),
@@ -161,6 +168,7 @@ func (a agentService) GetK8sObjs(agent, processId string) v1.K8sObjsInfo {
 	var namespacesInfo []v1.K8sObjShortInfo
 	for _, each := range namespaces {
 		namespacesInfo = append(namespacesInfo, v1.K8sObjShortInfo{
+			Kind:      each.Obj.Kind,
 			Name:      each.Obj.Name,
 			Namespace: each.Obj.Namespace,
 			UID:       string(each.Obj.UID),
@@ -171,6 +179,7 @@ func (a agentService) GetK8sObjs(agent, processId string) v1.K8sObjsInfo {
 	var networkPoliciesInfo []v1.K8sObjShortInfo
 	for _, each := range networkPolicies {
 		networkPoliciesInfo = append(networkPoliciesInfo, v1.K8sObjShortInfo{
+			Kind:      each.Obj.Kind,
 			Name:      each.Obj.Name,
 			Namespace: each.Obj.Namespace,
 			UID:       string(each.Obj.UID),
@@ -181,6 +190,7 @@ func (a agentService) GetK8sObjs(agent, processId string) v1.K8sObjsInfo {
 	var nodesInfo []v1.K8sObjShortInfo
 	for _, each := range nodes {
 		nodesInfo = append(nodesInfo, v1.K8sObjShortInfo{
+			Kind:      each.Obj.Kind,
 			Name:      each.Obj.Name,
 			Namespace: each.Obj.Namespace,
 			UID:       string(each.Obj.UID),
@@ -191,6 +201,7 @@ func (a agentService) GetK8sObjs(agent, processId string) v1.K8sObjsInfo {
 	var pvsInfo []v1.K8sObjShortInfo
 	for _, each := range pvs {
 		pvsInfo = append(pvsInfo, v1.K8sObjShortInfo{
+			Kind:      each.Obj.Kind,
 			Name:      each.Obj.Name,
 			Namespace: each.Obj.Namespace,
 			UID:       string(each.Obj.UID),
@@ -201,6 +212,7 @@ func (a agentService) GetK8sObjs(agent, processId string) v1.K8sObjsInfo {
 	var pvcsInfo []v1.K8sObjShortInfo
 	for _, each := range pvcs {
 		pvcsInfo = append(pvcsInfo, v1.K8sObjShortInfo{
+			Kind:      each.Obj.Kind,
 			Name:      each.Obj.Name,
 			Namespace: each.Obj.Namespace,
 			UID:       string(each.Obj.UID),
@@ -211,6 +223,7 @@ func (a agentService) GetK8sObjs(agent, processId string) v1.K8sObjsInfo {
 	var replicaSetsInfo []v1.ReplicaSetShortInfo
 	for _, each := range replicaSets {
 		replicaSetsInfo = append(replicaSetsInfo, v1.ReplicaSetShortInfo{
+			Kind:              each.Obj.Kind,
 			Name:              each.Obj.Name,
 			Namespace:         each.Obj.Namespace,
 			UID:               string(each.Obj.UID),
@@ -224,6 +237,7 @@ func (a agentService) GetK8sObjs(agent, processId string) v1.K8sObjsInfo {
 	var rolesInfo []v1.K8sObjShortInfo
 	for _, each := range roles {
 		rolesInfo = append(rolesInfo, v1.K8sObjShortInfo{
+			Kind:      each.Obj.Kind,
 			Name:      each.Obj.Name,
 			Namespace: each.Obj.Namespace,
 			UID:       string(each.Obj.UID),
@@ -234,6 +248,7 @@ func (a agentService) GetK8sObjs(agent, processId string) v1.K8sObjsInfo {
 	var roleBindingsInfo []v1.K8sObjShortInfo
 	for _, each := range roleBindings {
 		roleBindingsInfo = append(roleBindingsInfo, v1.K8sObjShortInfo{
+			Kind:      each.Obj.Kind,
 			Name:      each.Obj.Name,
 			Namespace: each.Obj.Namespace,
 			UID:       string(each.Obj.UID),
@@ -244,6 +259,7 @@ func (a agentService) GetK8sObjs(agent, processId string) v1.K8sObjsInfo {
 	var secretsInfo []v1.K8sObjShortInfo
 	for _, each := range secrets {
 		secretsInfo = append(secretsInfo, v1.K8sObjShortInfo{
+			Kind:      each.Obj.Kind,
 			Name:      each.Obj.Name,
 			Namespace: each.Obj.Namespace,
 			UID:       string(each.Obj.UID),
@@ -254,6 +270,7 @@ func (a agentService) GetK8sObjs(agent, processId string) v1.K8sObjsInfo {
 	var servicesInfo []v1.K8sObjShortInfo
 	for _, each := range services {
 		servicesInfo = append(servicesInfo, v1.K8sObjShortInfo{
+			Kind:      each.Obj.Kind,
 			Name:      each.Obj.Name,
 			Namespace: each.Obj.Namespace,
 			UID:       string(each.Obj.UID),
@@ -264,6 +281,7 @@ func (a agentService) GetK8sObjs(agent, processId string) v1.K8sObjsInfo {
 	var serviceAccountsInfo []v1.K8sObjShortInfo
 	for _, each := range serviceAccounts {
 		serviceAccountsInfo = append(serviceAccountsInfo, v1.K8sObjShortInfo{
+			Kind:      each.Obj.Kind,
 			Name:      each.Obj.Name,
 			Namespace: each.Obj.Namespace,
 			UID:       string(each.Obj.UID),
@@ -274,6 +292,7 @@ func (a agentService) GetK8sObjs(agent, processId string) v1.K8sObjsInfo {
 	var statefulSetsInfo []v1.StatefulSetShortInfo
 	for _, each := range statefulSets {
 		statefulSetsInfo = append(statefulSetsInfo, v1.StatefulSetShortInfo{
+			Kind:          each.Obj.Kind,
 			Name:          each.Obj.Name,
 			Namespace:     each.Obj.Namespace,
 			UID:           string(each.Obj.UID),
